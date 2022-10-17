@@ -1,14 +1,16 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
   import { loadStripe } from "@stripe/stripe-js";
-  import { Container, CardNumber, CardExpiry, CardCvc } from "svelte-stripe-js";
+  import { CardNumber, CardExpiry, CardCvc, Elements } from "svelte-stripe";
   const dispatch = createEventDispatcher();
 
   let stripe = null;
   let cardElement: any;
 
   onMount(async () => {
-    stripe = await loadStripe(import.meta.env.VITE_SVELTE_APP_SUBSCRIPTION_PUBLIC_KEY.toString());
+    stripe = await loadStripe(
+      import.meta.env.VITE_SVELTE_APP_SUBSCRIPTION_PUBLIC_KEY.toString()
+    );
   });
 
   // TODO: submit, payed, payError
@@ -25,7 +27,7 @@
 </script>
 
 {#if stripe}
-  <Container {stripe}>
+  <Elements {stripe}>
     <form class="space-y-3 text-lg" on:submit|preventDefault={submit}>
       <div class="grid grid-cols-12">
         <div class="col-span-6">
@@ -43,5 +45,5 @@
         <slot />
       </div>
     </form>
-  </Container>
+  </Elements>
 {/if}

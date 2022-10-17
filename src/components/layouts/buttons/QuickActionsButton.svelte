@@ -19,11 +19,17 @@
     opened = false;
     tinyEventBus().emitter.emit("new-client");
   }
-  $: currentRole = $tenantState.current?.currentUser.role ?? TenantUserRole.GUEST;
-  $: isOwnerOrAdmin = currentRole == TenantUserRole.OWNER || currentRole == TenantUserRole.ADMIN;
+  $: currentRole =
+    $tenantState.current?.currentUser.role ?? TenantUserRole.GUEST;
+  $: isOwnerOrAdmin =
+    currentRole == TenantUserRole.OWNER || currentRole == TenantUserRole.ADMIN;
 </script>
 
-<span class={className} use:clickOutside on:click_outside={() => (opened = false)}>
+<span
+  class={className}
+  use:clickOutside
+  on:click_outside={() => (opened = false)}
+>
   {#if currentRole < 3}
     <div class="relative">
       <div class="inline-flex shadow-none rounded-sm divide-x divide-gray-300">
@@ -38,8 +44,19 @@
           >
             <span class="sr-only">{$t("shared.new")}</span>
             <!--Heroicon name: solid/chevron-down -->
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            <svg
+              class="h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              fill="none"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
             </svg>
           </button>
         </div>
@@ -61,37 +78,80 @@
             aria-labelledby="listbox-label"
             aria-activedescendant="listbox-option-0"
           >
-            <li class="text-gray-900 cursor-default select-none relative text-sm" id="listbox-option-0" role="option">
-              <Link to="/app/contract/new" on:click={() => (opened = false)} class="flex flex-col p-4 hover:bg-gray-50">
+            <li
+              class="text-gray-900 cursor-default select-none relative text-sm"
+              id="listbox-option-0"
+              role="option"
+              aria-selected="false"
+            >
+              <Link
+                to="/app/contract/new"
+                on:click={() => (opened = false)}
+                class="flex flex-col p-4 hover:bg-gray-50"
+              >
                 <div class="flex justify-between">
                   <p class="font-semibold">{$t("app.contracts.new.title")}</p>
                 </div>
-                <p class="text-gray-500 mt-2">{$t("app.contracts.new.description")}</p>
+                <p class="text-gray-500 mt-2">
+                  {$t("app.contracts.new.description")}
+                </p>
               </Link>
             </li>
-            <li class="text-gray-900 cursor-default select-none relative text-sm" id="listbox-option-1" role="option">
-              <button type="button" on:click={newProvider} class="w-full text-left flex flex-col p-4 hover:bg-gray-50 focus:outline-none">
+            <li
+              class="text-gray-900 cursor-default select-none relative text-sm"
+              id="listbox-option-1"
+              role="option"
+              aria-selected="false"
+            >
+              <button
+                type="button"
+                on:click={newProvider}
+                class="w-full text-left flex flex-col p-4 hover:bg-gray-50 focus:outline-none"
+              >
                 <div class="flex justify-between">
                   <p class="font-semibold">{$t("app.providers.new.title")}</p>
                 </div>
-                <p class="text-gray-500 mt-2">{$t("app.providers.new.description")}</p>
+                <p class="text-gray-500 mt-2">
+                  {$t("app.providers.new.description")}
+                </p>
               </button>
             </li>
-            <li class="text-gray-900 cursor-default select-none relative text-sm" id="listbox-option-2" role="option">
-              <button type="button" on:click={newClient} class="w-full text-left flex flex-col p-4 hover:bg-gray-50 focus:outline-none">
+            <li
+              class="text-gray-900 cursor-default select-none relative text-sm"
+              id="listbox-option-2"
+              role="option"
+              aria-selected="false"
+            >
+              <button
+                type="button"
+                on:click={newClient}
+                class="w-full text-left flex flex-col p-4 hover:bg-gray-50 focus:outline-none"
+              >
                 <div class="flex justify-between">
                   <p class="font-semibold">{$t("app.clients.new.title")}</p>
                 </div>
-                <p class="text-gray-500 mt-2">{$t("app.clients.new.description")}</p>
+                <p class="text-gray-500 mt-2">
+                  {$t("app.clients.new.description")}
+                </p>
               </button>
             </li>
             {#if isOwnerOrAdmin}
-              <li class="text-gray-900 cursor-default select-none relative text-sm" role="option">
-                <Link to="/app/settings/workspaces/new" on:click={() => (opened = false)} class="flex flex-col p-4 hover:bg-gray-50">
+              <li
+                class="text-gray-900 cursor-default select-none relative text-sm"
+                role="option"
+                aria-selected="false"
+              >
+                <Link
+                  to="/app/settings/workspaces/new"
+                  on:click={() => (opened = false)}
+                  class="flex flex-col p-4 hover:bg-gray-50"
+                >
                   <div class="flex justify-between">
                     <p class="font-semibold">{$t("app.workspaces.create")}</p>
                   </div>
-                  <p class="text-gray-500 mt-2">{$t("app.workspaces.createDescription")}</p>
+                  <p class="text-gray-500 mt-2">
+                    {$t("app.workspaces.createDescription")}
+                  </p>
                 </Link>
               </li>
             {/if}

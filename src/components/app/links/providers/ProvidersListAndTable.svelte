@@ -69,7 +69,7 @@
     <div>
       <div class="sm:hidden">
         <div class="bg-white shadow overflow-hidden sm:rounded-md">
-          <ul role="list" class="divide-y divide-gray-200">
+          <ul class="divide-y divide-gray-200">
             {#each sortedItems() as item}
               <li>
                 <Link to={"/app/link/" + item.id} class="block hover:bg-gray-50">

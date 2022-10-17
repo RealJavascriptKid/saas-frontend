@@ -61,7 +61,7 @@
   else htmlClasses?.remove("dark");
 </script>
 
-<main role="main">
+<main>
   <Router {url}>
     <Route path="/">
       <Landing />

@@ -147,7 +147,7 @@
           />
         </div>
       {:else}
-        <ul role="list" class="sm:grid grid-cols-1 gap-3">
+        <ul class="sm:grid grid-cols-1 gap-3">
           {#each items as item}
             <li class="col-span-1 bg-white rounded-sm shadow-md divide-y divide-gray-200 border-t sm:border border-gray-300">
               <div class="w-full flex items-center justify-between p-6 space-x-6">

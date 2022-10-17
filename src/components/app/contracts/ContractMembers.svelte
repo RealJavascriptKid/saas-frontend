@@ -19,7 +19,7 @@
   <h3 class="mb-2 text-gray-400 font-medium text-sm">{$t("models.contract.members")}</h3>
   <div class="bg-white border-gray-200 rounded-md border shadow-md overflow-hidden">
     <div class="flow-root">
-      <ul role="list" class="divide-y divide-gray-200">
+      <ul class="divide-y divide-gray-200">
         {#each sortedItems() as member}
           <li class={classNames("flex items-center justify-between py-2 px-4 space-x-2")}>
             <div class="truncate">

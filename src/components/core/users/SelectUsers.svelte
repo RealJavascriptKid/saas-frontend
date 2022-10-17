@@ -162,7 +162,7 @@
                   </div>
                 {:else}
                   <div>
-                    <ul role="list" class="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
+                    <ul class="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
                       {#each filteredItems() as item}
                         <li class="py-2 flex items-center justify-between space-x-3">
                           <div class="min-w-0 flex-1 flex items-center space-x-3">

@@ -240,7 +240,7 @@
                         <h4 class="flex-shrink-0 pr-4 text-sm tracking-wider font-semibold uppercase text-white">{$t("pricing.whatsIncluded")}</h4>
                         <div class="flex-1 border-t dark:border-gray-300 border-gray-700" />
                       </div>
-                      <ul role="list" class="mt-8 space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-5">
+                      <ul class="mt-8 space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-5">
                         {#each customPlan.features as feature}
                           <li class="flex items-start lg:col-span-1">
                             <div class="flex-shrink-0">

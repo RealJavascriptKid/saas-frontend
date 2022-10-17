@@ -300,7 +300,7 @@
 
                   <!--Activity Feed -->
                   <div class="mt-6 flow-root">
-                    <ul role="list" class="-mb-8">
+                    <ul class="-mb-8">
                       <li>
                         <div class="relative pb-8">
                           {#if contracts.length > 0} <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />{/if}

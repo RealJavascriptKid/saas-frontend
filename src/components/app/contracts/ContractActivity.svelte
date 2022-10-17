@@ -32,7 +32,7 @@
   <h3 class="mb-2 text-gray-400 font-medium text-sm">{$t("models.contract.activity")}</h3>
   <div class="bg-white p-3 rounded-md border border-gray-100 shadow-md space-y-3 overflow-hidden">
     <div class="flow-root">
-      <ul role="list" class="-mb-8">
+      <ul class="-mb-8">
         {#each sortedItems() as activity, idxActivity}
           <li>
             <div class="relative pb-8">
