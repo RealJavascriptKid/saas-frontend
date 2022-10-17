@@ -29,10 +29,22 @@
 </script>
 
 <div>
-  <Breadcrumb home="/admin" menu={[{ title: $t("models.tenant.plural"), routePath: "/admin/tenants" }]} />
-  <div class="bg-white shadow-sm border-b border-gray-300 w-full py-3 px-8 h-13">
-    <div class="mx-auto max-w-5xl xl:max-w-7xl flex items-center justify-between">
-      <Tabs asLinks={false} {tabs} on:selected={selectedTab} className="flex-grow" />
+  <Breadcrumb
+    home="/admin"
+    menu={[{ title: $t("models.tenant.plural"), routePath: "/admin/tenants" }]}
+  />
+  <div
+    class="bg-white shadow-sm border-b border-gray-300 w-full py-3 px-8 h-13"
+  >
+    <div
+      class="mx-auto max-w-5xl xl:max-w-7xl flex items-center justify-between"
+    >
+      <Tabs
+        asLinks={false}
+        {tabs}
+        on:selected={selectedTab}
+        className="flex-grow"
+      />
     </div>
   </div>
   <div>

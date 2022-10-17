@@ -20,7 +20,9 @@ const invitation: TenantInvitationResponse = {
   requiresVerify: true,
 };
 
-export class FakeTenantUserInvitationService implements ITenantUserInvitationService {
+export class FakeTenantUserInvitationService
+  implements ITenantUserInvitationService
+{
   getInvitation(_tenantUserId: string): Promise<TenantInvitationResponse> {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -53,16 +55,24 @@ export class FakeTenantUserInvitationService implements ITenantUserInvitationSer
   inviteUser(_invitation: UserInviteRequest): Promise<TenantUserDto> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
-  requestAccess(_linkUuid: string, _payload: UserVerifyRequest): Promise<TenantUserDto> {
+  requestAccess(
+    _linkUuid: string,
+    _payload: UserVerifyRequest
+  ): Promise<TenantUserDto> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
   acceptUser(_payload: TenantUserDto): Promise<void> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
-  acceptInvitation(_tenantUserId: string, _payload: UserVerifyRequest): Promise<UserLoggedResponse> {
+  acceptInvitation(
+    _tenantUserId: string,
+    _payload: UserVerifyRequest
+  ): Promise<UserLoggedResponse> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
-  updateInvitationSettings(_payload: TenantUpdateJoinSettingsRequest): Promise<TenantJoinSettingsDto> {
+  updateInvitationSettings(
+    _payload: TenantUpdateJoinSettingsRequest
+  ): Promise<TenantJoinSettingsDto> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
 }

@@ -90,11 +90,17 @@
     });
   }
 
-  $: customClasses = isDragging && !loading ? "bg-theme-200 border-2 border-dashed border-theme-800" : "";
+  $: customClasses =
+    isDragging && !loading
+      ? "bg-theme-200 border-2 border-dashed border-theme-800"
+      : "";
 </script>
 
 <div
-  class={classNames(customClasses, "text-gray-600 overflow-hidden drop text-center flex border-2 border-dashed border-gray-300 rounded-md items-center")}
+  class={classNames(
+    customClasses,
+    "text-gray-600 overflow-hidden drop text-center flex border-2 border-dashed border-gray-300 rounded-md items-center"
+  )}
   on:dragover|preventDefault={dragOver}
   on:dragleave={dragLeave}
   on:drop|preventDefault={drop}
@@ -114,9 +120,19 @@
             >
               <span />
               <label for="uploadmyfile">
-                <p class="font-semibold text-sm underline cursor-pointer hover:text-theme-500">{$t("app.shared.buttons.uploadDocument")}</p>
+                <p
+                  class="font-semibold text-sm underline cursor-pointer hover:text-theme-500"
+                >
+                  {$t("app.shared.buttons.uploadDocument")}
+                </p>
               </label>
-              <input type="file" id="uploadmyfile" {accept} {multiple} on:change={requestUploadFile} />
+              <input
+                type="file"
+                id="uploadmyfile"
+                {accept}
+                {multiple}
+                on:change={requestUploadFile}
+              />
             </label>
             <p class="pl-1 lowercase">
               {$t("shared.or")}

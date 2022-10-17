@@ -13,10 +13,15 @@ export interface ILinkService {
   getAllClients(): Promise<LinkDto[]>;
   getLinkUsers(linkId: string): Promise<WorkspaceUserDto[]>;
   getInvitation(id: string): Promise<LinkInvitationDto>;
-  createInvitation(payload: CreateLinkInvitationRequest): Promise<LinkInvitationDto>;
+  createInvitation(
+    payload: CreateLinkInvitationRequest
+  ): Promise<LinkInvitationDto>;
   rejectInvitation(id: string): Promise<void>;
   searchUser(email: string): Promise<UserDto>;
-  searchMember(email: string, _workspaceName: string): Promise<WorkspaceUserDto>;
+  searchMember(
+    email: string,
+    _workspaceName: string
+  ): Promise<WorkspaceUserDto>;
   get(id: string): Promise<LinkDto>;
   create(data: CreateLinkRequest): Promise<LinkDto>;
   acceptOrReject(id: string, data: UpdateLinkRequest): Promise<LinkDto>;

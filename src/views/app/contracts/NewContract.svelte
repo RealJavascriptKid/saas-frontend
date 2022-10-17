@@ -27,7 +27,8 @@
   import { tenantState } from "@/store/modules/tenantStore";
   import { appState } from "@/store/modules/appStore";
 
-  const preselectLinkIdQueryParam = new URLSearchParams(window.location.search).get("l") ?? "";
+  const preselectLinkIdQueryParam =
+    new URLSearchParams(window.location.search).get("l") ?? "";
 
   let inputName: any;
   let errorModal: ErrorModal;
@@ -62,7 +63,10 @@
   }
   function addMember() {
     if (!link || !link.id) {
-      errorModal?.show($t("shared.missingFields"), $t("app.contracts.errors.linkRequired"));
+      errorModal?.show(
+        $t("shared.missingFields"),
+        $t("app.contracts.errors.linkRequired")
+      );
     } else {
       selectContractMembers?.show(
         link,
@@ -85,23 +89,46 @@
   }
   function save() {
     if (maxContractsReached()) {
-      errorModal?.show($t("shared.error"), $t("app.subscription.errors.limitReachedContracts"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("app.subscription.errors.limitReachedContracts")
+      );
     } else if (!link || !link.id) {
-      errorModal?.show($t("shared.missingFields"), $t("app.contracts.errors.linkRequired"));
+      errorModal?.show(
+        $t("shared.missingFields"),
+        $t("app.contracts.errors.linkRequired")
+      );
       return;
     } else if (!name) {
-      errorModal?.show($t("shared.missingFields"), $t("app.contracts.errors.nameRequired"));
+      errorModal?.show(
+        $t("shared.missingFields"),
+        $t("app.contracts.errors.nameRequired")
+      );
       return;
     } else if (!description) {
       errorModal?.show($t("app.contracts.errors.descriptionRequired"));
       return;
     } else if (!contractFile) {
-      errorModal?.show($t("shared.missingFields"), $t("app.contracts.errors.fileRequired"));
-    } else if (!members || members.filter((f) => f.role === ContractMemberRole.SIGNATORY).length < 2) {
-      errorModal?.show($t("shared.missingFields"), $t("app.contracts.errors.atLeastNSignatories"));
+      errorModal?.show(
+        $t("shared.missingFields"),
+        $t("app.contracts.errors.fileRequired")
+      );
+    } else if (
+      !members ||
+      members.filter((f) => f.role === ContractMemberRole.SIGNATORY).length < 2
+    ) {
+      errorModal?.show(
+        $t("shared.missingFields"),
+        $t("app.contracts.errors.atLeastNSignatories")
+      );
       return;
     } else {
-      confirmCreate?.show($t("app.contracts.actions.create"), $t("shared.create"), $t("shared.cancel"), $t("app.contracts.actions.createDescription"));
+      confirmCreate?.show(
+        $t("app.contracts.actions.create"),
+        $t("shared.create"),
+        $t("shared.cancel"),
+        $t("app.contracts.actions.createDescription")
+      );
     }
   }
   function saveContract() {
@@ -131,7 +158,10 @@
     if (files.length > 0) {
       const mb = files[0].file.size / 1048576;
       if (mb >= 20) {
-        errorModal?.show($t("shared.error"), $t("app.contracts.errors.maxFileReached"));
+        errorModal?.show(
+          $t("shared.error"),
+          $t("app.contracts.errors.maxFileReached")
+        );
       } else {
         contractFile = files[0].base64;
       }
@@ -163,7 +193,10 @@
     if (!features) {
       return true;
     } else {
-      return features.monthlyContracts > 0 && usage.contracts >= features.monthlyContracts;
+      return (
+        features.monthlyContracts > 0 &&
+        usage.contracts >= features.monthlyContracts
+      );
     }
   };
 </script>
@@ -191,33 +224,51 @@
             <WarningBanner
               redirect="/app/settings/subscription"
               title={$t("app.subscription.errors.limitReached")}
-              text={$t("app.subscription.errors.limitReachedContracts", { values: { p1: features.monthlyContracts } })}
+              text={$t("app.subscription.errors.limitReachedContracts", {
+                values: { p1: features.monthlyContracts },
+              })}
             />
           </div>
         {:else}
           <form>
             <div class="sm:space-y-4 divide-y divide-gray-200">
-              <div class="bg-white py-6 px-8 shadow-lg border border-gray-200 space-y-6">
+              <div
+                class="bg-white py-6 px-8 shadow-lg border border-gray-200 space-y-6"
+              >
                 <div class="flex items-center space-x-3 justify-between">
                   <div>
                     <div>
-                      <h3 class="text-lg leading-6 font-medium text-gray-900">{$t("app.contracts.new.title")}</h3>
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {$t("app.contracts.new.title")}
+                      </h3>
                     </div>
-                    <p class="mt-1 text-sm text-gray-500">{$t("app.contracts.new.description")}</p>
+                    <p class="mt-1 text-sm text-gray-500">
+                      {$t("app.contracts.new.description")}
+                    </p>
                   </div>
                   <IconContract className="h-8 w-8 text-gray-800" />
                 </div>
 
                 <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                   <div class="sm:col-span-6">
-                    <label for="link" class="block text-xs font-medium text-gray-700 truncate">
+                    <label
+                      for="link"
+                      class="block text-xs font-medium text-gray-700 truncate"
+                    >
                       {$t("models.link.object")}
                     </label>
-                    <LinkSelector bind:this={linkSelector} className="mt-1 w-full" on:selected={selectedLink} />
+                    <LinkSelector
+                      bind:this={linkSelector}
+                      className="mt-1 w-full"
+                      on:selected={selectedLink}
+                    />
                   </div>
 
                   <div class="sm:col-span-6">
-                    <label for="name" class="block text-xs font-medium text-gray-700 truncate">
+                    <label
+                      for="name"
+                      class="block text-xs font-medium text-gray-700 truncate"
+                    >
                       {$t("shared.name")}
                     </label>
                     <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -237,7 +288,10 @@
                   </div>
 
                   <div class="sm:col-span-6">
-                    <label for="description" class="block text-xs font-medium text-gray-700 truncate">
+                    <label
+                      for="description"
+                      class="block text-xs font-medium text-gray-700 truncate"
+                    >
                       {$t("shared.description")}
                     </label>
                     <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -248,7 +302,9 @@
                         rows={3}
                         autoComplete="off"
                         required
-                        placeholder={$t("app.contracts.placeholders.description")}
+                        placeholder={$t(
+                          "app.contracts.placeholders.description"
+                        )}
                         class="w-full flex-1 focus:ring-theme-500 focus:border-theme-500 block min-w-0 rounded-md sm:text-sm border-gray-300"
                       />
                     </div>
@@ -256,13 +312,29 @@
 
                   <div class="sm:col-span-6">
                     <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label class="block text-xs font-medium text-gray-700 truncate">{$t("shared.file")}</label>
+                    <label
+                      class="block text-xs font-medium text-gray-700 truncate"
+                      >{$t("shared.file")}</label
+                    >
                     <div class="mt-1">
                       {#if contractFile}
-                        <PdfPreview file={contractFile} editing={true} on:removeFile={removeFile} />
+                        <PdfPreview
+                          file={contractFile}
+                          editing={true}
+                          on:removeFile={removeFile}
+                        />
                       {:else}
-                        <UploadDocument accept=".pdf" description={$t("shared.onlyFileTypes", { values: { p1: ".PDF" } })} on:droppedFiles={droppedContractFile}
-                          ><span slot="icon"><IconContract className="mx-auto h-10 w-10 text-gray-400" /></span></UploadDocument
+                        <UploadDocument
+                          accept=".pdf"
+                          description={$t("shared.onlyFileTypes", {
+                            values: { p1: ".PDF" },
+                          })}
+                          on:droppedFiles={droppedContractFile}
+                          ><span slot="icon"
+                            ><IconContract
+                              className="mx-auto h-10 w-10 text-gray-400"
+                            /></span
+                          ></UploadDocument
                         >
                       {/if}
                     </div>
@@ -274,31 +346,52 @@
                 <div class="flex items-center space-x-3 justify-between">
                   <div>
                     <div>
-                      <h3 class="text-lg leading-6 font-medium text-gray-900">{$t("app.contracts.signatories")}</h3>
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {$t("app.contracts.signatories")}
+                      </h3>
                     </div>
-                    <p class="mt-1 text-sm text-gray-500">{$t("app.contracts.new.addSignatories")}.</p>
+                    <p class="mt-1 text-sm text-gray-500">
+                      {$t("app.contracts.new.addSignatories")}.
+                    </p>
                   </div>
                   <IconSign className="h-8 w-8 text-gray-800" />
                 </div>
                 <div>
                   {#each members as member, idxMember}
-                    <div class="grid grid-cols-6 items-center space-x-2 relative py-3 gap-1">
+                    <div
+                      class="grid grid-cols-6 items-center space-x-2 relative py-3 gap-1"
+                    >
                       <button
                         type="button"
                         disabled={members.length <= 1}
                         class={classNames(
                           "absolute origin-top-right right-0 top-0 mt-1 mr-0 inline-flex items-center px-1.5 py-1.5 border-gray-300 text-xs font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-theme-500",
-                          members.length <= 1 && "text-gray-400 cursor-not-allowed",
+                          members.length <= 1 &&
+                            "text-gray-400 cursor-not-allowed",
                           members.length > 1 && "text-gray-700 hover:bg-gray-50"
                         )}
                         on:click={() => removeMember(idxMember)}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       </button>
                       <div class="col-span-6 sm:col-span-2">
-                        <label for="full-name" class="block text-xs font-medium text-gray-700 truncate">
+                        <label
+                          for="full-name"
+                          class="block text-xs font-medium text-gray-700 truncate"
+                        >
                           {$t("account.shared.fullName")}
                         </label>
                         <div class="mt-1">
@@ -319,7 +412,10 @@
                       <div class="col-span-3 sm:col-span-2">
                         <div class="flex items-start space-x-2">
                           <div class="flex-grow">
-                            <label for="email" class="block text-xs font-medium text-gray-700 truncate">
+                            <label
+                              for="email"
+                              class="block text-xs font-medium text-gray-700 truncate"
+                            >
                               {$t("account.shared.email")}
                             </label>
                             <div class="mt-1">
@@ -330,8 +426,12 @@
                                 type="email"
                                 disabled
                                 placeholder={member.role === 0
-                                  ? $t("app.contracts.placeholders.signatoryEmail")
-                                  : $t("app.contracts.placeholders.spectatorEmail")}
+                                  ? $t(
+                                      "app.contracts.placeholders.signatoryEmail"
+                                    )
+                                  : $t(
+                                      "app.contracts.placeholders.spectatorEmail"
+                                    )}
                                 autoComplete="email"
                                 required
                                 class="bg-gray-100 cursor-not-allowed shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -344,7 +444,10 @@
                       <div class="col-span-3 sm:col-span-2">
                         <div class="flex items-start space-x-2">
                           <div class="flex-grow">
-                            <label for="role" class="block text-xs font-medium text-gray-700 truncate">
+                            <label
+                              for="role"
+                              class="block text-xs font-medium text-gray-700 truncate"
+                            >
                               {$t("shared.role")}
                             </label>
                             <div class="mt-1">
@@ -354,8 +457,12 @@
                                 autoComplete="email"
                                 class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md"
                               >
-                                <option value={0}>{$t("app.contracts.signatory")}</option>
-                                <option value={1}>{$t("app.contracts.spectator")}</option>
+                                <option value={0}
+                                  >{$t("app.contracts.signatory")}</option
+                                >
+                                <option value={1}
+                                  >{$t("app.contracts.spectator")}</option
+                                >
                               </select>
                             </div>
                           </div>
@@ -363,39 +470,80 @@
                       </div>
                     </div>
                   {/each}
-                  <button type="button" on:click={addMember} class="mt-6 flex items-center space-x-1 text-xs text-theme-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  <button
+                    type="button"
+                    on:click={addMember}
+                    class="mt-6 flex items-center space-x-1 text-xs text-theme-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
                     </svg>
-                    <span class="uppercase font-medium">{$t("app.contracts.actions.selectSignatoryOrSpectator")}</span>
+                    <span class="uppercase font-medium"
+                      >{$t(
+                        "app.contracts.actions.selectSignatoryOrSpectator"
+                      )}</span
+                    >
                   </button>
                 </div>
               </div>
 
               {#if imProvider}
-                <div class="bg-white py-6 px-8 shadow-lg border border-gray-200">
+                <div
+                  class="bg-white py-6 px-8 shadow-lg border border-gray-200"
+                >
                   <div class="flex items-center space-x-3 justify-between">
                     <div>
-                      <h3 class="text-lg leading-6 font-medium text-gray-900">{$t("models.employee.plural")}</h3>
-                      <p class="mt-1 text-sm text-gray-500">{$t("app.employees.actions.select")}.</p>
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {$t("models.employee.plural")}
+                      </h3>
+                      <p class="mt-1 text-sm text-gray-500">
+                        {$t("app.employees.actions.select")}.
+                      </p>
                     </div>
                     <IconWorkers className="h-8 w-8 text-gray-400" />
                   </div>
                   <div>
                     <div>
                       {#each employees as employee, idxEmployee}
-                        <div class="relative mt-1 grid grid-cols-6 items-center space-x-2 py-3 gap-1">
+                        <div
+                          class="relative mt-1 grid grid-cols-6 items-center space-x-2 py-3 gap-1"
+                        >
                           <button
                             type="button"
                             class="text-gray-700 hover:bg-gray-50 absolute origin-top-right right-0 top-0 mr-0 inline-flex items-center px-1.5 py-1.5 border-gray-300 text-xs font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-theme-500"
                             on:click={() => removeEmployee(idxEmployee)}
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                           <div class="col-span-6 sm:col-span-2">
-                            <label for="full-name" class="block text-xs font-medium text-gray-700 truncate">
+                            <label
+                              for="full-name"
+                              class="block text-xs font-medium text-gray-700 truncate"
+                            >
                               {$t("models.employee.fullName")}
                             </label>
                             <div class="mt-1">
@@ -404,7 +552,9 @@
                                 value={employee.firstName}
                                 type="text"
                                 name="employee-first-name-"
-                                placeholder={$t("models.employee.object") + " " + (idxEmployee + 1)}
+                                placeholder={$t("models.employee.object") +
+                                  " " +
+                                  (idxEmployee + 1)}
                                 autoComplete="off"
                                 required
                                 disabled
@@ -413,7 +563,10 @@
                             </div>
                           </div>
                           <div class="col-span-3 sm:col-span-2">
-                            <label for="full-name" class="block text-xs font-medium text-gray-700 truncate">
+                            <label
+                              for="full-name"
+                              class="block text-xs font-medium text-gray-700 truncate"
+                            >
                               {$t("models.employee.lastName")}
                             </label>
                             <div class="mt-1">
@@ -430,7 +583,10 @@
                             </div>
                           </div>
                           <div class="col-span-3 sm:col-span-2">
-                            <label for="email" class="block text-xs font-medium text-gray-700 truncate">
+                            <label
+                              for="email"
+                              class="block text-xs font-medium text-gray-700 truncate"
+                            >
                               {$t("models.employee.email")}
                             </label>
                             <div class="mt-1">
@@ -450,11 +606,28 @@
                       {/each}
 
                       <div class="flex items-center space-x-3">
-                        <button type="button" on:click={addEmployee} class="mt-6 flex items-center space-x-1 text-xs text-theme-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        <button
+                          type="button"
+                          on:click={addEmployee}
+                          class="mt-6 flex items-center space-x-1 text-xs text-theme-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            />
                           </svg>
-                          <span class="uppercase font-medium">{$t("app.employees.actions.selectEmployees")}</span>
+                          <span class="uppercase font-medium"
+                            >{$t("app.employees.actions.selectEmployees")}</span
+                          >
                         </button>
                       </div>
                     </div>
@@ -485,8 +658,14 @@
       </div>
     {/if}
   </div>
-  <SelectEmployees bind:this={selectEmployees} on:selected={selectedEmployees} />
-  <SelectContractMembers bind:this={selectContractMembers} on:selected={selectedContractMembers} />
+  <SelectEmployees
+    bind:this={selectEmployees}
+    on:selected={selectedEmployees}
+  />
+  <SelectContractMembers
+    bind:this={selectContractMembers}
+    on:selected={selectedContractMembers}
+  />
   <ConfirmModal bind:this={confirmCreate} on:yes={saveContract} />
   <ErrorModal bind:this={errorModal} />
 </div>

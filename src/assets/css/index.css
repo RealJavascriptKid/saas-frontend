@@ -9,7 +9,7 @@
   .InputElement {
     @apply text-lg;
   }
-  
+
   .base-button + .base-button {
     margin-left: 1em;
   }

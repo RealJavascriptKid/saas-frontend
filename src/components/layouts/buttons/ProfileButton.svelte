@@ -33,7 +33,11 @@
   };
 </script>
 
-<div use:clickOutside on:click_outside={() => (opened = false)} class="relative">
+<div
+  use:clickOutside
+  on:click_outside={() => (opened = false)}
+  class="relative"
+>
   <div class="inline-flex shadow-none rounded-sm divide-x divide-gray-300">
     <button
       on:click={() => (opened = !opened)}
@@ -47,11 +51,17 @@
       aria-haspopup="true"
     >
       {#if avatar}
-        <img class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-slate-800" src={avatar} alt="Avatar" />
+        <img
+          class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-slate-800"
+          src={avatar}
+          alt="Avatar"
+        />
       {:else}
         <span class="inline-block h-5 w-5 rounded-full overflow-hidden">
           <svg class="h-full w-full" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            <path
+              d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+            />
           </svg>
         </span>
       {/if}
@@ -70,8 +80,16 @@
       <div
         class="z-40 origin-top-right absolute right-0 mt-2 w-64 rounded-sm shadow-lg overflow-hidden bg-white divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
-        <div class="py-1 rounded-sm bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-          <span class="truncate group flex items-center px-4 py-2 text-sm text-gray-700 transition ease-in-out duration-150" role="menuitem">
+        <div
+          class="py-1 rounded-sm bg-white shadow-xs"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="user-menu"
+        >
+          <span
+            class="truncate group flex items-center px-4 py-2 text-sm text-gray-700 transition ease-in-out duration-150"
+            role="menuitem"
+          >
             <div class="flex flex-col space-y-1 truncate">
               <div class="font-medium">{profileName()}</div>
               <div class="font-bold truncate">{email}</div>

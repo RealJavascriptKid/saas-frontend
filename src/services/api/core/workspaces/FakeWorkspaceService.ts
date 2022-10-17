@@ -18,7 +18,8 @@ for (let index = 0; index < fakeCompanies.length; index++) {
     id: (index + 1).toString(),
     tenant: undefined,
     name: fakeCompanies[index].name,
-    businessMainActivity: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
+    businessMainActivity:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
     type: WorkspaceType.PUBLIC,
     registrationNumber: "",
     registrationDate: new Date(),
@@ -41,7 +42,9 @@ export class FakeWorkspaceService implements IWorkspaceService {
   getAllWorkspaces(saveInStore: boolean): Promise<WorkspaceDto[]> {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
-        const workspaces = this.workspaces.filter((f) => f.type === WorkspaceType.PUBLIC).slice(0, 2);
+        const workspaces = this.workspaces
+          .filter((f) => f.type === WorkspaceType.PUBLIC)
+          .slice(0, 2);
         if (saveInStore) {
           tenantStore.setWorkspaces(workspaces);
         }

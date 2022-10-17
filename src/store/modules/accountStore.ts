@@ -5,7 +5,9 @@ import type { AccountState } from "../types";
 export const state: AccountState = {
   user: null,
 };
-const initialState: AccountState = JSON.parse(localStorage.getItem("account") ?? "{}") ?? {
+const initialState: AccountState = JSON.parse(
+  localStorage.getItem("account") ?? "{}"
+) ?? {
   user: null,
 };
 

@@ -17,7 +17,12 @@
   export let icon: string = "";
 </script>
 
-<div class={classNames(className, "text-center border-2 border-dashed border-gray-200 py-16 px-1.6")}>
+<div
+  class={classNames(
+    className,
+    "text-center border-2 border-dashed border-gray-200 py-16 px-1.6"
+  )}
+>
   <IconEmptyResults className="mx-auto w-10" />
   <h3 class="mt-2 text-sm font-medium text-gray-900">{captions.thereAreNo}</h3>
   <p class="mt-1 text-sm text-gray-500">{captions.description ?? ""}</p>
@@ -26,11 +31,28 @@
       {#if to}
         <ButtonSecondary {to}>
           {#if icon === "plus"}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              />
             </svg>
           {:else if icon === "refresh"}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -47,8 +69,19 @@
         <ButtonSecondary on:click={() => dispatch("click")} type="button">
           <div>
             {#if icon === "plus"}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
               </svg>
             {/if}
           </div>

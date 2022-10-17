@@ -83,7 +83,9 @@ for (const product of plans) {
   };
   subscriptions.push(subscription);
 }
-export class FakeSubscriptionManagerService implements ISubscriptionManagerService {
+export class FakeSubscriptionManagerService
+  implements ISubscriptionManagerService
+{
   subscriptions = subscriptions;
   currentSubscription = subscriptions[1];
   getCurrentSubscription(): Promise<SubscriptionGetCurrentResponse> {
@@ -91,17 +93,27 @@ export class FakeSubscriptionManagerService implements ISubscriptionManagerServi
       setTimeout(() => {
         tenantStore.setSubscription(this.currentSubscription);
         if (this.currentSubscription.myProducts?.length > 0) {
-          pricingStore.setProduct(this.currentSubscription.myProducts[0].subscriptionProduct);
-          pricingStore.setBillingPeriod(this.currentSubscription.myProducts[0].subscriptionPrice.billingPeriod);
+          pricingStore.setProduct(
+            this.currentSubscription.myProducts[0].subscriptionProduct
+          );
+          pricingStore.setBillingPeriod(
+            this.currentSubscription.myProducts[0].subscriptionPrice
+              .billingPeriod
+          );
         }
         resolve(this.currentSubscription);
       }, 500);
     });
   }
-  getCoupon(_couponId: string, _currency: string): Promise<SubscriptionCouponDto> {
+  getCoupon(
+    _couponId: string,
+    _currency: string
+  ): Promise<SubscriptionCouponDto> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
-  updateSubscription(_subscription: SelectedSubscriptionRequest): Promise<SubscriptionGetCurrentResponse> {
+  updateSubscription(
+    _subscription: SelectedSubscriptionRequest
+  ): Promise<SubscriptionGetCurrentResponse> {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
   cancelSubscription(): Promise<SubscriptionGetCurrentResponse> {

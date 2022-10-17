@@ -21,7 +21,11 @@
 <div>
   <SlideOver on:close={() => dispatch("close")} {title}>
     <div slot="content" class="space-y-2">
-      <UploadDocument accept="image/png, image/jpg, image/jpeg" description={title} on:dropped={onChange} />
+      <UploadDocument
+        accept="image/png, image/jpg, image/jpeg"
+        description={title}
+        on:dropped={onChange}
+      />
       {#if $image}
         <div>
           <img class="w-full h-auto" alt="Upload" src={$image} />

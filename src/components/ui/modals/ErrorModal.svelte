@@ -44,8 +44,15 @@
 <span>
   {#if showing}
     <div on:keyup={keyup} class={className}>
-      <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center block p-0">
+      <div
+        class="fixed z-10 inset-0 overflow-y-auto"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div
+          class="items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center block p-0"
+        >
           <transition
             enter-active-class="ease-out duration-300"
             enter-class="opacity-0"
@@ -54,7 +61,10 @@
             leave-class="opacity-100"
             leave-to-class="opacity-0"
           >
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" />
+            <div
+              class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+              aria-hidden="true"
+            />
           </transition>
 
           <span class="inline-block align-middle h-screen" aria-hidden="true" />
@@ -70,9 +80,18 @@
               class="inline-block bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle max-w-sm w-full p-6"
             >
               <div>
-                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <div
+                  class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100"
+                >
                   <!-- Heroicon name: outline/check -->
-                  <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <svg
+                    class="h-6 w-6 text-red-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -82,7 +101,12 @@
                   </svg>
                 </div>
                 <div class="text-center mt-5">
-                  <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">{title}</h3>
+                  <h3
+                    class="text-lg leading-6 font-medium text-gray-900"
+                    id="modal-title"
+                  >
+                    {title}
+                  </h3>
                   <div class="mt-2">
                     <p class="text-sm text-gray-700">{description}</p>
                   </div>

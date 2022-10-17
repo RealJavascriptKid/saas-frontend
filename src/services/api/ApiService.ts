@@ -55,7 +55,11 @@ export class ApiService {
         });
     });
   }
-  protected download(data: any, method = "Download", headers?: any): Promise<any> {
+  protected download(
+    data: any,
+    method = "Download",
+    headers?: any
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
       server
         .post(this.controller + `${method}`, data, {
@@ -84,7 +88,12 @@ export class ApiService {
         });
     });
   }
-  protected put(id: string, data: any, method = "Update", headers?: any): Promise<any> {
+  protected put(
+    id: string,
+    data: any,
+    method = "Update",
+    headers?: any
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
       server
         .put(this.controller + `${method}/${id}`, data, {

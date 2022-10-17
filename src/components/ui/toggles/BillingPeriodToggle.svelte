@@ -12,16 +12,21 @@
     dispatch("selected");
   }
   function billingPeriodName(billingPeriod: SubscriptionBillingPeriod): string {
-    return $t("pricing." + SubscriptionBillingPeriod[billingPeriod].toString()).toString();
+    return $t(
+      "pricing." + SubscriptionBillingPeriod[billingPeriod].toString()
+    ).toString();
   }
   function isYearly(billingPeriod: SubscriptionBillingPeriod): boolean {
     return billingPeriod === SubscriptionBillingPeriod.YEARLY;
   }
   function yearlyDiscount(): string | undefined {
     const priceYearly = getPriceWithInterval(SubscriptionBillingPeriod.YEARLY);
-    const priceMonthly = getPriceWithInterval(SubscriptionBillingPeriod.MONTHLY);
+    const priceMonthly = getPriceWithInterval(
+      SubscriptionBillingPeriod.MONTHLY
+    );
     if (priceYearly && priceMonthly) {
-      const discount = 100 - (priceYearly.price * 100) / (priceMonthly.price * 12);
+      const discount =
+        100 - (priceYearly.price * 100) / (priceMonthly.price * 12);
       if (discount !== 0) {
         return "-" + discount.toFixed(0) + "%";
       }
@@ -29,11 +34,18 @@
 
     return undefined;
   }
-  function getPriceWithInterval(billingPeriod: SubscriptionBillingPeriod): SubscriptionPriceDto | undefined {
+  function getPriceWithInterval(
+    billingPeriod: SubscriptionBillingPeriod
+  ): SubscriptionPriceDto | undefined {
     let price: SubscriptionPriceDto | undefined;
     if (products && products.length > 0) {
       products.forEach((product) => {
-        const prices = product.prices.find((f) => f.billingPeriod === billingPeriod && f.currency === currency && f.price > 0);
+        const prices = product.prices.find(
+          (f) =>
+            f.billingPeriod === billingPeriod &&
+            f.currency === currency &&
+            f.price > 0
+        );
         if (prices) {
           price = prices;
         }
@@ -49,7 +61,10 @@
 
     products.forEach((element) => {
       element.prices.forEach((price) => {
-        if (currency === price.currency && price.billingPeriod !== SubscriptionBillingPeriod.ONCE) {
+        if (
+          currency === price.currency &&
+          price.billingPeriod !== SubscriptionBillingPeriod.ONCE
+        ) {
           allBillingPeriods.push(price.billingPeriod);
         }
       });
@@ -73,7 +88,9 @@
             billingPeriod !== period
               ? "text-xs p-4 cursor-pointer bg-gray-50 dark:bg-gray-700"
               : "text-xs p-4 cursor-pointer bg-white dark:bg-gray-900 border shadow-md border-slate-300 dark:border-gray-600",
-            idx === 0 ? "rounded-l-md border-r-none" : "rounded-r-md border-l-none"
+            idx === 0
+              ? "rounded-l-md border-r-none"
+              : "rounded-r-md border-l-none"
           )}
         >
           <div>{billingPeriodName(period)}</div>

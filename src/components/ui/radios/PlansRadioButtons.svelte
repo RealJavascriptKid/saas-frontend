@@ -29,7 +29,8 @@
   $: currency = $pricingState.currency;
   $: selectedProduct = $pricingState.selectedProduct;
 
-  $: activeProducts = activeProducts = $tenantState.subscription?.myProducts ?? [];
+  $: activeProducts = activeProducts =
+    $tenantState.subscription?.myProducts ?? [];
   $: activeProduct = activeProducts?.length > 0 ? activeProducts[0] : null;
 
   $: authenticated = $authState.authenticated;
@@ -56,9 +57,15 @@
       });
     }
   }
-  function getPrice(product: SubscriptionProductDto): SubscriptionPriceDto | undefined {
+  function getPrice(
+    product: SubscriptionProductDto
+  ): SubscriptionPriceDto | undefined {
     const prices = product.prices.find(
-      (f) => (f.billingPeriod === billingPeriod || f.billingPeriod === SubscriptionBillingPeriod.ONCE) && f.currency === currency && f.active
+      (f) =>
+        (f.billingPeriod === billingPeriod ||
+          f.billingPeriod === SubscriptionBillingPeriod.ONCE) &&
+        f.currency === currency &&
+        f.active
     );
     return prices;
   }
@@ -102,9 +109,12 @@
   }
   function getYearlyDiscount(): string | undefined {
     const priceYearly = getPriceWithInterval(SubscriptionBillingPeriod.YEARLY);
-    const priceMonthly = getPriceWithInterval(SubscriptionBillingPeriod.MONTHLY);
+    const priceMonthly = getPriceWithInterval(
+      SubscriptionBillingPeriod.MONTHLY
+    );
     if (priceYearly && priceMonthly) {
-      const discount = 100 - (priceYearly.price * 100) / (priceMonthly.price * 12);
+      const discount =
+        100 - (priceYearly.price * 100) / (priceMonthly.price * 12);
       if (discount !== 0) {
         return "-" + discount.toFixed(0) + "%";
       }
@@ -112,11 +122,18 @@
 
     return undefined;
   }
-  function getPriceWithInterval(billingPeriod: SubscriptionBillingPeriod): SubscriptionPriceDto | undefined {
+  function getPriceWithInterval(
+    billingPeriod: SubscriptionBillingPeriod
+  ): SubscriptionPriceDto | undefined {
     let price: SubscriptionPriceDto | undefined;
     if (products && products.length > 0) {
       products.forEach((product) => {
-        const prices = product.prices.find((f) => f.billingPeriod === billingPeriod && f.currency === currency && f.price > 0);
+        const prices = product.prices.find(
+          (f) =>
+            f.billingPeriod === billingPeriod &&
+            f.currency === currency &&
+            f.price > 0
+        );
         if (prices) {
           price = prices;
         }
@@ -138,12 +155,18 @@
   {:else}
     <span>
       <fieldset>
-        <legend class="text-sm font-medium flex items-center justify-between w-full">
+        <legend
+          class="text-sm font-medium flex items-center justify-between w-full"
+        >
           <div>
             {#if plansLabel} <span>{$t("shared.plan")}</span>{/if}
           </div>
           <div class="flex items-center justify-center space-x-2">
-            <button type="button" on:click|preventDefault={selectMonthly} class="text-gray-500 text-sm font-normal focus:outline-none">
+            <button
+              type="button"
+              on:click|preventDefault={selectMonthly}
+              class="text-gray-500 text-sm font-normal focus:outline-none"
+            >
               {getBillingPeriodName(3)}
             </button>
             <button
@@ -151,11 +174,14 @@
               class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500"
               on:click|preventDefault={toggleBillingPeriod}
             >
-              <div class="w-8 h-4 transition bg-theme-500 rounded-full shadow-md outline-none" />
+              <div
+                class="w-8 h-4 transition bg-theme-500 rounded-full shadow-md outline-none"
+              />
               <div
                 class={classNames(
                   "absolute inline-flex items-center justify-center w-2 h-2 transition-all duration-200 ease-in-out transform bg-white rounded-full shadow-sm top-1 left-1",
-                  billingPeriod === SubscriptionBillingPeriod.YEARLY && "translate-x-4"
+                  billingPeriod === SubscriptionBillingPeriod.YEARLY &&
+                    "translate-x-4"
                 )}
               />
             </button>
@@ -165,7 +191,11 @@
               class="flex items-center space-x-1 text-gray-500 text-sm font-normal focus:outline-none"
             >
               <div>{getBillingPeriodName(4)}</div>
-              <div class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800">{getYearlyDiscount()}</div>
+              <div
+                class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800"
+              >
+                {getYearlyDiscount()}
+              </div>
             </button>
           </div>
         </legend>
@@ -173,7 +203,11 @@
         <div class="mt-2 relative bg-white rounded-md -space-y-px">
           {#if !loading && products.length === 0}
             <div>
-              <WarningBanner redirect="/admin/pricing" title={$t("shared.error")} text={$t("admin.pricing.noPricesInDatabase")} />
+              <WarningBanner
+                redirect="/admin/pricing"
+                title={$t("shared.error")}
+                text={$t("admin.pricing.noPricesInDatabase")}
+              />
             </div>
           {/if}
           <!--Checked: "bg-theme-50 border-theme-200 z-10", Not Checked: "border-gray-200" -->
@@ -201,24 +235,43 @@
                 <!--Checked: "text-theme-900", Not Checked: "text-gray-900" -->
                 <span
                   id="pricing-plans-0-label"
-                  class={classNames("ml-3 font-medium", isSelected(product) && "text-theme-900", !isSelected(product) && "text-gray-900")}
+                  class={classNames(
+                    "ml-3 font-medium",
+                    isSelected(product) && "text-theme-900",
+                    !isSelected(product) && "text-gray-900"
+                  )}
                 >
                   {$t(product.title)}
                 </span>
                 {#if showCurrent && activeProduct && activeProduct.subscriptionProduct.title === product.title}
-                  <span class="ml-2 font-extrabold truncate">({$t("shared.current")})</span>
+                  <span class="ml-2 font-extrabold truncate"
+                    >({$t("shared.current")})</span
+                  >
                 {/if}
               </div>
-              <p id="pricing-plans-0-description-0" class="ml-6 pl-1 text-sm sm:ml-0 sm:pl-0 sm:text-center">
+              <p
+                id="pricing-plans-0-description-0"
+                class="ml-6 pl-1 text-sm sm:ml-0 sm:pl-0 sm:text-center"
+              >
                 <!--Checked: "text-theme-900", Not Checked: "text-gray-900" -->
                 <span class="font-medium">
-                  <span class={classNames("font-medium tracking-tight", isSelected(product) && "text-theme-900", !isSelected(product) && "text-gray-900")}>
+                  <span
+                    class={classNames(
+                      "font-medium tracking-tight",
+                      isSelected(product) && "text-theme-900",
+                      !isSelected(product) && "text-gray-900"
+                    )}
+                  >
                     {getPriceAmount(product)}
                   </span>
                   {#if billingPeriod === SubscriptionBillingPeriod.MONTHLY}
-                    <span class="text-gray-500 font-normal">/ {$t("pricing.MONTHLYShort")}</span>
+                    <span class="text-gray-500 font-normal"
+                      >/ {$t("pricing.MONTHLYShort")}</span
+                    >
                   {:else}
-                    <span class="text-gray-500">/ {$t("pricing.YEARLYShort")}</span>
+                    <span class="text-gray-500"
+                      >/ {$t("pricing.YEARLYShort")}</span
+                    >
                   {/if}
                 </span>
               </p>
@@ -231,7 +284,11 @@
                   !isSelected(product) && "text-gray-500"
                 )}
               >
-                <span>{$t(product.features[0].key, { values: { p1: product.features[0].value } })}</span>
+                <span
+                  >{$t(product.features[0].key, {
+                    values: { p1: product.features[0].value },
+                  })}</span
+                >
               </p>
             </label>
           {/each}

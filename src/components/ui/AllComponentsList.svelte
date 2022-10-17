@@ -24,17 +24,26 @@
 </script>
 
 <div>
-  <div class={classNames(className, "space-y-6 pb-12 p-4 mx-auto max-w-2xl text-slate-900")}>
+  <div
+    class={classNames(
+      className,
+      "space-y-6 pb-12 p-4 mx-auto max-w-2xl text-slate-900"
+    )}
+  >
     <div class="space-y-1">
       <h3 class="font-medium text-sm">Breadcrumbs</h3>
-      <div class="flex items-center space-x-2 p-2 border-dashed border-gray-300 border">
+      <div
+        class="flex items-center space-x-2 p-2 border-dashed border-gray-300 border"
+      >
         <PreviewBreadcrumbs />
       </div>
     </div>
 
     <div class="space-y-1">
       <h3 class="font-medium text-sm">Tab - as Links</h3>
-      <div class="flex items-center space-x-2 p-2 border-dashed border-gray-300 border">
+      <div
+        class="flex items-center space-x-2 p-2 border-dashed border-gray-300 border"
+      >
         <PreviewTabsAsLinks />
       </div>
     </div>
@@ -130,7 +139,10 @@
       <div class="space-y-1">
         <h3 class="font-medium text-sm">Slide-overs</h3>
         <div class="bg-white p-6 border-dashed border-gray-300 border">
-          <ButtonSecondary on:click={() => (showRightSlideOver = !showRightSlideOver)}>Right slide-over</ButtonSecondary>
+          <ButtonSecondary
+            on:click={() => (showRightSlideOver = !showRightSlideOver)}
+            >Right slide-over</ButtonSecondary
+          >
         </div>
       </div>
     {/if}

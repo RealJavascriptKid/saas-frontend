@@ -28,7 +28,9 @@
 <div>
   {#if showing}
     <div class="fixed z-50 inset-0 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0"
@@ -42,7 +44,10 @@
           </div>
         </transition>
 
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true" />
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+        />
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -67,8 +72,20 @@
                 class="p-1 bg-white hover:bg-gray-200 border border-gray-200 rounded-full text-gray-600 justify-center flex items-center hover:text-gray-500 focus:outline-none"
               >
                 <span class="sr-only">{$t("shared.close")}</span>
-                <svg class="h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  class="h-5 w-5 text-gray-700"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>

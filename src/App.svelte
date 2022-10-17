@@ -85,7 +85,9 @@
       <AdminIndex>
         <Router>
           <Route path="tenants"><TenantsIndex /></Route>
-          <Route path="tenant/:tenantId" let:params><Tenant {...params} /></Route>
+          <Route path="tenant/:tenantId" let:params
+            ><Tenant {...params} /></Route
+          >
           <Route path="users"><Users /></Route>
           <Route path="pricing"><AdminPricing /></Route>
           <Route path="emails"><Emails /></Route>
@@ -99,12 +101,22 @@
     <PrivateRoute path="app/*" userTypes={[UserType.Tenant]}>
       <AppIndex>
         <Router>
-          <PrivateRoute path="dashboard" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER]}><Dashboard /></PrivateRoute>
+          <PrivateRoute
+            path="dashboard"
+            roles={[
+              TenantUserRole.OWNER,
+              TenantUserRole.ADMIN,
+              TenantUserRole.MEMBER,
+            ]}><Dashboard /></PrivateRoute
+          >
           <Route path="settings/*">
             <Router>
               <Settings>
                 <Route path="profile"><Profile /></Route>
-                <PrivateRoute path="workspaces/*" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}>
+                <PrivateRoute
+                  path="workspaces/*"
+                  roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}
+                >
                   <Workspaces>
                     <Router>
                       <Route path="new">
@@ -117,7 +129,10 @@
                   </Workspaces>
                 </PrivateRoute>
 
-                <PrivateRoute path="members/*" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}>
+                <PrivateRoute
+                  path="members/*"
+                  roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}
+                >
                   <Members>
                     <Router>
                       <Route path="new">
@@ -130,7 +145,10 @@
                   </Members>
                 </PrivateRoute>
 
-                <PrivateRoute path="subscription" roles={[TenantUserRole.OWNER]}>
+                <PrivateRoute
+                  path="subscription"
+                  roles={[TenantUserRole.OWNER]}
+                >
                   <MySubscription />
                 </PrivateRoute>
 
@@ -142,7 +160,10 @@
           </Route>
 
           <Route path="links"><Redirect to="links/all" /></Route>
-          <PrivateRoute path="links/*" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}>
+          <PrivateRoute
+            path="links/*"
+            roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}
+          >
             <LinksIndex>
               <Router>
                 <Route path="all"><AllLinksList /></Route>
@@ -153,7 +174,11 @@
             </LinksIndex>
           </PrivateRoute>
 
-          <PrivateRoute let:params path="link/:id" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}>
+          <PrivateRoute
+            let:params
+            path="link/:id"
+            roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN]}
+          >
             <Link {...params} />
           </PrivateRoute>
 
@@ -161,16 +186,35 @@
           <Route path="employees/new"><NewEmployees /></Route>
           <Route path="employee/:id" let:params><Employee {...params} /></Route>
 
-          <Route path="contracts"><Redirect to="app/contracts/pending" /></Route>
-          <Route path="contracts/:status" let:params><Contracts {...params} /></Route>
+          <Route path="contracts"><Redirect to="app/contracts/pending" /></Route
+          >
+          <Route path="contracts/:status" let:params
+            ><Contracts {...params} /></Route
+          >
 
           <Route path="unauthorized"><Unauthorized /></Route>
 
-          <PrivateRoute let:params path="contract/new" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER]}>
+          <PrivateRoute
+            let:params
+            path="contract/new"
+            roles={[
+              TenantUserRole.OWNER,
+              TenantUserRole.ADMIN,
+              TenantUserRole.MEMBER,
+            ]}
+          >
             <NewContract {...params} />
           </PrivateRoute>
 
-          <PrivateRoute let:params path="contract/:id" roles={[TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER]}>
+          <PrivateRoute
+            let:params
+            path="contract/:id"
+            roles={[
+              TenantUserRole.OWNER,
+              TenantUserRole.ADMIN,
+              TenantUserRole.MEMBER,
+            ]}
+          >
             <Contract {...params} />
           </PrivateRoute>
         </Router>

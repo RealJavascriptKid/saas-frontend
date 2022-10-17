@@ -13,8 +13,16 @@ export interface ITenantUserInvitationService {
   getInviteURL(linkUuid: string): Promise<TenantDto>;
   getInvitationSettings(tenantId?: string): Promise<TenantJoinSettingsDto>;
   inviteUser(invitation: UserInviteRequest): Promise<TenantUserDto>;
-  requestAccess(linkUuid: string, payload: UserVerifyRequest): Promise<TenantUserDto>;
+  requestAccess(
+    linkUuid: string,
+    payload: UserVerifyRequest
+  ): Promise<TenantUserDto>;
   acceptUser(payload: TenantUserDto): Promise<void>;
-  acceptInvitation(tenantUserId: string, payload: UserVerifyRequest): Promise<UserLoggedResponse>;
-  updateInvitationSettings(payload: TenantUpdateJoinSettingsRequest): Promise<TenantJoinSettingsDto>;
+  acceptInvitation(
+    tenantUserId: string,
+    payload: UserVerifyRequest
+  ): Promise<UserLoggedResponse>;
+  updateInvitationSettings(
+    payload: TenantUpdateJoinSettingsRequest
+  ): Promise<TenantJoinSettingsDto>;
 }

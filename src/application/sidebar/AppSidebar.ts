@@ -15,7 +15,12 @@ export const AppSidebar: SideBarItem[] = [
         title: $t("app.sidebar.dashboard"),
         path: "/app/dashboard",
         icon: SvgIcon.DASHBOARD,
-        userRoles: [TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER, TenantUserRole.GUEST],
+        userRoles: [
+          TenantUserRole.OWNER,
+          TenantUserRole.ADMIN,
+          TenantUserRole.MEMBER,
+          TenantUserRole.GUEST,
+        ],
       },
       {
         title: $t("models.link.plural"),
@@ -41,13 +46,22 @@ export const AppSidebar: SideBarItem[] = [
         title: $t("models.contract.plural"),
         path: "/app/contracts/pending",
         icon: SvgIcon.CONTRACTS,
-        userRoles: [TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER, TenantUserRole.GUEST],
+        userRoles: [
+          TenantUserRole.OWNER,
+          TenantUserRole.ADMIN,
+          TenantUserRole.MEMBER,
+          TenantUserRole.GUEST,
+        ],
       },
       {
         title: $t("models.employee.plural"),
         path: "/app/employees",
         icon: SvgIcon.EMPLOYEES,
-        userRoles: [TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER],
+        userRoles: [
+          TenantUserRole.OWNER,
+          TenantUserRole.ADMIN,
+          TenantUserRole.MEMBER,
+        ],
       },
       {
         title: $t("app.navbar.settings"),

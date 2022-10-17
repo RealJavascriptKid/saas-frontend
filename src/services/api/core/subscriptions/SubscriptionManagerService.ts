@@ -7,7 +7,10 @@ import type { ISubscriptionManagerService } from "./ISubscriptionManagerService"
 import { tenantStore } from "@/store/modules/tenantStore";
 import { pricingStore } from "@/store/modules/pricingStore";
 
-export class SubscriptionManagerService extends ApiService implements ISubscriptionManagerService {
+export class SubscriptionManagerService
+  extends ApiService
+  implements ISubscriptionManagerService
+{
   constructor() {
     super("SubscriptionManager");
   }
@@ -18,8 +21,12 @@ export class SubscriptionManagerService extends ApiService implements ISubscript
         .then((subscription: SubscriptionGetCurrentResponse) => {
           tenantStore.setSubscription(subscription);
           if (subscription.myProducts?.length > 0) {
-            pricingStore.setProduct(subscription.myProducts[0].subscriptionProduct);
-            pricingStore.setBillingPeriod(subscription.myProducts[0].subscriptionPrice.billingPeriod);
+            pricingStore.setProduct(
+              subscription.myProducts[0].subscriptionProduct
+            );
+            pricingStore.setBillingPeriod(
+              subscription.myProducts[0].subscriptionPrice.billingPeriod
+            );
           }
           resolve(subscription);
         })
@@ -28,10 +35,15 @@ export class SubscriptionManagerService extends ApiService implements ISubscript
         });
     });
   }
-  getCoupon(couponId: string, currency: string): Promise<SubscriptionCouponDto> {
+  getCoupon(
+    couponId: string,
+    currency: string
+  ): Promise<SubscriptionCouponDto> {
     return super.get(`GetCoupon/${couponId}/${currency}`);
   }
-  updateSubscription(subscription: SelectedSubscriptionRequest): Promise<SubscriptionGetCurrentResponse> {
+  updateSubscription(
+    subscription: SelectedSubscriptionRequest
+  ): Promise<SubscriptionGetCurrentResponse> {
     return new Promise((resolve, reject) => {
       super
         .post(subscription, `UpdateSubscription`)
@@ -39,7 +51,9 @@ export class SubscriptionManagerService extends ApiService implements ISubscript
           tenantStore.setSubscription(response);
           if (response.myProducts?.length > 0) {
             pricingStore.setProduct(response.myProducts[0].subscriptionProduct);
-            pricingStore.setBillingPeriod(response.myProducts[0].subscriptionPrice.billingPeriod);
+            pricingStore.setBillingPeriod(
+              response.myProducts[0].subscriptionPrice.billingPeriod
+            );
           }
           resolve(response);
         })
@@ -56,7 +70,9 @@ export class SubscriptionManagerService extends ApiService implements ISubscript
           tenantStore.setSubscription(response);
           if (response.myProducts?.length > 0) {
             pricingStore.setProduct(response.myProducts[0].subscriptionProduct);
-            pricingStore.setBillingPeriod(response.myProducts[0].subscriptionPrice.billingPeriod);
+            pricingStore.setBillingPeriod(
+              response.myProducts[0].subscriptionPrice.billingPeriod
+            );
           }
           pricingStore.setSelected({
             product: null,

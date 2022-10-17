@@ -2,5 +2,7 @@ import type { SubscriptionProductDto } from "@/application/dtos/core/subscriptio
 
 export interface ISubscriptionProductService {
   getProducts(): Promise<SubscriptionProductDto[]>;
-  createProduct(product: SubscriptionProductDto): Promise<SubscriptionProductDto>;
+  createProduct(
+    product: SubscriptionProductDto
+  ): Promise<SubscriptionProductDto>;
 }

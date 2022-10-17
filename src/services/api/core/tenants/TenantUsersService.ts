@@ -4,7 +4,10 @@ import type { TenantUserUpdateRequest } from "@/application/contracts/core/tenan
 import type { ITenantUsersService } from "./ITenantUsersService";
 import { tenantStore } from "@/store/modules/tenantStore";
 
-export class TenantUsersService extends ApiService implements ITenantUsersService {
+export class TenantUsersService
+  extends ApiService
+  implements ITenantUsersService
+{
   constructor() {
     super("TenantUsers");
   }
@@ -24,7 +27,10 @@ export class TenantUsersService extends ApiService implements ITenantUsersServic
   get(tenantUserId: string): Promise<TenantUserDto> {
     return super.get("Get", `${tenantUserId}`);
   }
-  update(tenantUserId: string, payload: TenantUserUpdateRequest): Promise<TenantUserDto> {
+  update(
+    tenantUserId: string,
+    payload: TenantUserUpdateRequest
+  ): Promise<TenantUserDto> {
     return super.put(`${tenantUserId}`, payload);
   }
   delete(tenantUserId: string): Promise<any> {

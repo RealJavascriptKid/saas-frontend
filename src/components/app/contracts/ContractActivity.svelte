@@ -29,23 +29,40 @@
 </script>
 
 <div>
-  <h3 class="mb-2 text-gray-400 font-medium text-sm">{$t("models.contract.activity")}</h3>
-  <div class="bg-white p-3 rounded-md border border-gray-100 shadow-md space-y-3 overflow-hidden">
+  <h3 class="mb-2 text-gray-400 font-medium text-sm">
+    {$t("models.contract.activity")}
+  </h3>
+  <div
+    class="bg-white p-3 rounded-md border border-gray-100 shadow-md space-y-3 overflow-hidden"
+  >
     <div class="flow-root">
       <ul class="-mb-8">
         {#each sortedItems() as activity, idxActivity}
           <li>
             <div class="relative pb-8">
               {#if items.length > 0 && idxActivity + 1 < items.length}
-                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+                <span
+                  class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                  aria-hidden="true"
+                />
               {/if}
 
               <div class="relative flex space-x-3">
                 <div>
-                  <span class={classNames("h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center ring-8 ring-white")}>
+                  <span
+                    class={classNames(
+                      "h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center ring-8 ring-white"
+                    )}
+                  >
                     <!--Heroicon name: solid/user -->
                     {#if activity.type === ContractActivityType.CREATED}
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-gray-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -61,16 +78,24 @@
                     <div class="truncate">
                       <div class="text-sm text-gray-500">
                         <div class="text-gray-900 truncate">
-                          <span title={getActivityTitle(activity)}>{getActivityTitle(activity)}</span>
+                          <span title={getActivityTitle(activity)}
+                            >{getActivityTitle(activity)}</span
+                          >
                         </div>
                       </div>
                     </div>
-                    <div class="text-right text-xs whitespace-nowrap text-gray-500 lowercase">
-                      {#if activity.createdAt} <time>{dateDM(activity.createdAt)}</time>{/if}
+                    <div
+                      class="text-right text-xs whitespace-nowrap text-gray-500 lowercase"
+                    >
+                      {#if activity.createdAt}
+                        <time>{dateDM(activity.createdAt)}</time>{/if}
                     </div>
                   </div>
                   <div class="min-w-0 flex-1 flex justify-between space-x-4">
-                    {#if activity.createdByUser} <div class="font-light text-xs">{activity.createdByUser.email}</div>{/if}
+                    {#if activity.createdByUser}
+                      <div class="font-light text-xs">
+                        {activity.createdByUser.email}
+                      </div>{/if}
                   </div>
                 </div>
               </div>

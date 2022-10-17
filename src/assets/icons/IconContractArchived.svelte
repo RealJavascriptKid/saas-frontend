@@ -2,7 +2,15 @@
   export let className: string = "";
 </script>
 
-<svg class={className} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172">
+<svg
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  x="0px"
+  y="0px"
+  width="50"
+  height="50"
+  viewBox="0 0 172 172"
+>
   <g
     fill="none"
     fill-rule="nonzero"
@@ -30,13 +38,62 @@
     </g>
     <g fill="currentColor">
       <g fill="currentColor">
-        <g id="Слой_2" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="Android_x5F_4" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="Android_x5F_5" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="Windows_x5F_8" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="Windows_x5F_10" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="Color" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
-        <g id="IOS" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
+        <g
+          id="Слой_2"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="Android_x5F_4"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="Android_x5F_5"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="Windows_x5F_8"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="Windows_x5F_10"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="Color"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
+        <g
+          id="IOS"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
         <g id="IOS_copy">
           <path
             d="M165.464,123.84h-3.784v-6.192c0,-11.696 -9.288,-21.328 -20.64,-21.328c-11.352,0 -20.64,9.632 -20.64,21.328v6.192h-3.784c-3.784,0 -6.536,3.096 -6.536,6.536v34.744c0,3.784 2.752,6.88 6.536,6.88h48.848c3.44,0 6.536,-3.096 6.536,-6.536v-35.088c0,-3.44 -2.752,-6.536 -6.536,-6.536zM127.28,117.648c0,-7.912 6.192,-14.448 13.76,-14.448c7.568,0 13.76,6.536 13.76,14.448v6.192h-27.52zM165.12,165.12h-48.16v-34.4h48.16zM144.136,149.296v4.472c0,1.72 -1.376,3.096 -3.096,3.096c-1.72,0 -3.096,-1.376 -3.096,-3.096v-4.472c-1.032,-1.032 -1.72,-2.064 -1.72,-3.44c0,-2.752 2.064,-4.816 4.816,-4.816c2.752,0 4.816,2.064 4.816,4.816c0,1.376 -0.688,2.408 -1.72,3.44z"
@@ -44,7 +101,14 @@
         </g>
       </g>
       <g fill="#94A3B8" opacity="0">
-        <g id="IOS" font-family="Inter, sans-serif" font-weight="400" font-size="16" text-anchor="start" visibility="hidden" />
+        <g
+          id="IOS"
+          font-family="Inter, sans-serif"
+          font-weight="400"
+          font-size="16"
+          text-anchor="start"
+          visibility="hidden"
+        />
         <g id="IOS_copy">
           <path
             d="M116.616,178.88h48.848c7.224,0 13.416,-6.192 13.416,-13.416v-35.088c0,-6.536 -4.472,-11.696 -10.32,-13.072c0,-15.48 -12.384,-27.864 -27.52,-27.864c-15.136,0 -27.52,12.384 -27.52,27.864c-5.848,1.376 -10.32,6.88 -10.32,13.072v34.744c0,7.568 5.848,13.76 13.416,13.76zM141.04,110.08c3.44,0 6.536,3.096 6.88,6.88h-13.76c0.344,-3.784 3.44,-6.88 6.88,-6.88z"

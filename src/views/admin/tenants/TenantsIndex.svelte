@@ -46,13 +46,17 @@
     return item.workspaces?.map((f) => `${f.name}`).join(", ");
   }
   function getUsers(item: TenantDto) {
-    return item.users?.map((f) => `${f.firstName} ${f.lastName} (${f.email})`).join(", ");
+    return item.users
+      ?.map((f) => `${f.firstName} ${f.lastName} (${f.email})`)
+      .join(", ");
   }
   function getProducts(item: TenantDto) {
     return item.products
       ?.map(
         (f) =>
-          `${f.subscriptionProduct.tier} - ${$t(f.subscriptionProduct.title)} (${NumberUtils.decimalFormat(f.subscriptionPrice.price)} ${
+          `${f.subscriptionProduct.tier} - ${$t(
+            f.subscriptionProduct.title
+          )} (${NumberUtils.decimalFormat(f.subscriptionPrice.price)} ${
             f.subscriptionPrice.currency
           }${priceBillingPeriod(f.subscriptionPrice)})`
       )
@@ -62,7 +66,12 @@
     if (price.billingPeriod === SubscriptionBillingPeriod.ONCE) {
       return $t("pricing.once").toString();
     } else {
-      return "/" + $t("pricing." + SubscriptionBillingPeriod[price.billingPeriod] + "Short");
+      return (
+        "/" +
+        $t(
+          "pricing." + SubscriptionBillingPeriod[price.billingPeriod] + "Short"
+        )
+      );
     }
   }
   $: orderedItems = (): TenantDto[] => {
@@ -85,7 +94,8 @@
     return items.filter(
       (f) =>
         f.subdomain !== "admin" &&
-        (f.id?.toUpperCase().includes(searchInput.toUpperCase()) || f.name?.toString().toUpperCase().includes(searchInput.toUpperCase()))
+        (f.id?.toUpperCase().includes(searchInput.toUpperCase()) ||
+          f.name?.toString().toUpperCase().includes(searchInput.toUpperCase()))
     );
   };
 </script>
@@ -96,11 +106,15 @@
 
 <div>
   <div class="bg-white shadow-sm border-b border-gray-300 w-full py-2">
-    <div class="mx-auto max-w-5xl xl:max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 space-x-2">
+    <div
+      class="mx-auto max-w-5xl xl:max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 space-x-2"
+    >
       <h1 class="flex-1 font-bold flex items-center truncate">
         {$t("models.tenant.plural")}
         {#if !loading}
-          <span class="ml-2 inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-gray-50 text-gray-800 border border-gray-300">
+          <span
+            class="ml-2 inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-gray-50 text-gray-800 border border-gray-300"
+          >
             {orderedItems().length}
           </span>
         {/if}
@@ -112,7 +126,9 @@
       </div>
     </div>
   </div>
-  <div class="pt-2 space-y-2 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl xl:max-w-7xl">
+  <div
+    class="pt-2 space-y-2 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl xl:max-w-7xl"
+  >
     {#if loading}
       <Loading />
     {:else}
@@ -120,8 +136,15 @@
         <div class="flex justify-between">
           <div class="flex items-center justify-start w-full">
             <div class="relative flex items-center w-full">
-              <div class="focus-within:z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <div
+                class="focus-within:z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
                   <path
                     fill-rule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -156,13 +179,20 @@
               <div class="flex flex-col">
                 <div class="overflow-x-auto">
                   <div class="py-2 align-middle inline-block min-w-full">
-                    <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+                    <div
+                      class="shadow overflow-hidden border border-gray-200 sm:rounded-lg"
+                    >
                       <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                           <tr>
                             {#each headers as header}
-                              <th scope="col" class="text-xs px-3 py-2 text-left font-medium text-gray-500 tracking-wider select-none truncate">
-                                <div class="flex items-center space-x-1 text-gray-500">
+                              <th
+                                scope="col"
+                                class="text-xs px-3 py-2 text-left font-medium text-gray-500 tracking-wider select-none truncate"
+                              >
+                                <div
+                                  class="flex items-center space-x-1 text-gray-500"
+                                >
                                   <div>{header.title}</div>
                                 </div>
                               </th>
@@ -172,18 +202,29 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                           {#each orderedItems() as item}
                             <tr>
-                              <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                              <td
+                                class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                              >
                                 <div class="flex flex-col max-w-sm truncate">
-                                  <Link to={"/admin/tenant/" + item.id} class="text-sm font-medium text-gray-900 hover:underline">
+                                  <Link
+                                    to={"/admin/tenant/" + item.id}
+                                    class="text-sm font-medium text-gray-900 hover:underline"
+                                  >
                                     {item.name}
                                   </Link>
                                   <div>{getUsers(item)}</div>
                                 </div>
                               </td>
-                              <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
-                                <div class="max-w-sm truncate">{getWorkspaces(item)}</div>
+                              <td
+                                class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                              >
+                                <div class="max-w-sm truncate">
+                                  {getWorkspaces(item)}
+                                </div>
                               </td>
-                              <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                              <td
+                                class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                              >
                                 <div>{getProducts(item)}</div>
                               </td>
                             </tr>

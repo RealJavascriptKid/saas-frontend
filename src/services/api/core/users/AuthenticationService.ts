@@ -6,7 +6,10 @@ import type { UserVerifyRequest } from "@/application/contracts/core/users/UserV
 import type { IAuthenticationService } from "./IAuthenticationService";
 import { authStore } from "@/store/modules/authStore";
 
-export class AuthenticationService extends ApiService implements IAuthenticationService {
+export class AuthenticationService
+  extends ApiService
+  implements IAuthenticationService
+{
   constructor() {
     super("Authentication");
   }

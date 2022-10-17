@@ -14,7 +14,9 @@ export const state: TenantState = {
   currentWorkspace: null,
   features: null,
 };
-const initialState: TenantState = JSON.parse(localStorage.getItem("tenant") ?? "{}") ?? {
+const initialState: TenantState = JSON.parse(
+  localStorage.getItem("tenant") ?? "{}"
+) ?? {
   tenants: [],
   current: null,
   subscription: null,

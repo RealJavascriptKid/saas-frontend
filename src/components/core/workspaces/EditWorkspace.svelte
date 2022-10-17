@@ -66,7 +66,10 @@
   }
   function save() {
     if (users.length === 0) {
-      errorModal?.show($t("shared.error"), $t("account.tenant.workspaces.errors.atLeastOneUser"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.tenant.workspaces.errors.atLeastOneUser")
+      );
       return;
     }
     loading = true;
@@ -91,10 +94,18 @@
       });
   }
   function remove() {
-    confirmRemove?.show($t("shared.confirmDelete"), $t("shared.delete"), $t("shared.cancel"), $t("shared.warningCannotUndo"));
+    confirmRemove?.show(
+      $t("shared.confirmDelete"),
+      $t("shared.delete"),
+      $t("shared.cancel"),
+      $t("shared.warningCannotUndo")
+    );
   }
   function yesRemove() {
-    if (currentRole == TenantUserRole.MEMBER || currentRole == TenantUserRole.GUEST) {
+    if (
+      currentRole == TenantUserRole.MEMBER ||
+      currentRole == TenantUserRole.GUEST
+    ) {
       errorModal?.show($t("account.tenant.onlyAdmin"));
     } else {
       loading = true;
@@ -136,7 +147,9 @@
 <div>
   <div>
     <div class="fixed inset-0 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0"
@@ -150,7 +163,10 @@
           </div>
         </transition>
 
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true" />
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+        />
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -175,14 +191,28 @@
                 class="p-1 bg-white hover:bg-gray-200 border border-gray-200 rounded-full text-gray-600 justify-center flex items-center hover:text-gray-500 focus:outline-none"
               >
                 <span class="sr-only">{$t("shared.close")}</span>
-                <svg class="h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  class="h-5 w-5 text-gray-700"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
             <div class="mt-3 space-y-3">
               <div class="flex items-center justify-between">
-                <h4 class="text-lg font-medium">{$t("app.workspaces.actions.edit")}</h4>
+                <h4 class="text-lg font-medium">
+                  {$t("app.workspaces.actions.edit")}
+                </h4>
               </div>
               {#if loading}
                 <Loading />
@@ -193,7 +223,10 @@
                   <div class="grid grid-cols-2 gap-2">
                     <!--Workspace Name -->
                     <div class="col-span-2">
-                      <label for="name" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="name"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.workspace.name")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -216,7 +249,10 @@
 
                     <!--Workspace Business Main Activity -->
                     <div class="col-span-2">
-                      <label for="business-main-activity" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="business-main-activity"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.workspace.businessMainActivity")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -238,17 +274,23 @@
 
                     <!--Workspace Type -->
                     <div class="col-span-2">
-                      <label for="type" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="type"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.workspace.type")}
                       </label>
                       <div class="mt-1 rounded-md shadow-sm w-full">
                         <fieldset name="type" id="type">
-                          <legend class="sr-only">{$t("models.workspace.type")}</legend>
+                          <legend class="sr-only"
+                            >{$t("models.workspace.type")}</legend
+                          >
                           <div class="bg-white rounded-md -space-y-px">
                             <label
                               class={classNames(
                                 "rounded-tl-md rounded-tr-md relative border py-2 px-4 flex cursor-pointer focus:outline-none",
-                                type === 0 && "bg-theme-50 border-theme-200 z-10",
+                                type === 0 &&
+                                  "bg-theme-50 border-theme-200 z-10",
                                 type !== 0 && "border-gray-200"
                               )}
                             >
@@ -264,16 +306,26 @@
                               <div class="ml-3 flex flex-col">
                                 <span
                                   id="workspace-type-0-label"
-                                  class={classNames("block text-sm font-medium", type === 0 && "text-theme-900", type !== 0 && "text-gray-900")}
+                                  class={classNames(
+                                    "block text-sm font-medium",
+                                    type === 0 && "text-theme-900",
+                                    type !== 0 && "text-gray-900"
+                                  )}
                                 >
                                   {$t("app.workspaces.types.PRIVATE")}
                                 </span>
 
                                 <span
                                   id="workspace-type-0-description"
-                                  class={classNames("block text-sm", type === 0 && "text-theme-700", type !== 0 && "text-gray-500")}
+                                  class={classNames(
+                                    "block text-sm",
+                                    type === 0 && "text-theme-700",
+                                    type !== 0 && "text-gray-500"
+                                  )}
                                 >
-                                  {$t("app.workspaces.typesDescription.PRIVATE")}
+                                  {$t(
+                                    "app.workspaces.typesDescription.PRIVATE"
+                                  )}
                                 </span>
                               </div>
                             </label>
@@ -281,7 +333,8 @@
                             <label
                               class={classNames(
                                 "relative border py-2 px-4 flex cursor-pointer focus:outline-none",
-                                type === 1 && "bg-theme-50 border-theme-200 z-10",
+                                type === 1 &&
+                                  "bg-theme-50 border-theme-200 z-10",
                                 type !== 1 && "border-gray-200"
                               )}
                             >
@@ -298,13 +351,21 @@
                               <div class="ml-3 flex flex-col">
                                 <span
                                   id="workspace-type-1-label"
-                                  class={classNames("block text-sm font-medium", type === 1 && "text-theme-900", type !== 1 && "text-gray-900")}
+                                  class={classNames(
+                                    "block text-sm font-medium",
+                                    type === 1 && "text-theme-900",
+                                    type !== 1 && "text-gray-900"
+                                  )}
                                 >
                                   {$t("app.workspaces.types.PUBLIC")}
                                 </span>
                                 <span
                                   id="workspace-type-1-description"
-                                  class={classNames("block text-sm", type === 1 && "text-theme-700", type !== 1 && "text-gray-500")}
+                                  class={classNames(
+                                    "block text-sm",
+                                    type === 1 && "text-theme-700",
+                                    type !== 1 && "text-gray-500"
+                                  )}
                                 >
                                   {$t("app.workspaces.typesDescription.PUBLIC")}
                                 </span>
@@ -319,7 +380,10 @@
                     <!--Workspace Registration Number -->
                     {#if type === 1}
                       <div>
-                        <label for="registration-number" class="block text-xs font-medium text-gray-700 truncate">
+                        <label
+                          for="registration-number"
+                          class="block text-xs font-medium text-gray-700 truncate"
+                        >
                           {$t("models.workspace.registrationNumber")}
                         </label>
                         <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -343,7 +407,10 @@
                     <!--Workspace Registration Date -->
                     {#if type === 1}
                       <div>
-                        <label for="registration-date" class="block text-xs font-medium text-gray-700 truncate">
+                        <label
+                          for="registration-date"
+                          class="block text-xs font-medium text-gray-700 truncate"
+                        >
                           {$t("models.workspace.registrationDate")}
                         </label>
                         <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -366,7 +433,10 @@
 
                     <!--Workspace Users -->
                     <div class="col-span-2">
-                      <label for="users" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="users"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.user.plural")}
                       </label>
                       <div class="mt-2 rounded-md w-full space-y-2">
@@ -378,11 +448,30 @@
                           value={currentUsersDescription(users)}
                           class="bg-gray-100 cursor-not-allowed w-full flex-1 focus:ring-theme-500 focus:border-theme-500 block min-w-0 rounded-md sm:text-sm border-gray-300"
                         />
-                        <button type="button" on:click={selectWorkspaceUsers} class="flex items-center space-x-1 text-xs text-theme-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        <button
+                          type="button"
+                          on:click={selectWorkspaceUsers}
+                          class="flex items-center space-x-1 text-xs text-theme-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            />
                           </svg>
-                          <span class="uppercase font-medium">{$t("app.workspaces.actions.selectWorkspaceUsers")}</span>
+                          <span class="uppercase font-medium"
+                            >{$t(
+                              "app.workspaces.actions.selectWorkspaceUsers"
+                            )}</span
+                          >
                         </button>
                       </div>
                     </div>

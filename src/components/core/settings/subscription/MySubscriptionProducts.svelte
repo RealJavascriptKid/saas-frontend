@@ -35,12 +35,16 @@
 
     const promises: any[] = [];
 
-    const loadDashboard = services.subscriptionManager.getCurrentSubscription().then((response) => {
-      subscription = response;
-    });
-    const loadWorkspaces = services.workspaces.getAllWorkspaces(false).then((response) => {
-      workspaces = response;
-    });
+    const loadDashboard = services.subscriptionManager
+      .getCurrentSubscription()
+      .then((response) => {
+        subscription = response;
+      });
+    const loadWorkspaces = services.workspaces
+      .getAllWorkspaces(false)
+      .then((response) => {
+        workspaces = response;
+      });
     const loadUsers = services.tenantUsers.getAll().then((response) => {
       users = response;
     });
@@ -69,9 +73,13 @@
     }
     return 0;
   };
-  $: currentProduct = subscription?.myProducts && subscription?.myProducts.length > 0 ? subscription?.myProducts[0] : undefined;
+  $: currentProduct =
+    subscription?.myProducts && subscription?.myProducts.length > 0
+      ? subscription?.myProducts[0]
+      : undefined;
   $: usage = $appState.usage;
-  $: links = ($appState.usage?.providers ?? 0) + ($appState.usage?.clients ?? 0);
+  $: links =
+    ($appState.usage?.providers ?? 0) + ($appState.usage?.clients ?? 0);
   $: maxLinksRemaining = () => {
     if (!currentProduct || !usage) {
       return 1;
@@ -102,19 +110,26 @@
 <div class={className}>
   <div>
     {#if withCurrentPlan}
-      <div class="space-y-2 sm:space-y-0 sm:flex items-center sm:space-x-2 justify-between">
+      <div
+        class="space-y-2 sm:space-y-0 sm:flex items-center sm:space-x-2 justify-between"
+      >
         <h3 class="leading-5 text-gray-900 truncate">
           {#if loading}
             <span class="leading-5">{$t("shared.loading")}...</span>
           {:else if currentProduct}
             <span>
               {$t("settings.subscription.current")}{" "}
-              <Link to="/app/settings/subscription" class="leading-5 font-bold hover:underline hover:text-theme-600">
+              <Link
+                to="/app/settings/subscription"
+                class="leading-5 font-bold hover:underline hover:text-theme-600"
+              >
                 {$t(currentProduct.subscriptionProduct.title)}
               </Link>
             </span>
           {:else if !loading}
-            <span class="ml-1 text-sm leading-5 font-bold text-gray-500">({$t("settings.subscription.noActivePlan")})</span>
+            <span class="ml-1 text-sm leading-5 font-bold text-gray-500"
+              >({$t("settings.subscription.noActivePlan")})</span
+            >
           {:else}
             <div />
           {/if}
@@ -125,19 +140,26 @@
       <div
         class={classNames(
           "bg-white px-4 py-5 border border-gray-300 shadow-md rounded-lg overflow-hidden sm:p-6",
-          billableStatus(maxLinksRemaining()) === 0 && "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
-          billableStatus(maxLinksRemaining()) === 1 && "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
+          billableStatus(maxLinksRemaining()) === 0 &&
+            "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
+          billableStatus(maxLinksRemaining()) === 1 &&
+            "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
           billableStatus(maxLinksRemaining()) === 2 && "bg-white"
         )}
       >
-        <dt class="text-sm font-medium text-gray-500 truncate">{$t("models.link.plural")}</dt>
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          {$t("models.link.plural")}
+        </dt>
         <dd class="mt-1 text-xl font-semibold text-gray-900">
           {#if loading}
             <span>...</span>
           {:else}
             <span>
               {#if links} <span>{links}</span> {:else} <span>0</span>{/if} /{" "}
-              {#if currentProduct} <span>{currentProduct.maxLinks}</span> {:else} <span class="text-gray-500">0</span>{/if}
+              {#if currentProduct}
+                <span>{currentProduct.maxLinks}</span>
+              {:else}
+                <span class="text-gray-500">0</span>{/if}
             </span>
           {/if}
         </dd>
@@ -147,19 +169,29 @@
         to="/app/contracts/pending"
         class={classNames(
           "bg-white px-4 py-5 border border-gray-300 shadow-md rounded-lg overflow-hidden sm:p-6 hover:bg-gray-50",
-          billableStatus(maxDocumentsRemaining()) === 0 && "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
-          billableStatus(maxDocumentsRemaining()) === 1 && "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
+          billableStatus(maxDocumentsRemaining()) === 0 &&
+            "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
+          billableStatus(maxDocumentsRemaining()) === 1 &&
+            "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
           billableStatus(maxDocumentsRemaining()) === 2 && "bg-white"
         )}
       >
-        <dt class="text-sm font-medium text-gray-500 truncate">{$t("models.contract.plural")}</dt>
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          {$t("models.contract.plural")}
+        </dt>
         <dd class="mt-1 text-xl font-semibold text-gray-900">
           {#if loading}
             <span>...</span>
           {:else}
             <span>
-              {#if usage && usage.contracts} <span>{usage.contracts}</span> {:else} <span>0</span>{/if} /{" "}
-              {#if currentProduct} <span>{currentProduct.monthlyContracts}</span> {:else} <span class="text-gray-500">0</span>{/if}
+              {#if usage && usage.contracts}
+                <span>{usage.contracts}</span>
+              {:else}
+                <span>0</span>{/if} /{" "}
+              {#if currentProduct}
+                <span>{currentProduct.monthlyContracts}</span>
+              {:else}
+                <span class="text-gray-500">0</span>{/if}
             </span>
           {/if}
         </dd>
@@ -169,19 +201,29 @@
         to="/app/settings/workspaces"
         class={classNames(
           "bg-white px-4 py-5 border border-gray-300 shadow-md rounded-lg overflow-hidden sm:p-6 hover:bg-gray-50",
-          billableStatus(maxWorkspacesRemaining()) === 0 && "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
-          billableStatus(maxWorkspacesRemaining()) === 1 && "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
+          billableStatus(maxWorkspacesRemaining()) === 0 &&
+            "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
+          billableStatus(maxWorkspacesRemaining()) === 1 &&
+            "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
           billableStatus(maxWorkspacesRemaining()) === 2 && "bg-white"
         )}
       >
-        <dt class="text-sm font-medium text-gray-500 truncate">{$t("models.workspace.plural")}</dt>
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          {$t("models.workspace.plural")}
+        </dt>
         <dd class="mt-1 text-xl font-semibold text-gray-900">
           {#if loading}
             <span>...</span>
           {:else}
             <span>
-              {#if usage} <span>{workspaces.length}</span> {:else} <span>0</span>{/if} /{" "}
-              {#if currentProduct} <span>{currentProduct.maxWorkspaces}</span> {:else} <span class="text-gray-500">0</span>{/if}
+              {#if usage}
+                <span>{workspaces.length}</span>
+              {:else}
+                <span>0</span>{/if} /{" "}
+              {#if currentProduct}
+                <span>{currentProduct.maxWorkspaces}</span>
+              {:else}
+                <span class="text-gray-500">0</span>{/if}
             </span>
           {/if}
         </dd>
@@ -190,19 +232,29 @@
         to="/app/settings/members"
         class={classNames(
           "bg-white px-4 py-5 border border-gray-300 shadow-md rounded-lg overflow-hidden sm:p-6 hover:bg-gray-50",
-          billableStatus(maxUsersRemaining()) === 0 && "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
-          billableStatus(maxUsersRemaining()) === 1 && "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
+          billableStatus(maxUsersRemaining()) === 0 &&
+            "bg-rose-50 border-rose-300 hover:bg-rose-100 cursor-pointer",
+          billableStatus(maxUsersRemaining()) === 1 &&
+            "bg-yellow-50 border-yellow-300 hover:bg-yellow-100 cursor-pointer",
           billableStatus(maxUsersRemaining()) === 2 && "bg-white"
         )}
       >
-        <dt class="text-sm font-medium text-gray-500 truncate">{$t("models.user.plural")}</dt>
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          {$t("models.user.plural")}
+        </dt>
         <dd class="mt-1 text-xl font-semibold text-gray-900">
           {#if loading}
             <span>...</span>
           {:else}
             <span>
-              {#if usage} <span>{users.length}</span> {:else} <span>0</span>{/if} /{" "}
-              {#if currentProduct} <span>{currentProduct.maxUsers}</span> {:else} <span class="text-gray-500">0</span>{/if}
+              {#if usage}
+                <span>{users.length}</span>
+              {:else}
+                <span>0</span>{/if} /{" "}
+              {#if currentProduct}
+                <span>{currentProduct.maxUsers}</span>
+              {:else}
+                <span class="text-gray-500">0</span>{/if}
             </span>
           {/if}
         </dd>

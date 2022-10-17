@@ -34,15 +34,36 @@
 </script>
 
 <div class="space-y-2 w-full">
-  <div class="max-w-3xl mx-auto space-y-4 flex flex-col items-center justify-center sm:space-y-0 sm:space-x-4 sm:flex-row sm:items-end sm:justify-center">
-    <ButtonSecondary on:click={() => showSuccessModal()}>Success Modal</ButtonSecondary>
-    <ButtonSecondary on:click={() => showErrorModal()}>Error Modal</ButtonSecondary>
-    <ButtonSecondary on:click={() => showConfirmModal()}>Confirm Modal</ButtonSecondary>
-    <ButtonSecondary on:click={() => showEmptyModal()}>Empty Modal</ButtonSecondary>
+  <div
+    class="max-w-3xl mx-auto space-y-4 flex flex-col items-center justify-center sm:space-y-0 sm:space-x-4 sm:flex-row sm:items-end sm:justify-center"
+  >
+    <ButtonSecondary on:click={() => showSuccessModal()}
+      >Success Modal</ButtonSecondary
+    >
+    <ButtonSecondary on:click={() => showErrorModal()}
+      >Error Modal</ButtonSecondary
+    >
+    <ButtonSecondary on:click={() => showConfirmModal()}
+      >Confirm Modal</ButtonSecondary
+    >
+    <ButtonSecondary on:click={() => showEmptyModal()}
+      >Empty Modal</ButtonSecondary
+    >
   </div>
-  <SuccessModal bind:this={successModal} on:closed={() => alert("Closed success modal")} />
-  <ErrorModal bind:this={errorModal} on:closed={() => alert("Closed error modal")} />
-  <ConfirmModal bind:this={confirmModal} bind:value={confirmModalValue} on:no={() => alert("No")} on:yes={onYes} />
+  <SuccessModal
+    bind:this={successModal}
+    on:closed={() => alert("Closed success modal")}
+  />
+  <ErrorModal
+    bind:this={errorModal}
+    on:closed={() => alert("Closed error modal")}
+  />
+  <ConfirmModal
+    bind:this={confirmModal}
+    bind:value={confirmModalValue}
+    on:no={() => alert("No")}
+    on:yes={onYes}
+  />
   <Modal bind:this={emptyModal}>
     <div>Your content here...</div>
   </Modal>

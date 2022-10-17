@@ -82,7 +82,9 @@
     <div class="flex flex-col">
       <div class="overflow-x-auto">
         <div class="py-2 align-middle inline-block min-w-full">
-          <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+          <div
+            class="shadow overflow-hidden border border-gray-200 sm:rounded-lg"
+          >
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -97,9 +99,19 @@
                     >
                       <div class="flex items-center space-x-1 text-gray-500">
                         <div>{header.title}</div>
-                        <div class={classNames((!header.name || sortByColumn !== header.name) && "invisible")}>
+                        <div
+                          class={classNames(
+                            (!header.name || sortByColumn !== header.name) &&
+                              "invisible"
+                          )}
+                        >
                           {#if sortDirection === -1}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
                               <path
                                 fill-rule="evenodd"
                                 d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
@@ -107,7 +119,12 @@
                               />
                             </svg>
                           {:else}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
                               <path
                                 fill-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -124,28 +141,44 @@
               <tbody class="bg-white divide-y divide-gray-200">
                 {#each sortedItems() as link}
                   <tr>
-                    <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div class="flex items-end">
                         <div>
-                          <div class="text-sm font-extrabold text-gray-900">{getWorkspace(link).name}</div>
+                          <div class="text-sm font-extrabold text-gray-900">
+                            {getWorkspace(link).name}
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                    >
                       {#if whoAmI(link) === 0}
-                        <span class="flex-shrink-0 inline-block px-2 py-0.5 text-indigo-800 text-xs font-medium bg-indigo-100 rounded-sm border-indigo-300">
+                        <span
+                          class="flex-shrink-0 inline-block px-2 py-0.5 text-indigo-800 text-xs font-medium bg-indigo-100 rounded-sm border-indigo-300"
+                        >
                           {$t("models.client.object")}
                         </span>
                       {:else}
-                        <span class="flex-shrink-0 inline-block px-2 py-0.5 text-theme-800 text-xs font-medium bg-theme-100 rounded-sm border-theme-300">
+                        <span
+                          class="flex-shrink-0 inline-block px-2 py-0.5 text-theme-800 text-xs font-medium bg-theme-100 rounded-sm border-theme-300"
+                        >
                           {$t("models.provider.object")}
                         </span>
                       {/if}
                     </td>
-                    <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
-                      <div class="max-w-sm truncate">{getWorkspace(link).businessMainActivity}</div>
+                    <td
+                      class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                    >
+                      <div class="max-w-sm truncate">
+                        {getWorkspace(link).businessMainActivity}
+                      </div>
                     </td>
-                    <td class="w-20 px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="w-20 px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div class="flex items-center space-x-2">
                         <ButtonTertiary to={"/app/link/" + link.id}>
                           <div>{$t("app.links.profile.title")}</div>

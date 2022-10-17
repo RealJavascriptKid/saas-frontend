@@ -24,13 +24,29 @@
       navigate(redirect);
     }
 
-    if (currentType && userTypes.length > 0 && !userTypes.some((f) => f === currentType)) {
-      console.log(`User type ${UserType[currentType]} not unauthorized, allowed: ${userTypes.map((f) => UserType[f])}`);
+    if (
+      currentType &&
+      userTypes.length > 0 &&
+      !userTypes.some((f) => f === currentType)
+    ) {
+      console.log(
+        `User type ${
+          UserType[currentType]
+        } not unauthorized, allowed: ${userTypes.map((f) => UserType[f])}`
+      );
       navigate("/app/unauthorized");
     }
 
-    if (currentRole && roles.length > 0 && !roles.some((f) => f === currentRole)) {
-      console.log(`User tenant role ${currentRole} not unauthorized, allowed: ${roles.map((f) => TenantUserRole[f])}`);
+    if (
+      currentRole &&
+      roles.length > 0 &&
+      !roles.some((f) => f === currentRole)
+    ) {
+      console.log(
+        `User tenant role ${currentRole} not unauthorized, allowed: ${roles.map(
+          (f) => TenantUserRole[f]
+        )}`
+      );
       navigate("/app/unauthorized");
     }
   });

@@ -20,12 +20,30 @@
     "paths": {
       "@/*": ["./src/*", "./*", "src/*"]
     },
-    "lib": ["esnext", "dom.iterable", "scripthost", "es2015", "es2016", "dom", "es2018.promise"]
+    "lib": [
+      "esnext",
+      "dom.iterable",
+      "scripthost",
+      "es2015",
+      "es2016",
+      "dom",
+      "es2018.promise"
+    ]
   },
   "paths": {
     "@/*": ["./src/*", "./*", "src/*"]
   },
-  "include": ["./src", "**.svelte", "./src/**/*", "src/**/*.ts", "src/**/*.tsx", "src/**/*.svelte", "tests/**/*.ts", "tests/**/*.tsx", "src/locale/*"],
+  "include": [
+    "./src",
+    "**.svelte",
+    "./src/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.svelte",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "src/locale/*"
+  ],
   "exclude": ["node_modules"],
   "trailing-comma": [
     true,

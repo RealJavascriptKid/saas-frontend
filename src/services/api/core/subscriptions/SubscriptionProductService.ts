@@ -6,7 +6,10 @@ import { get } from "svelte/store";
 import { _ } from "svelte-i18n";
 const $t = get(_);
 
-export class SubscriptionProductService extends ApiService implements ISubscriptionProductService {
+export class SubscriptionProductService
+  extends ApiService
+  implements ISubscriptionProductService
+{
   constructor() {
     super("SubscriptionProduct");
   }
@@ -35,7 +38,9 @@ export class SubscriptionProductService extends ApiService implements ISubscript
         });
     });
   }
-  createProduct(product: SubscriptionProductDto): Promise<SubscriptionProductDto> {
+  createProduct(
+    product: SubscriptionProductDto
+  ): Promise<SubscriptionProductDto> {
     product.title = $t(product.title).toString();
     product.description = $t(product.description).toString();
     return super.post(product, `CreateProduct`);

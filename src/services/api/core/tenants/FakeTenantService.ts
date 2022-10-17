@@ -36,16 +36,26 @@ const createTenant = (index: number): TenantDto => {
     subscriptionCustomerId: "",
     subscriptionPlanId: "",
     users: [],
-    products: fakeSubscriptionManagerService?.currentSubscription?.activeProduct,
+    products:
+      fakeSubscriptionManagerService?.currentSubscription?.activeProduct,
     currentUser: {} as TenantUserDto,
     workspaces: [],
   };
   return tenant;
 };
 
-const tenants: TenantDto[] = [createTenant(1), createTenant(2), createTenant(3)];
+const tenants: TenantDto[] = [
+  createTenant(1),
+  createTenant(2),
+  createTenant(3),
+];
 
-const types = [TenantUserRole.OWNER, TenantUserRole.ADMIN, TenantUserRole.MEMBER, TenantUserRole.GUEST];
+const types = [
+  TenantUserRole.OWNER,
+  TenantUserRole.ADMIN,
+  TenantUserRole.MEMBER,
+  TenantUserRole.GUEST,
+];
 const users: TenantUserDto[] = [];
 for (let idxType = 0; idxType < types.length; idxType++) {
   const type = types[idxType];
@@ -86,7 +96,8 @@ for (let idxType = 0; idxType < types.length; idxType++) {
 }
 
 tenants.forEach((element) => {
-  element.currentUser = users.find((f) => f.role === TenantUserRole.OWNER) ?? users[0];
+  element.currentUser =
+    users.find((f) => f.role === TenantUserRole.OWNER) ?? users[0];
   element.users = users;
   users.forEach((user) => {
     user.tenant.name = element.name;
@@ -117,7 +128,8 @@ export class FakeTenantService implements ITenantService {
     }
   }
   getFeatures(): Promise<TenantFeaturesDto> {
-    let tenantProducts: TenantProductDto[] | undefined = get(tenantState).subscription?.activeProduct;
+    let tenantProducts: TenantProductDto[] | undefined =
+      get(tenantState).subscription?.activeProduct;
 
     let currentSubcription: TenantProductDto | undefined;
     if (tenantProducts && tenantProducts.length > 0) {

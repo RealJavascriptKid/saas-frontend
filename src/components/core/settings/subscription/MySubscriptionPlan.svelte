@@ -25,10 +25,17 @@
 
   function updateSubscription() {
     if (!selectedPrice || !selectedProduct) {
-      errorModal?.show($t("shared.error"), $t("settings.subscription.errors.selectPlan"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("settings.subscription.errors.selectPlan")
+      );
       return;
     }
-    if (selectedPrice.trialDays === 0 && selectedPrice.price > 0 && !subscriptionCard) {
+    if (
+      selectedPrice.trialDays === 0 &&
+      selectedPrice.price > 0 &&
+      !subscriptionCard
+    ) {
       errorModal?.show($t("settings.tenant.payment.notSet"));
       return;
     }
@@ -38,7 +45,9 @@
     }
 
     confirmModal?.show(
-      $t("shared.updateSubscriptionTo", { values: { p1: $t(selectedProduct.title) } }).toString(),
+      $t("shared.updateSubscriptionTo", {
+        values: { p1: $t(selectedProduct.title) },
+      }).toString(),
       $t("shared.confirm").toString(),
       $t("shared.back").toString(),
       priceDescription(selectedPrice)
@@ -56,7 +65,10 @@
       .then(() => {
         services.subscriptionManager.getCurrentSubscription();
         services.tenants.getFeatures();
-        successModal?.show($t("shared.updated"), $t("settings.subscription.updated"));
+        successModal?.show(
+          $t("shared.updated"),
+          $t("settings.subscription.updated")
+        );
         tinyEventBus().emitter.emit("updated-plan");
         editing = false;
       })
@@ -73,7 +85,9 @@
     editing = !editing;
   }
   $: selectedProduct = $pricingState.selectedProduct as SubscriptionProductDto;
-  $: selectedPrice = selectedProduct?.prices.find((f) => f.billingPeriod === $pricingState.billingPeriod);
+  $: selectedPrice = selectedProduct?.prices.find(
+    (f) => f.billingPeriod === $pricingState.billingPeriod
+  );
   $: activeTenantProducts = $tenantState.subscription?.myProducts ?? [];
 
   $: selectingCurrentTenantProduct = () => {
@@ -83,7 +97,10 @@
     return false;
   };
   $: subscriptionCard = (): SubscriptionCardDto | undefined => {
-    if ($tenantState.subscription && $tenantState.subscription.paymentMethods?.length > 0) {
+    if (
+      $tenantState.subscription &&
+      $tenantState.subscription.paymentMethods?.length > 0
+    ) {
       return $tenantState.subscription.paymentMethods[0].card;
     }
   };
@@ -94,7 +111,13 @@
     }
     const price = selectedPrice.price;
     const currency = selectedPrice.currency;
-    const period = "/" + $t("pricing." + SubscriptionBillingPeriod[selectedPrice.billingPeriod] + "Short");
+    const period =
+      "/" +
+      $t(
+        "pricing." +
+          SubscriptionBillingPeriod[selectedPrice.billingPeriod] +
+          "Short"
+      );
     // const feature = selectedProduct.value?.features[0].value;
     return `${price} ${currency}${period}.`;
   };
@@ -105,10 +128,16 @@
     <div class="shadow sm:rounded-sm">
       <div class="px-4 py-5 bg-white sm:p-6 space-y-2">
         <div class="flex items-center space-x-2 justify-between">
-          <h3 class="leading-5 font-medium text-gray-900">{$t("shared.upgrade")}</h3>
+          <h3 class="leading-5 font-medium text-gray-900">
+            {$t("shared.upgrade")}
+          </h3>
         </div>
         <div class="grid grid-cols-6 gap-2">
-          <PlansRadioButtons plansLabel={false} showCurrent={true} className="-mt-6 col-span-6" />
+          <PlansRadioButtons
+            plansLabel={false}
+            showCurrent={true}
+            className="-mt-6 col-span-6"
+          />
         </div>
       </div>
       <div class="px-4 py-3 sm:px-6 flex items-center space-x-2 justify-end">
@@ -119,7 +148,10 @@
           <LoadingButton
             on:click={updateSubscription}
             disabled={selectingCurrentTenantProduct()}
-            className={classNames(selectingCurrentTenantProduct() && " opacity-50 cursor-not-allowed")}
+            className={classNames(
+              selectingCurrentTenantProduct() &&
+                " opacity-50 cursor-not-allowed"
+            )}
             bind:this={loadingButton}
           >
             {$t("shared.upgrade")}

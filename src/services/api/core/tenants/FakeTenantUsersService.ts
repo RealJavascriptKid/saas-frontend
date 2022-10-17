@@ -32,7 +32,10 @@ export class FakeTenantUsersService implements ITenantUsersService {
       }, 500);
     });
   }
-  update(tenantUserId: string, payload: TenantUserUpdateRequest): Promise<TenantUserDto> {
+  update(
+    tenantUserId: string,
+    payload: TenantUserUpdateRequest
+  ): Promise<TenantUserDto> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const user = this.tenantUsers.find((f) => f.id === tenantUserId);

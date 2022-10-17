@@ -10,8 +10,10 @@
   import { _ as t } from "svelte-i18n";
   import { onMount } from "svelte";
 
-  const emailQueryParam = new URLSearchParams(window.location.search).get("e") ?? "";
-  const tokenQueryParam = new URLSearchParams(window.location.search).get("t") ?? "";
+  const emailQueryParam =
+    new URLSearchParams(window.location.search).get("e") ?? "";
+  const tokenQueryParam =
+    new URLSearchParams(window.location.search).get("t") ?? "";
 
   let loadingButton: LoadingButton;
   let errorModal: ErrorModal;
@@ -70,10 +72,16 @@
     <div class="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8">
       <Logo className="mx-auto h-12 w-auto" />
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200">{$t("account.verify.title")}</h2>
+        <h2
+          class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200"
+        >
+          {$t("account.verify.title")}
+        </h2>
         <p class="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
           {$t("account.register.alreadyRegistered")}{" "}
-          <span class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150">
+          <span
+            class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+          >
             <Link to="/login">{$t("account.register.clickHereToLogin")}</Link>
           </span>
         </p>
@@ -81,7 +89,10 @@
           <div class="sm:rounded-sm sm:px-10">
             <form on:submit|preventDefault={verify}>
               <div>
-                <label for="email" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                >
                   {$t("account.shared.email")}
                 </label>
                 <div class="mt-1 rounded-sm shadow-sm">
@@ -100,7 +111,10 @@
               </div>
               {#if requireName}
                 <div class="mt-6">
-                  <label for="firstName" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                  <label
+                    for="firstName"
+                    class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                  >
                     {$t("account.register.firstName")}
                   </label>
                   <div class="mt-1 rounded-sm shadow-sm">
@@ -116,7 +130,10 @@
               {/if}
               {#if requireName}
                 <div class="mt-6">
-                  <label for="lastName" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                  <label
+                    for="lastName"
+                    class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                  >
                     {$t("account.register.lastName")}
                   </label>
                   <div class="mt-1 rounded-sm shadow-sm">
@@ -132,7 +149,10 @@
               {/if}
               {#if requirePassword}
                 <div class="mt-6">
-                  <label for="password" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                  <label
+                    for="password"
+                    class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                  >
                     {$t("account.shared.password")}
                   </label>
                   <div class="mt-1 rounded-sm shadow-sm">
@@ -148,7 +168,10 @@
               {/if}
               {#if requirePassword}
                 <div class="mt-6">
-                  <label for="confirmPassword" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                  <label
+                    for="confirmPassword"
+                    class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                  >
                     {$t("account.register.confirmPassword")}
                   </label>
                   <div class="mt-1 rounded-sm shadow-sm">
@@ -165,7 +188,11 @@
 
               <div class="mt-6">
                 <span class="block w-full rounded-sm shadow-sm">
-                  <LoadingButton bind:this={loadingButton} className="w-full block" type="submit">
+                  <LoadingButton
+                    bind:this={loadingButton}
+                    className="w-full block"
+                    type="submit"
+                  >
                     {$t("account.verify.button")}
                   </LoadingButton>
                 </span>

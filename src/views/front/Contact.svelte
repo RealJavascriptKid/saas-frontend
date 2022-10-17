@@ -6,7 +6,15 @@
 
   import { _ as t } from "svelte-i18n";
 
-  const usersOptions = ["1", "2 - 3", "4 - 10", "11 - 25", "26 - 50", "51 - 100", "+100"];
+  const usersOptions = [
+    "1",
+    "2 - 3",
+    "4 - 10",
+    "11 - 25",
+    "26 - 50",
+    "51 - 100",
+    "+100",
+  ];
   let firstName = "";
   let lastName = "";
   let email = "";
@@ -16,7 +24,9 @@
   let actionURL = "";
 
   onMount(() => {
-    actionURL = import.meta.env.VITE_SVELTE_APP_INTEGRATIONS_CONTACT_FORMSPREE?.toString() ?? "";
+    actionURL =
+      import.meta.env.VITE_SVELTE_APP_INTEGRATIONS_CONTACT_FORMSPREE?.toString() ??
+      "";
   });
 </script>
 
@@ -29,34 +39,102 @@
     <div class="bg-white dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:flex-col sm:align-center">
-          <div class="relative max-w-xl mx-auto py-12 sm:py-6 w-full overflow-hidden">
-            <svg class="absolute left-full transform translate-x-1/2" width="404" height="404" fill="none" viewBox="0 0 404 404" aria-hidden="true">
+          <div
+            class="relative max-w-xl mx-auto py-12 sm:py-6 w-full overflow-hidden"
+          >
+            <svg
+              class="absolute left-full transform translate-x-1/2"
+              width="404"
+              height="404"
+              fill="none"
+              viewBox="0 0 404 404"
+              aria-hidden="true"
+            >
               <defs>
-                <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-black" fill="currentColor" />
+                <pattern
+                  id="85737c0e-0916-41d7-917f-596dc7edfa27"
+                  x="0"
+                  y="0"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="4"
+                    height="4"
+                    class="text-gray-200 dark:text-black"
+                    fill="currentColor"
+                  />
                 </pattern>
               </defs>
-              <rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
+              <rect
+                width="404"
+                height="404"
+                fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
+              />
             </svg>
-            <svg class="absolute right-full bottom-0 transform -translate-x-1/2" width="404" height="404" fill="none" viewBox="0 0 404 404" aria-hidden="true">
+            <svg
+              class="absolute right-full bottom-0 transform -translate-x-1/2"
+              width="404"
+              height="404"
+              fill="none"
+              viewBox="0 0 404 404"
+              aria-hidden="true"
+            >
               <defs>
-                <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-black" fill="currentColor" />
+                <pattern
+                  id="85737c0e-0916-41d7-917f-596dc7edfa27"
+                  x="0"
+                  y="0"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="4"
+                    height="4"
+                    class="text-gray-200 dark:text-black"
+                    fill="currentColor"
+                  />
                 </pattern>
               </defs>
-              <rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
+              <rect
+                width="404"
+                height="404"
+                fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
+              />
             </svg>
             <div class="text-center">
-              <h2 class="text-3xl font-extrabold tracking-tight text-gray-800 dark:text-slate-200 sm:text-4xl">{$t("front.contact.title")}</h2>
-              <p class="mt-4 text-lg leading-6 text-gray-500">{$t("front.contact.headline")}</p>
+              <h2
+                class="text-3xl font-extrabold tracking-tight text-gray-800 dark:text-slate-200 sm:text-4xl"
+              >
+                {$t("front.contact.title")}
+              </h2>
+              <p class="mt-4 text-lg leading-6 text-gray-500">
+                {$t("front.contact.headline")}
+              </p>
             </div>
             <div class="mt-12">
               {#if !actionURL}
-                <WarningBanner title={$t("shared.notSet")} text={$t("front.contact.setup")} />
+                <WarningBanner
+                  title={$t("shared.notSet")}
+                  text={$t("front.contact.setup")}
+                />
               {/if}
-              <form action={actionURL} method="POST" class="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+              <form
+                action={actionURL}
+                method="POST"
+                class="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+              >
                 <div>
-                  <label for="first_name" class="block text-sm font-medium text-gray-900 dark:text-slate-300">
+                  <label
+                    for="first_name"
+                    class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                  >
                     {$t("front.contact.firstName")}
                   </label>
                   <div class="mt-1">
@@ -72,7 +150,10 @@
                   </div>
                 </div>
                 <div>
-                  <label for="last_name" class="block text-sm font-medium text-gray-900 dark:text-slate-300">
+                  <label
+                    for="last_name"
+                    class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                  >
                     {$t("front.contact.lastName")}
                   </label>
                   <div class="mt-1">
@@ -87,7 +168,10 @@
                   </div>
                 </div>
                 <div class="sm:col-span-2">
-                  <label for="email" class="block text-sm font-medium text-gray-900 dark:text-slate-300">
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                  >
                     {$t("front.contact.email")}
                   </label>
                   <div class="mt-1">
@@ -104,10 +188,16 @@
                 </div>
                 <div class="sm:col-span-2">
                   <div class="flex justify-between">
-                    <label for="company" class="block text-sm font-medium text-gray-900 dark:text-slate-300">
+                    <label
+                      for="company"
+                      class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                    >
                       {$t("front.contact.organization")}
                     </label>
-                    <span id="company_description" class="text-sm text-gray-500">
+                    <span
+                      id="company_description"
+                      class="text-sm text-gray-500"
+                    >
                       {$t("shared.optional")}
                     </span>
                   </div>
@@ -124,7 +214,10 @@
                 </div>
 
                 <fieldset class="sm:col-span-2">
-                  <legend class="block text-sm font-medium text-gray-900 dark:text-slate-300">{$t("front.contact.users")}</legend>
+                  <legend
+                    class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                    >{$t("front.contact.users")}</legend
+                  >
                   <div class="mt-4 grid grid-cols-1 gap-y-4">
                     <select
                       id="users"
@@ -143,7 +236,10 @@
 
                 <div class="sm:col-span-2">
                   <div class="flex justify-between">
-                    <label for="comments" class="block text-sm font-medium text-gray-900 dark:text-slate-300">
+                    <label
+                      for="comments"
+                      class="block text-sm font-medium text-gray-900 dark:text-slate-300"
+                    >
                       {$t("front.contact.comments")}
                     </label>
                   </div>

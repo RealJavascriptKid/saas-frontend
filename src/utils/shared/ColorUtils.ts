@@ -3,7 +3,12 @@ import { get } from "svelte/store";
 import { _ } from "svelte-i18n";
 const $t = get(_);
 
-export function getTailwindColor(itemColor: Colors, textWeight = 50, backgroundWeight = 300, borderWeight = 500): string {
+export function getTailwindColor(
+  itemColor: Colors,
+  textWeight = 50,
+  backgroundWeight = 300,
+  borderWeight = 500
+): string {
   let color = "gray";
   switch (itemColor) {
     case 0:
@@ -73,7 +78,8 @@ export function getTailwindColor(itemColor: Colors, textWeight = 50, backgroundW
       color = "rose";
       break;
   }
-  const textColor = textWeight === 0 ? "text-white" : `text-${color}-${textWeight}`;
+  const textColor =
+    textWeight === 0 ? "text-white" : `text-${color}-${textWeight}`;
   return `${textColor} bg-${color}-${backgroundWeight} border border-${color}-${borderWeight}`;
 }
 

@@ -26,7 +26,13 @@
       inputString = email;
     }
   });
-  export function show(_question: string, _yesTitle?: string, _noTitle?: string, _subtitle?: string, _inputString?: string) {
+  export function show(
+    _question: string,
+    _yesTitle?: string,
+    _noTitle?: string,
+    _subtitle?: string,
+    _inputString?: string
+  ) {
     question = _question.toString();
     showing = true;
     if (_yesTitle) {
@@ -62,7 +68,10 @@
   function yes() {
     if (inputType) {
       value = inputString;
-      if (validateInput && (!inputString || inputString.toString().trim() === "")) {
+      if (
+        validateInput &&
+        (!inputString || inputString.toString().trim() === "")
+      ) {
         return;
       }
     }
@@ -82,7 +91,9 @@
 <div>
   {#if showing}
     <div on:keyup={keyup}>
-      <div class="fixed z-50 inset-x-0 px-4 pb-6 inset-0 p-0 flex items-center justify-center">
+      <div
+        class="fixed z-50 inset-x-0 px-4 pb-6 inset-0 p-0 flex items-center justify-center"
+      >
         <div class="fixed inset-0 transition-opacity">
           <div class="absolute inset-0 bg-gray-500 opacity-75" />
         </div>
@@ -94,8 +105,15 @@
           aria-labelledby="modal-headline"
         >
           <div>
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-50 border border-yellow-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-50 border border-yellow-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-yellow-600"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
                 <path
                   fill-rule="evenodd"
                   d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
@@ -104,7 +122,12 @@
               </svg>
             </div>
             <div class="mt-3 text-center sm:mt-5">
-              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">{question}</h3>
+              <h3
+                class="text-lg leading-6 font-medium text-gray-900"
+                id="modal-headline"
+              >
+                {question}
+              </h3>
               {#if subtitle}
                 <p class="text-gray-500 text-sm mt-3">
                   {subtitle}
@@ -113,13 +136,28 @@
 
               {#if inputType === "email"}
                 <div class="mt-4">
-                  <label for="email" class="block text-sm font-medium text-gray-700" />
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700"
+                  />
                   <div class="mt-1 relative rounded-md shadow-sm">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
                       <!-- Heroicon name: solid/mail -->
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                      <svg
+                        class="h-5 w-5 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                        />
+                        <path
+                          d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                        />
                       </svg>
                     </div>
                     <input
@@ -136,7 +174,9 @@
               {/if}
             </div>
           </div>
-          <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+          <div
+            class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense"
+          >
             <button
               bind:this={yesButton}
               on:click={yes}

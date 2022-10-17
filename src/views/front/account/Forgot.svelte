@@ -42,12 +42,21 @@
       <Logo className="mx-auto h-12 w-auto" />
       {#if !emailSent}
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200">{$t("account.forgot.title")}</h2>
-          <p class="mt-5 text-sm leading-5 text-center text-gray-500">{$t("account.reset.headline")}</p>
+          <h2
+            class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200"
+          >
+            {$t("account.forgot.title")}
+          </h2>
+          <p class="mt-5 text-sm leading-5 text-center text-gray-500">
+            {$t("account.reset.headline")}
+          </p>
           <div class="mt-8 sm:rounded-sm sm:px-10">
             <form on:submit|preventDefault={reset}>
               <div>
-                <label for="email" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                >
                   {$t("account.shared.email")}
                 </label>
                 <div class="mt-1 rounded-sm shadow-sm">
@@ -63,7 +72,11 @@
 
               <div class="mt-6">
                 <span class="block w-full rounded-sm shadow-sm">
-                  <LoadingButton bind:this={loadingButton} className="w-full block" type="submit">
+                  <LoadingButton
+                    bind:this={loadingButton}
+                    className="w-full block"
+                    type="submit"
+                  >
                     <span class="absolute left-0 inset-y pl-3" />
                     {$t("account.reset.button")}
                   </LoadingButton>
@@ -73,10 +86,14 @@
             <div class="mt-6">
               <div class="relative">
                 <div class="absolute inset-0 flex items-center">
-                  <div class="w-full border-t border-gray-300 dark:border-gray-700" />
+                  <div
+                    class="w-full border-t border-gray-300 dark:border-gray-700"
+                  />
                 </div>
                 <div class="relative flex justify-center text-sm leading-5">
-                  <span class="px-2 bg-white dark:bg-slate-900 text-gray-500">{$t("account.forgot.rememberedPassword")}</span>
+                  <span class="px-2 bg-white dark:bg-slate-900 text-gray-500"
+                    >{$t("account.forgot.rememberedPassword")}</span
+                  >
                 </div>
               </div>
 
@@ -97,12 +114,22 @@
         </div>
       {:else}
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div class="max-w-md w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8">
+          <div
+            class="max-w-md w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8"
+          >
             <h2 class="text-xl font-black">
-              <h2 class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200">{$t("account.reset.resetSuccess")}</h2>
+              <h2
+                class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200"
+              >
+                {$t("account.reset.resetSuccess")}
+              </h2>
             </h2>
             <div class="my-4 leading-tight">
-              <p class="mt-2 text-center text-sm leading-5 text-gray-900 dark:text-slate-300 max-w">{$t("account.reset.emailSent")}</p>
+              <p
+                class="mt-2 text-center text-sm leading-5 text-gray-900 dark:text-slate-300 max-w"
+              >
+                {$t("account.reset.emailSent")}
+              </p>
             </div>
           </div>
         </div>

@@ -125,7 +125,12 @@
     }
   }
   function deleteContract() {
-    confirmDelete?.show($t("shared.confirmDelete"), $t("shared.delete"), $t("shared.cancel"), $t("shared.warningCannotUndo"));
+    confirmDelete?.show(
+      $t("shared.confirmDelete"),
+      $t("shared.delete"),
+      $t("shared.cancel"),
+      $t("shared.warningCannotUndo")
+    );
   }
   function yesDelete() {
     loading = true;
@@ -153,7 +158,17 @@
       $t("shared.send"),
       $t("shared.cancel"),
       $t("shared.sendTo", {
-        values: { p1: item?.members.map((f) => (f.user.firstName + " " + f.user.lastName).trim() + " (" + f.user.email + ")").join(", ") },
+        values: {
+          p1: item?.members
+            .map(
+              (f) =>
+                (f.user.firstName + " " + f.user.lastName).trim() +
+                " (" +
+                f.user.email +
+                ")"
+            )
+            .join(", "),
+        },
       })
     );
   }
@@ -174,11 +189,20 @@
   }
   function save() {
     if (!name) {
-      errorModal?.show($t("shared.error"), $t("app.contracts.errors.nameRequired"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("app.contracts.errors.nameRequired")
+      );
     } else if (!description) {
-      errorModal?.show($t("shared.error"), $t("app.contracts.errors.descriptionRequired"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("app.contracts.errors.descriptionRequired")
+      );
     } else if (!contractPdf) {
-      errorModal?.show($t("shared.error"), $t("app.contracts.errors.fileRequired"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("app.contracts.errors.fileRequired")
+      );
     } else {
       loading = true;
       services.contracts
@@ -213,10 +237,14 @@
     return "";
   };
 
-  $: canBeEdited = item?.members.filter((f) => f.role === 0 && f.signDate).length === 0;
-  $: isOwnerOrAdmin = currentRole === TenantUserRole.OWNER || currentRole === TenantUserRole.ADMIN;
+  $: canBeEdited =
+    item?.members.filter((f) => f.role === 0 && f.signDate).length === 0;
+  $: isOwnerOrAdmin =
+    currentRole === TenantUserRole.OWNER ||
+    currentRole === TenantUserRole.ADMIN;
   $: user = $accountState.user;
-  $: currentRole = $tenantState.current?.currentUser.role ?? TenantUserRole.GUEST;
+  $: currentRole =
+    $tenantState.current?.currentUser.role ?? TenantUserRole.GUEST;
   $: canEdit = () => {
     if (isOwnerOrAdmin) {
       return true;
@@ -229,10 +257,14 @@
   {#if loading}
     <Loading />
   {:else if !item || !item.id}
-    <div class="mx-auto p-5 items-center justify-between flex text-red-700">{error}</div>
+    <div class="mx-auto p-5 items-center justify-between flex text-red-700">
+      {error}
+    </div>
   {:else if item}
     <div>
-      <div class="md:flex space-y-2 md:space-y-0 items-center justify-between py-3 border-b border-gray-200 mb-2 md:space-x-3">
+      <div
+        class="md:flex space-y-2 md:space-y-0 items-center justify-between py-3 border-b border-gray-200 mb-2 md:space-x-3"
+      >
         <div class="font-bold text-xl uppercase truncate">
           <span class="truncate">{item.name}</span>
         </div>
@@ -268,8 +300,19 @@
             <div class="flex items-end space-x-2 space-y-0">
               <DropdownWithClick on:click={downloadPdf}>
                 <div slot="button" class="flex items-center space-x-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="-ml-0.5 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="-ml-0.5 mr-2 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
                   </svg>
                   {$t("shared.download")}
                 </div>
@@ -322,11 +365,18 @@
           <div class="grid gap-4 lg:grid-cols-3">
             <div class="lg:col-span-2 space-y-4">
               <div>
-                <h3 class="mb-2 text-gray-400 font-medium text-sm">{$t("app.contracts.details.general")}</h3>
-                <div class="bg-white p-3 rounded border border-gray-100 shadow-md space-y-3">
+                <h3 class="mb-2 text-gray-400 font-medium text-sm">
+                  {$t("app.contracts.details.general")}
+                </h3>
+                <div
+                  class="bg-white p-3 rounded border border-gray-100 shadow-md space-y-3"
+                >
                   <div class="grid sm:grid-cols-3 gap-2">
                     <div>
-                      <label for="provider" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="provider"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.provider.object")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -343,7 +393,10 @@
                       </div>
                     </div>
                     <div>
-                      <label for="client" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="client"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.client.object")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -360,7 +413,10 @@
                       </div>
                     </div>
                     <div>
-                      <label for="status" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="status"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.contract.status")}
                       </label>
                       <select
@@ -374,14 +430,23 @@
                         )}
                         bind:value={status}
                       >
-                        <option value={ContractStatus.PENDING}>{$t("app.contracts.status.PENDING")}</option>
-                        <option value={ContractStatus.SIGNED}>{$t("app.contracts.status.SIGNED")}</option>
-                        <option value={ContractStatus.ARCHIVED}>{$t("app.contracts.status.ARCHIVED")}</option>
+                        <option value={ContractStatus.PENDING}
+                          >{$t("app.contracts.status.PENDING")}</option
+                        >
+                        <option value={ContractStatus.SIGNED}
+                          >{$t("app.contracts.status.SIGNED")}</option
+                        >
+                        <option value={ContractStatus.ARCHIVED}
+                          >{$t("app.contracts.status.ARCHIVED")}</option
+                        >
                       </select>
                     </div>
                   </div>
                   <div>
-                    <label for="name" class="block text-xs font-medium text-gray-700">
+                    <label
+                      for="name"
+                      class="block text-xs font-medium text-gray-700"
+                    >
                       {$t("models.contract.name")}
                     </label>
                     <div class="mt-1">
@@ -402,7 +467,10 @@
                     </div>
                   </div>
                   <div>
-                    <label for="description" class="block text-xs font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label
+                      for="description"
+                      class="block text-xs font-medium text-gray-700 sm:mt-px sm:pt-2"
+                    >
                       {$t("models.contract.description")}
                     </label>
                     <div class="mt-1 sm:col-span-2">
@@ -422,23 +490,43 @@
 
                   <div>
                     <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label class="block text-xs font-medium text-gray-700 sm:mt-px sm:pt-2">{$t("models.contract.file")}</label>
-                    <div class={classNames("mt-1 sm:col-span-2", editing && "bg-white")}>
+                    <label
+                      class="block text-xs font-medium text-gray-700 sm:mt-px sm:pt-2"
+                      >{$t("models.contract.file")}</label
+                    >
+                    <div
+                      class={classNames(
+                        "mt-1 sm:col-span-2",
+                        editing && "bg-white"
+                      )}
+                    >
                       {#if loadingPdf}
-                        <div class="overflow-hidden border border-gray-300 rounded-md items-center">
+                        <div
+                          class="overflow-hidden border border-gray-300 rounded-md items-center"
+                        >
                           <Loading />
                         </div>
                       {:else}
                         <div>
                           {#if contractPdf && contractPdf.length > 0}
-                            <PdfViewer file={contractPdf} fileName={item.name} {editing} on:removeFile={removeFile} />
+                            <PdfViewer
+                              file={contractPdf}
+                              fileName={item.name}
+                              {editing}
+                              on:removeFile={removeFile}
+                            />
                           {:else}
                             <UploadDocument
                               accept=".pdf"
-                              description={$t("shared.onlyFileTypes", { values: { p1: ".PDF" } })}
+                              description={$t("shared.onlyFileTypes", {
+                                values: { p1: ".PDF" },
+                              })}
                               on:droppedFiles={droppedContractFile}
                             >
-                              <IconContract slot="icon" className="mx-auto h-10 w-10 text-gray-400" />
+                              <IconContract
+                                slot="icon"
+                                className="mx-auto h-10 w-10 text-gray-400"
+                              />
                             </UploadDocument>
                           {/if}
                         </div>
@@ -451,7 +539,8 @@
 
             <div class="space-y-5">
               <ContractMembers items={item.members} />
-              {#if item.employees.length > 0} <ContractEmployees items={item.employees} />{/if}
+              {#if item.employees.length > 0}
+                <ContractEmployees items={item.employees} />{/if}
               <ContractActivity items={item.activity} />
             </div>
           </div>

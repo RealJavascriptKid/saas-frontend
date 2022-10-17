@@ -5,7 +5,9 @@ import type { SelectedSubscriptionRequest } from "@/application/contracts/core/s
 export interface ISubscriptionManagerService {
   getCurrentSubscription(): Promise<SubscriptionGetCurrentResponse>;
   getCoupon(couponId: string, currency: string): Promise<SubscriptionCouponDto>;
-  updateSubscription(subscription: SelectedSubscriptionRequest): Promise<SubscriptionGetCurrentResponse>;
+  updateSubscription(
+    subscription: SelectedSubscriptionRequest
+  ): Promise<SubscriptionGetCurrentResponse>;
   cancelSubscription(): Promise<SubscriptionGetCurrentResponse>;
   updateCardToken(cardToken: string): Promise<SubscriptionGetCurrentResponse>;
   createCustomerPortalSession(): Promise<SubscriptionGetCurrentResponse>;

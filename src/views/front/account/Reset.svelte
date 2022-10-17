@@ -12,8 +12,10 @@
   import { _ as t } from "svelte-i18n";
   import { onMount } from "svelte";
 
-  const emailQueryParam = new URLSearchParams(window.location.search).get("e") ?? "";
-  const tokenQueryParam = new URLSearchParams(window.location.search).get("t") ?? "";
+  const emailQueryParam =
+    new URLSearchParams(window.location.search).get("e") ?? "";
+  const tokenQueryParam =
+    new URLSearchParams(window.location.search).get("t") ?? "";
 
   let loadingButton: LoadingButton;
   let errorModal: ErrorModal;
@@ -62,18 +64,31 @@
     <div class="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8">
       <Logo className="mx-auto h-12 w-auto" />
       <div>
-        <h2 class="mt-6 text-center text-md leading-9 font-bold text-gray-900 dark:text-slate-300">{$t("account.newPassword.title")}</h2>
-        <p class="mt-2 text-center text-sm leading-5 text-gray-900 dark:text-slate-300 max-w">
+        <h2
+          class="mt-6 text-center text-md leading-9 font-bold text-gray-900 dark:text-slate-300"
+        >
+          {$t("account.newPassword.title")}
+        </h2>
+        <p
+          class="mt-2 text-center text-sm leading-5 text-gray-900 dark:text-slate-300 max-w"
+        >
           {$t("account.forgot.rememberedPassword")}{" "}
-          <span class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150">
+          <span
+            class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+          >
             <Link to="/login">{$t("account.register.clickHereToLogin")}</Link>
           </span>
         </p>
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div class="max-w-md w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8">
+          <div
+            class="max-w-md w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8"
+          >
             <form on:submit|preventDefault={reset}>
               <div>
-                <label for="email" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                >
                   {$t("account.shared.email")}
                 </label>
                 <div class="mt-1 rounded-sm shadow-sm">
@@ -91,7 +106,10 @@
                 </div>
               </div>
               <div class="mt-6">
-                <label for="password" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                <label
+                  for="password"
+                  class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                >
                   {$t("account.shared.password")}
                 </label>
                 <div class="mt-1 rounded-sm shadow-sm">
@@ -105,7 +123,10 @@
                 </div>
               </div>
               <div class="mt-6">
-                <label for="confirmPassword" class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300">
+                <label
+                  for="confirmPassword"
+                  class="block text-sm font-medium leading-5 text-gray-900 dark:text-slate-300"
+                >
                   {$t("account.register.confirmPassword")}
                 </label>
                 <div class="mt-1 rounded-sm shadow-sm">

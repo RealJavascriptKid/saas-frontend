@@ -79,7 +79,12 @@
     if (price.billingPeriod === SubscriptionBillingPeriod.ONCE) {
       return $t("pricing.once").toString();
     } else {
-      return "/" + $t("pricing." + SubscriptionBillingPeriod[price.billingPeriod] + "Short");
+      return (
+        "/" +
+        $t(
+          "pricing." + SubscriptionBillingPeriod[price.billingPeriod] + "Short"
+        )
+      );
     }
   }
   function dateAgo(value: Date) {
@@ -99,13 +104,20 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto">
             <div class="py-2 align-middle inline-block min-w-full">
-              <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+              <div
+                class="shadow overflow-hidden border border-gray-200 sm:rounded-lg"
+              >
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
                       {#each headers as header}
-                        <th scope="col" class="text-xs px-3 py-2 text-left font-medium text-gray-500 tracking-wider select-none truncate">
-                          <div class="flex items-center space-x-1 text-gray-500">
+                        <th
+                          scope="col"
+                          class="text-xs px-3 py-2 text-left font-medium text-gray-500 tracking-wider select-none truncate"
+                        >
+                          <div
+                            class="flex items-center space-x-1 text-gray-500"
+                          >
                             <div>{header.title}</div>
                           </div>
                         </th>
@@ -115,12 +127,20 @@
                   <tbody class="bg-white divide-y divide-gray-200">
                     {#each products as item}
                       <tr>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
                           {#if item.subscriptionPrice && item.subscriptionPrice.subscriptionProduct}
-                            <span>{$t(item.subscriptionPrice.subscriptionProduct.title)}</span>
+                            <span
+                              >{$t(
+                                item.subscriptionPrice.subscriptionProduct.title
+                              )}</span
+                            >
                           {/if}
                         </td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
                           {#if item.subscriptionPrice}
                             <span>
                               {item.subscriptionPrice.price}
@@ -128,9 +148,17 @@
                             </span>
                           {/if}
                         </td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{dateYMD(item.startDate)}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{dateYMD(item.endDate)}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{dateYMD(item.startDate)}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{dateYMD(item.endDate)}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
                           {#if item.trialEnds}
                             <span>
                               {$t("settings.subscription.trial.ends")}
@@ -138,14 +166,34 @@
                             </span>
                           {/if}
                         </td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
-                          {#if item.active} <span>{$t("shared.active")}</span> {:else} <span>{$t("shared.inactive")}</span>{/if}
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
+                          {#if item.active}
+                            <span>{$t("shared.active")}</span>
+                          {:else}
+                            <span>{$t("shared.inactive")}</span>{/if}
                         </td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{item.maxWorkspaces}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{item.maxUsers}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{item.maxLinks}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{item.monthlyContracts}</td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">{item.maxStorage / 1024}</td>
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{item.maxWorkspaces}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{item.maxUsers}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{item.maxLinks}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{item.monthlyContracts}</td
+                        >
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                          >{item.maxStorage / 1024}</td
+                        >
                       </tr>
                     {/each}
                   </tbody>

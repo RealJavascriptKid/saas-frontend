@@ -22,10 +22,14 @@
   import { _ as t } from "svelte-i18n";
   import { Link } from "svelte-routing";
 
-  const emailQueryParam = new URLSearchParams(window.location.search).get("e") ?? "";
-  const selectPlanQueryParam = new URLSearchParams(window.location.search).get("p") ?? "";
-  const invitationQueryParam = new URLSearchParams(window.location.search).get("i") ?? "";
-  const couponQueryParam = new URLSearchParams(window.location.search).get("coupon") ?? "";
+  const emailQueryParam =
+    new URLSearchParams(window.location.search).get("e") ?? "";
+  const selectPlanQueryParam =
+    new URLSearchParams(window.location.search).get("p") ?? "";
+  const invitationQueryParam =
+    new URLSearchParams(window.location.search).get("i") ?? "";
+  const couponQueryParam =
+    new URLSearchParams(window.location.search).get("coupon") ?? "";
 
   let inputFirstName: HTMLInputElement;
   let buttonAcceptInvitation: HTMLButtonElement;
@@ -61,8 +65,14 @@
 
   $: selectedProduct = $pricingState.selectedProduct;
   $: selectedPrice =
-    selectedProduct?.prices.find((f) => f.billingPeriod === $pricingState.billingPeriod && f.currency === $pricingState.currency) ??
-    selectedProduct?.prices.filter((f) => f.currency === $pricingState.currency)[0];
+    selectedProduct?.prices.find(
+      (f) =>
+        f.billingPeriod === $pricingState.billingPeriod &&
+        f.currency === $pricingState.currency
+    ) ??
+    selectedProduct?.prices.filter(
+      (f) => f.currency === $pricingState.currency
+    )[0];
 
   onMount(() => {
     loading = true;
@@ -70,11 +80,15 @@
       .getProducts()
       .then(() => {
         if (selectPlanQueryParam) {
-          const product = products.find((f) => f.tier === Number(selectPlanQueryParam));
+          const product = products.find(
+            (f) => f.tier === Number(selectPlanQueryParam)
+          );
           if (product) {
             pricingStore.setSelected({
               product,
-              billingPeriod: selectedPrice?.billingPeriod ?? SubscriptionBillingPeriod.MONTHLY,
+              billingPeriod:
+                selectedPrice?.billingPeriod ??
+                SubscriptionBillingPeriod.MONTHLY,
             });
           }
         }
@@ -85,10 +99,12 @@
           searchCoupon(false);
         }
         if (invitationQueryParam) {
-          services.links.getInvitation(invitationQueryParam.toString()).then((response) => {
-            linkInvitation = response;
-            loadLinkInvitation(response);
-          });
+          services.links
+            .getInvitation(invitationQueryParam.toString())
+            .then((response) => {
+              linkInvitation = response;
+              loadLinkInvitation(response);
+            });
         }
       })
       .finally(() => {
@@ -110,7 +126,14 @@
     if (selectedPrice.billingPeriod === SubscriptionBillingPeriod.ONCE) {
       return $t("pricing.once").toString();
     } else {
-      return "/ " + $t("pricing." + SubscriptionBillingPeriod[selectedPrice.billingPeriod] + "Short");
+      return (
+        "/ " +
+        $t(
+          "pricing." +
+            SubscriptionBillingPeriod[selectedPrice.billingPeriod] +
+            "Short"
+        )
+      );
     }
   };
 
@@ -171,11 +194,17 @@
       return;
     }
     if (!selectedPrice) {
-      errorModal?.show($t("shared.error"), $t("account.register.errors.priceNotSelected"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.register.errors.priceNotSelected")
+      );
       return;
     }
     if (!acceptTermsAndConditions) {
-      errorModal?.show($t("shared.error"), $t("account.register.errors.acceptTermsAndConditions"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.register.errors.acceptTermsAndConditions")
+      );
       return;
     }
     console.log("try1");
@@ -188,7 +217,9 @@
         $t("account.register.prompts.register.title"),
         $t("shared.confirm"),
         $t("shared.back"),
-        $t("account.register.prompts.register.description", { values: { p1: $t(selectedProduct?.title ?? "") } })
+        $t("account.register.prompts.register.description", {
+          values: { p1: $t(selectedProduct?.title ?? "") },
+        })
       );
     }
   }
@@ -212,10 +243,16 @@
   }
   function register(cardToken = "") {
     if (!selectedPrice) {
-      errorModal?.show($t("shared.error"), $t("account.register.errors.priceNotSelected"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.register.errors.priceNotSelected")
+      );
       return;
     } else if (selectedPrice && !selectedPrice.id) {
-      errorModal?.show($t("shared.error"), $t("account.register.errors.priceNotInDatabase"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.register.errors.priceNotInDatabase")
+      );
       return;
     }
     const user: UserRegisterRequest = {
@@ -281,14 +318,27 @@
     if (!selectedPrice) {
       return "";
     }
-    return "$" + intFormat(discountedPrice()) + " " + selectedPrice.currency + " " + billingPeriod();
+    return (
+      "$" +
+      intFormat(discountedPrice()) +
+      " " +
+      selectedPrice.currency +
+      " " +
+      billingPeriod()
+    );
   };
   $: getButtonText();
   const getButtonText = (): string => {
     if (!selectedPrice) {
       return "";
     }
-    return (selectedPrice.billingPeriod === SubscriptionBillingPeriod.ONCE ? $t("pricing.pay") : $t("pricing.subscribe")) + " " + priceDescription();
+    return (
+      (selectedPrice.billingPeriod === SubscriptionBillingPeriod.ONCE
+        ? $t("pricing.pay")
+        : $t("pricing.subscribe")) +
+      " " +
+      priceDescription()
+    );
   };
 </script>
 
@@ -302,10 +352,18 @@
       <Logo className="mx-auto h-12 w-auto" />
       {#if !registered}
         <div>
-          <h2 class="mt-6 text-center text-lg leading-9 font-bold text-gray-800 dark:text-slate-200">{$t("account.register.title")}</h2>
-          <p class="mt-2 text-center text-sm leading-5 text-gray-800 dark:text-slate-200 max-w">
+          <h2
+            class="mt-6 text-center text-lg leading-9 font-bold text-gray-800 dark:text-slate-200"
+          >
+            {$t("account.register.title")}
+          </h2>
+          <p
+            class="mt-2 text-center text-sm leading-5 text-gray-800 dark:text-slate-200 max-w"
+          >
             {$t("account.register.alreadyRegistered")}{" "}
-            <span class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150">
+            <span
+              class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+            >
               <Link to="/login">{$t("account.register.clickHereToLogin")}</Link>
             </span>
           </p>
@@ -316,7 +374,9 @@
                 <!-- Workspace -->
                 <div>
                   <!-- svelte-ignore a11y-label-has-associated-control -->
-                  <label class="block text-sm font-medium">{$t("account.register.organization")}</label>
+                  <label class="block text-sm font-medium"
+                    >{$t("account.register.organization")}</label
+                  >
 
                   <div class="mt-1 rounded-md shadow-sm -space-y-px">
                     <div>
@@ -334,7 +394,8 @@
                         disabled={!workspaceNameEnabled}
                         class={classNames(
                           "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:bg-gray-900 text-gray-800 dark:text-slate-200 focus:outline-none focus:ring-theme-500 focus:border-theme-500 focus:z-10 sm:text-sm",
-                          !workspaceNameEnabled && "bg-gray-100 dark:bg-slate-800 cursor-not-allowed"
+                          !workspaceNameEnabled &&
+                            "bg-gray-100 dark:bg-slate-800 cursor-not-allowed"
                         )}
                       />
                     </div>
@@ -344,7 +405,9 @@
 
                 <!-- Personal Info -->
                 <div>
-                  <legend class="block text-sm font-medium">{$t("account.register.personalInfo")}</legend>
+                  <legend class="block text-sm font-medium"
+                    >{$t("account.register.personalInfo")}</legend
+                  >
                   <div class="mt-1 rounded-sm shadow-sm -space-y-px">
                     <div class="flex">
                       <div class="w-1/2">
@@ -392,7 +455,8 @@
                         disabled={!emailEnabled}
                         class={classNames(
                           "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:bg-gray-900 text-gray-800 dark:text-slate-200 focus:outline-none focus:ring-theme-500 focus:border-theme-500 focus:z-10 sm:text-sm",
-                          !emailEnabled && "bg-gray-100 dark:bg-slate-800 cursor-not-allowed"
+                          !emailEnabled &&
+                            "bg-gray-100 dark:bg-slate-800 cursor-not-allowed"
                         )}
                       />
                     </div>
@@ -429,11 +493,15 @@
                     aria-checked="false"
                     class={classNames(
                       "relative inline-flex flex-shrink-0 h-5 w-9 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-theme-500",
-                      acceptTermsAndConditions && "bg-theme-600 dark:bg-theme-400",
-                      !acceptTermsAndConditions && "bg-gray-200 dark:bg-gray-700"
+                      acceptTermsAndConditions &&
+                        "bg-theme-600 dark:bg-theme-400",
+                      !acceptTermsAndConditions &&
+                        "bg-gray-200 dark:bg-gray-700"
                     )}
                   >
-                    <span class="sr-only">{$t("app.workspaces.types.PUBLIC")}</span>
+                    <span class="sr-only"
+                      >{$t("app.workspaces.types.PUBLIC")}</span
+                    >
                     <span
                       class={classNames(
                         "translate-x-0 pointer-events-none relative inline-block h-4 w-4 rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200",
@@ -446,12 +514,24 @@
                         aria-hidden="true"
                         class={classNames(
                           "opacity-100 ease-in duration-200 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity",
-                          acceptTermsAndConditions && "hidden opacity-0 ease-out duration-100",
-                          !acceptTermsAndConditions && "opacity-100 ease-in duration-200"
+                          acceptTermsAndConditions &&
+                            "hidden opacity-0 ease-out duration-100",
+                          !acceptTermsAndConditions &&
+                            "opacity-100 ease-in duration-200"
                         )}
                       >
-                        <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
-                          <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg
+                          class="h-3 w-3 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 12 12"
+                        >
+                          <path
+                            d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </svg>
                       </span>
                       <!-- Enabled: "opacity-100 ease-in duration-200", Not Enabled: "opacity-0 ease-out duration-100" -->
@@ -459,11 +539,17 @@
                         aria-hidden="true"
                         class={classNames(
                           "opacity-0 ease-out duration-100 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity",
-                          acceptTermsAndConditions && "opacity-100 ease-in duration-200",
-                          !acceptTermsAndConditions && "hidden opacity-0 ease-out duration-100"
+                          acceptTermsAndConditions &&
+                            "opacity-100 ease-in duration-200",
+                          !acceptTermsAndConditions &&
+                            "hidden opacity-0 ease-out duration-100"
                         )}
                       >
-                        <svg class="h-3 w-3 text-theme-600 dark:text-theme-400" fill="currentColor" viewBox="0 0 12 12">
+                        <svg
+                          class="h-3 w-3 text-theme-600 dark:text-theme-400"
+                          fill="currentColor"
+                          viewBox="0 0 12 12"
+                        >
                           <path
                             d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
                           />
@@ -472,7 +558,10 @@
                     </span>
                   </button>
                   <span class="flex-grow flex flex-col">
-                    <span class="text-sm font-normal dark:bg-gray-900 text-gray-800 dark:text-slate-200" id="accept-terms-and-conditions">
+                    <span
+                      class="text-sm font-normal dark:bg-gray-900 text-gray-800 dark:text-slate-200"
+                      id="accept-terms-and-conditions"
+                    >
                       {$t("account.register.acceptTerms")}
                     </span>
                   </span>
@@ -481,13 +570,22 @@
                 {#if !loading}
                   <div class="mt-3">
                     <span class="block w-full rounded-sm shadow-sm">
-                      <LoadingButton bind:this={loadingButton} className="w-full block" type="submit">
+                      <LoadingButton
+                        bind:this={loadingButton}
+                        className="w-full block"
+                        type="submit"
+                      >
                         {#if selectedPrice && selectedPrice.price === 0}
                           <span>{$t("pricing.signUpFree")}</span>
                         {:else if selectedPrice && selectedPrice.trialDays > 0}
-                          <span>{$t("account.register.startTrial", { values: { p1: selectedPrice.trialDays } })}</span>
+                          <span
+                            >{$t("account.register.startTrial", {
+                              values: { p1: selectedPrice.trialDays },
+                            })}</span
+                          >
                         {:else if !getButtonText()}
-                          <span>{$t("settings.subscription.plans.select")}</span>
+                          <span>{$t("settings.subscription.plans.select")}</span
+                          >
                         {:else}
                           <span>{getButtonText()}</span>
                         {/if}
@@ -496,13 +594,23 @@
                   </div>
                 {/if}
 
-                <p class="mt-3 py-2 text-gray-500 text-sm border-t border-gray-200 dark:border-gray-700">
+                <p
+                  class="mt-3 py-2 text-gray-500 text-sm border-t border-gray-200 dark:border-gray-700"
+                >
                   {$t("account.register.bySigningUp")}{" "}
-                  <a target="_blank" href="/terms-and-conditions" class="text-theme-500 underline">
+                  <a
+                    target="_blank"
+                    href="/terms-and-conditions"
+                    class="text-theme-500 underline"
+                  >
                     {$t("account.register.termsAndConditions")}
                   </a>{" "}
                   {$t("account.register.andOur")}{" "}
-                  <a target="_blank" href="/privacy-policy" class="text-theme-500 underline">
+                  <a
+                    target="_blank"
+                    href="/privacy-policy"
+                    class="text-theme-500 underline"
+                  >
                     {$t("account.register.privacyPolicy")}
                   </a>
                   .
@@ -513,12 +621,20 @@
         </div>
       {:else}
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div class="bg-white dark:bg-slate-800 max-w-sm w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8">
-            <h2 class="mt-6 text-center text-3xl leading-9 font-bold text-gray-800 dark:text-slate-200">
+          <div
+            class="bg-white dark:bg-slate-800 max-w-sm w-full mx-auto rounded-sm px-8 pt-6 pb-8 mb-4 mt-8"
+          >
+            <h2
+              class="mt-6 text-center text-3xl leading-9 font-bold text-gray-800 dark:text-slate-200"
+            >
               {$t("account.register.successTitle")}
             </h2>
             <div class="my-4 leading-tight">
-              <p class="mt-2 text-center text-sm leading-5 text-gray-800 dark:text-slate-200 max-w">{$t("account.register.successText")}</p>
+              <p
+                class="mt-2 text-center text-sm leading-5 text-gray-800 dark:text-slate-200 max-w"
+              >
+                {$t("account.register.successText")}
+              </p>
             </div>
           </div>
         </div>
@@ -528,8 +644,16 @@
     <Modal bind:this={modalInvitation}>
       {#if linkInvitation && linkInvitation.createdByUser && linkInvitation.createdByWorkspace}
         <div class="space-y-6 text-gray-900">
-          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-theme-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-theme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div
+            class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-theme-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-theme-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -542,25 +666,41 @@
             <h3 class="text-lg leading-6 font-medium" id="modal-title">
               {$t("app.links.invitation.toBe")}{" "}
               {#if linkInvitation.inviteeIsProvider}
-                <span class="font-bold text-theme-600">{$t("models.provider.object")}</span>
+                <span class="font-bold text-theme-600"
+                  >{$t("models.provider.object")}</span
+                >
               {:else}
-                <span class="font-bold text-theme-600">{$t("models.client.object")}</span>
+                <span class="font-bold text-theme-600"
+                  >{$t("models.client.object")}</span
+                >
               {/if}
             </h3>
             <div class="mt-4 text-left">
               <p class="font-normal text-base">
-                {linkInvitation.createdByUser.firstName} (<span class="italic text-gray-600">{linkInvitation.createdByUser.email})</span>{" "}
-                {$t("app.links.invitation.hasInvitedYou")} <span class="font-bold">{linkInvitation.createdByWorkspace.name}</span>{" "}
-                {$t("app.links.invitation.andYourCompany")} <span class="font-bold">{linkInvitation.workspaceName}</span>{" "}
+                {linkInvitation.createdByUser.firstName} (<span
+                  class="italic text-gray-600"
+                  >{linkInvitation.createdByUser.email})</span
+                >{" "}
+                {$t("app.links.invitation.hasInvitedYou")}
+                <span class="font-bold"
+                  >{linkInvitation.createdByWorkspace.name}</span
+                >{" "}
+                {$t("app.links.invitation.andYourCompany")}
+                <span class="font-bold">{linkInvitation.workspaceName}</span
+                >{" "}
                 {#if linkInvitation.inviteeIsProvider}
                   <span>{$t("app.links.invitation.reasonAsProvider")}.</span>
                 {:else}
-                  return <span>{$t("app.links.invitation.reasonAsClient")}.</span>
+                  return <span
+                    >{$t("app.links.invitation.reasonAsClient")}.</span
+                  >
                 {/if}
               </p>
             </div>
             {#if linkInvitation.message}
-              <div class="mt-4 text-left bg-gray-50 border border-gray-300 py-2 px-2">
+              <div
+                class="mt-4 text-left bg-gray-50 border border-gray-300 py-2 px-2"
+              >
                 <p class="font-normal text-base text-gray-600">
                   <span class="font-medium">
                     {$t("app.links.invitation.message")}
@@ -573,7 +713,9 @@
           </div>
         </div>
       {/if}
-      <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+      <div
+        class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense"
+      >
         <button
           type="button"
           bind:this={buttonAcceptInvitation}

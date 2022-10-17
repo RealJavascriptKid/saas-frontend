@@ -39,7 +39,9 @@
 
   $: selectedProduct = $pricingState.selectedProduct;
   $: selectedPrice = selectedProduct
-    ? selectedProduct.prices.find((f) => f.billingPeriod === $pricingState.billingPeriod) ?? selectedProduct.prices[0]
+    ? selectedProduct.prices.find(
+        (f) => f.billingPeriod === $pricingState.billingPeriod
+      ) ?? selectedProduct.prices[0]
     : undefined;
 
   onMount(() => {
@@ -105,7 +107,14 @@
       if (selectedPrice?.billingPeriod === SubscriptionBillingPeriod.ONCE) {
         return $t("pricing.once").toString();
       } else {
-        return "/ " + $t("pricing." + SubscriptionBillingPeriod[selectedPrice.billingPeriod] + "Short");
+        return (
+          "/ " +
+          $t(
+            "pricing." +
+              SubscriptionBillingPeriod[selectedPrice.billingPeriod] +
+              "Short"
+          )
+        );
       }
     }
     return "";
@@ -118,7 +127,13 @@
   $: getButtonText();
   const getButtonText = (): string => {
     if (selectedPrice) {
-      return (selectedPrice.billingPeriod === SubscriptionBillingPeriod.ONCE ? $t("pricing.pay") : $t("pricing.subscribe")) + " " + priceDescription;
+      return (
+        (selectedPrice.billingPeriod === SubscriptionBillingPeriod.ONCE
+          ? $t("pricing.pay")
+          : $t("pricing.subscribe")) +
+        " " +
+        priceDescription
+      );
     }
     return "";
   };
@@ -131,21 +146,43 @@
     <div class="absolute inset-0 overflow-hidden">
       <section class="absolute inset-y-0 pl-16 max-w-full right-0 flex">
         <div class="w-screen max-w-md">
-          <div class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-2xl">
+          <div
+            class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-2xl"
+          >
             <div class="flex-1 h-0 overflow-y-auto bg-white text-gray-600">
-              <header class="space-y-1 py-6 px-4 bg-gray-100 sm:px-6 shadow-inner border-b border-gray-200">
+              <header
+                class="space-y-1 py-6 px-4 bg-gray-100 sm:px-6 shadow-inner border-b border-gray-200"
+              >
                 <div class="flex items-center justify-between space-x-3">
-                  <h2 class="text-lg leading-7 font-medium text-gray-800">{$t("settings.tenant.create")}</h2>
+                  <h2 class="text-lg leading-7 font-medium text-gray-800">
+                    {$t("settings.tenant.create")}
+                  </h2>
                   <div class="h-7 flex items-center">
-                    <button on:click={close} aria-label="Close panel" class="text-gray-500 hover:text-gray-800 transition ease-in-out duration-150">
-                      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <button
+                      on:click={close}
+                      aria-label="Close panel"
+                      class="text-gray-500 hover:text-gray-800 transition ease-in-out duration-150"
+                    >
+                      <svg
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
                       </svg>
                     </button>
                   </div>
                 </div>
                 <div>
-                  <p class="text-sm leading-5 text-gray-500">{$t("settings.tenant.createDescription")}</p>
+                  <p class="text-sm leading-5 text-gray-500">
+                    {$t("settings.tenant.createDescription")}
+                  </p>
                 </div>
               </header>
               <div class="flex-1 flex flex-col justify-between">
@@ -153,7 +190,9 @@
                   <div class="space-y-3 pt-6 pb-5">
                     <div>
                       <!-- svelte-ignore a11y-label-has-associated-control -->
-                      <label class="block text-sm font-medium">{$t("account.register.organization")}</label>
+                      <label class="block text-sm font-medium"
+                        >{$t("account.register.organization")}</label
+                      >
 
                       <div class="mt-1 rounded-md shadow-sm -space-y-px">
                         <div>
@@ -183,10 +222,14 @@
                   <div class="space-y-4 pt-4 pb-6 text-right text-gray-700">
                     <div class="text-sm leading-5 right-0">
                       <span class="inline-flex rounded-sm shadow-sm">
-                        <ButtonSecondary on:click={close}>{$t("shared.cancel")}</ButtonSecondary>
+                        <ButtonSecondary on:click={close}
+                          >{$t("shared.cancel")}</ButtonSecondary
+                        >
                       </span>
                       <span class="inline-flex rounded-sm shadow-sm ml-2">
-                        <ButtonPrimary on:click={createTenant}>{$t("shared.create")}</ButtonPrimary>
+                        <ButtonPrimary on:click={createTenant}
+                          >{$t("shared.create")}</ButtonPrimary
+                        >
                       </span>
                     </div>
                   </div>
@@ -207,7 +250,11 @@
         on:payed={payed}
         on:error={payError}
       >
-        <LoadingButton bind:this={loadingButton} className="w-full block" type="submit">
+        <LoadingButton
+          bind:this={loadingButton}
+          className="w-full block"
+          type="submit"
+        >
           {getButtonText}
         </LoadingButton>
       </PayCard>

@@ -47,7 +47,10 @@ export class LinkService extends ApiService implements ILinkService {
   searchUser(email: string): Promise<UserDto> {
     return super.get(`SearchUser/${email}`);
   }
-  searchMember(email: string, workspaceName: string): Promise<WorkspaceUserDto> {
+  searchMember(
+    email: string,
+    workspaceName: string
+  ): Promise<WorkspaceUserDto> {
     return super.get(`SearchMember/${email}/${workspaceName}`);
   }
   get(id: string): Promise<LinkDto> {

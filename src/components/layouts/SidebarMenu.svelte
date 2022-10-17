@@ -45,7 +45,8 @@
     // return route.name && menuItem.pathName && route.name.includes(menuItem.pathName)
   };
   $: currentUserType = $accountState.user?.type ?? UserType.Tenant;
-  $: currentUserRole = $tenantState.current?.currentUser?.role as TenantUserRole;
+  $: currentUserRole = $tenantState.current?.currentUser
+    ?.role as TenantUserRole;
   function allowCurrentUserType(item: SideBarItem) {
     return !item.userTypes || item.userTypes.includes(currentUserType);
   }
@@ -61,7 +62,10 @@
           ..._menu,
           {
             title: title.toString(),
-            items: items?.filter((f) => allowCurrentUserType(f) && allowCurrentRole(f)) ?? [],
+            items:
+              items?.filter(
+                (f) => allowCurrentUserType(f) && allowCurrentRole(f)
+              ) ?? [],
           },
         ];
       });
@@ -74,7 +78,11 @@
     {#each getMenu() as group}
       <div class="mt-2">
         <div class="mt-2">
-          <h3 class="px-1 text-xs leading-4 font-semibold text-slate-500 uppercase tracking-wider">{group.title}</h3>
+          <h3
+            class="px-1 text-xs leading-4 font-semibold text-slate-500 uppercase tracking-wider"
+          >
+            {group.title}
+          </h3>
         </div>
         {#each group.items as menuItem, index}
           <div>
@@ -84,12 +92,18 @@
                   to={menuItem.path}
                   class={classNames(
                     "px-4 mt-1 group flex items-center space-x-4 py-2 text-base leading-5 rounded-sm hover:text-white text-slate-300 focus:outline-none focus:text-gray-50 transition ease-in-out duration-150",
-                    isCurrent(menuItem, $url.pathname) && "text-slate-300 bg-theme-600 focus:bg-theme-700",
-                    !isCurrent(menuItem, $url.pathname) && "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
+                    isCurrent(menuItem, $url.pathname) &&
+                      "text-slate-300 bg-theme-600 focus:bg-theme-700",
+                    !isCurrent(menuItem, $url.pathname) &&
+                      "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                   )}
                   on:click={() => dispatch("selected")}
                 >
-                  {#if menuItem.icon !== undefined} <SidebarIcon className="h-5 w-5 text-white" icon={menuItem.icon} />{/if}
+                  {#if menuItem.icon !== undefined}
+                    <SidebarIcon
+                      className="h-5 w-5 text-white"
+                      icon={menuItem.icon}
+                    />{/if}
                   <div>{menuItem.title}</div>
                 </Link>
               </div>
@@ -101,7 +115,11 @@
                 >
                   <div class="flex items-center space-x-4">
                     <span class="text-slate-200 h-5 w-5 transition ease-in-out">
-                      {#if menuItem.icon !== undefined} <SidebarIcon className="h-5 w-5 text-white" icon={menuItem.icon} />{/if}
+                      {#if menuItem.icon !== undefined}
+                        <SidebarIcon
+                          className="h-5 w-5 text-white"
+                          icon={menuItem.icon}
+                        />{/if}
                     </span>
                     <div>{menuItem.title}</div>
                   </div>
@@ -126,14 +144,19 @@
                         to={subItem.path}
                         class={classNames(
                           "pl-14 mt-1 group flex items-center py-2 sm:text-sm leading-5 rounded-sm hover:text-slate-300 focus:outline-none focus:text-slate-300 transition ease-in-out duration-150",
-                          isCurrent(subItem, $url.pathname) && "text-slate-300 bg-theme-600 focus:bg-theme-700",
-                          !isCurrent(subItem, $url.pathname) && "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
+                          isCurrent(subItem, $url.pathname) &&
+                            "text-slate-300 bg-theme-600 focus:bg-theme-700",
+                          !isCurrent(subItem, $url.pathname) &&
+                            "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                         )}
                         on:click={() => dispatch("selected")}
                       >
                         {#if subItem.icon !== undefined}
                           <span class="mr-1 h-5 w-5 transition ease-in-out">
-                            <SidebarIcon className="h-5 w-5 text-white" icon={subItem.icon} />
+                            <SidebarIcon
+                              className="h-5 w-5 text-white"
+                              icon={subItem.icon}
+                            />
                           </span>
                         {/if}
                         {subItem.title}
@@ -152,7 +175,10 @@
     {#each getMenu() as group}
       <div class="select-none">
         <div class="mt-2">
-          <h3 id="Settings-headline" class="px-1 text-xs leading-4 font-semibold text-slate-500 uppercase tracking-wider">
+          <h3
+            id="Settings-headline"
+            class="px-1 text-xs leading-4 font-semibold text-slate-500 uppercase tracking-wider"
+          >
             {group.title}
           </h3>
         </div>
@@ -165,12 +191,18 @@
                   class={classNames(
                     "px-4 justify-between mt-1 group flex items-center py-2 text-sm leading-5 rounded-sm hover:text-white text-slate-300 focus:outline-none focus:text-gray-50 transition ease-in-out duration-150",
                     menuItem.icon !== undefined && "px-4",
-                    isCurrent(menuItem, $url.pathname) && "text-slate-300 bg-theme-600 focus:bg-theme-700",
-                    !isCurrent(menuItem, $url.pathname) && "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
+                    isCurrent(menuItem, $url.pathname) &&
+                      "text-slate-300 bg-theme-600 focus:bg-theme-700",
+                    !isCurrent(menuItem, $url.pathname) &&
+                      "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                   )}
                 >
                   <div class="flex items-center space-x-5">
-                    {#if menuItem.icon !== undefined} <SidebarIcon className="h-5 w-5 text-white" icon={menuItem.icon} />{/if}
+                    {#if menuItem.icon !== undefined}
+                      <SidebarIcon
+                        className="h-5 w-5 text-white"
+                        icon={menuItem.icon}
+                      />{/if}
                     <div>{menuItem.title}</div>
                   </div>
                 </Link>
@@ -183,7 +215,11 @@
                   on:click={() => toggleMenuItem(index)}
                 >
                   <div class="flex items-center space-x-5">
-                    {#if menuItem.icon !== undefined} <SidebarIcon className="h-5 w-5 text-white" icon={menuItem.icon} />{/if}
+                    {#if menuItem.icon !== undefined}
+                      <SidebarIcon
+                        className="h-5 w-5 text-white"
+                        icon={menuItem.icon}
+                      />{/if}
                     <div>{menuItem.title}</div>
                   </div>
                   <!--Expanded: "text-gray-400 rotate-90", Collapsed: "text-slate-200" -->
@@ -209,11 +245,17 @@
                           "mt-1 group flex items-center py-2 text-sm leading-5 rounded-sm hover:text-white focus:outline-none focus:text-gray-50 text-slate-300 transition ease-in-out duration-150",
                           menuItem.icon === undefined && "pl-10",
                           menuItem.icon !== undefined && "pl-14",
-                          isCurrent(subItem, $url.pathname) && "text-slate-300 bg-theme-600 focus:bg-theme-700",
-                          !isCurrent(subItem, $url.pathname) && "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
+                          isCurrent(subItem, $url.pathname) &&
+                            "text-slate-300 bg-theme-600 focus:bg-theme-700",
+                          !isCurrent(subItem, $url.pathname) &&
+                            "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                         )}
                       >
-                        {#if subItem.icon !== undefined} <SidebarIcon className="h-5 w-5 text-white" icon={subItem.icon} />{/if}
+                        {#if subItem.icon !== undefined}
+                          <SidebarIcon
+                            className="h-5 w-5 text-white"
+                            icon={subItem.icon}
+                          />{/if}
                         <div>{subItem.title}</div>
                       </Link>
                     {/each}

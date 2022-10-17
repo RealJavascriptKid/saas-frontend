@@ -62,11 +62,20 @@
     if (thereAreNoChanges()) {
       errorModal?.show($t("shared.error"), $t("shared.noChanges"));
     } else {
-      confirmSave?.show($t("shared.saveChanges"), $t("shared.yes"), $t("shared.cancel"));
+      confirmSave?.show(
+        $t("shared.saveChanges"),
+        $t("shared.yes"),
+        $t("shared.cancel")
+      );
     }
   }
   function deleteEmployee() {
-    confirmDeleteEmployee?.show($t("shared.confirmDelete"), $t("shared.yes"), $t("shared.cancel"), $t("shared.warningCannotUndo"));
+    confirmDeleteEmployee?.show(
+      $t("shared.confirmDelete"),
+      $t("shared.yes"),
+      $t("shared.cancel"),
+      $t("shared.warningCannotUndo")
+    );
   }
   function successModalDeletedClosed() {
     navigate("/app/employees");
@@ -115,7 +124,11 @@
   }
   $: thereAreNoChanges = () => {
     if (item) {
-      return firstName === item.firstName && lastName === item.lastName && email === item.email;
+      return (
+        firstName === item.firstName &&
+        lastName === item.lastName &&
+        email === item.email
+      );
     }
     return true;
   };
@@ -129,20 +142,32 @@
       <div>
         <div class="relative min-h-screen">
           <main class="py-4">
-            <div class="max-w-5xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl">
+            <div
+              class="max-w-5xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl"
+            >
               <div class="flex items-center space-x-5 truncate">
                 <div class="flex-shrink-0">
                   <div class="relative">
-                    <span class="inline-block h-16 w-16 rounded-full overflow-hidden bg-gray-100">
-                      <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <span
+                      class="inline-block h-16 w-16 rounded-full overflow-hidden bg-gray-100"
+                    >
+                      <svg
+                        class="h-full w-full text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                        />
                       </svg>
                     </span>
                   </div>
                 </div>
                 <div class="truncate">
                   <div class="flex items-center space-x-2">
-                    <h1 class="text-2xl font-bold text-gray-900">{item.firstName}</h1>
+                    <h1 class="text-2xl font-bold text-gray-900">
+                      {item.firstName}
+                    </h1>
                   </div>
                   {#if item.createdByUser}
                     <p class="text-sm font-medium text-gray-500 truncate">
@@ -155,7 +180,8 @@
                       {#if item.createdAt}
                         <span>
                           {" "}
-                          {$t("shared.in")} <time>{dateMonthDayYear(item.createdAt)}</time>
+                          {$t("shared.in")}
+                          <time>{dateMonthDayYear(item.createdAt)}</time>
                         </span>
                       {/if}
                     </p>
@@ -165,7 +191,9 @@
               <div
                 class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3"
               >
-                <ButtonSecondary on:click={edit}>{$t("shared.edit")}</ButtonSecondary>
+                <ButtonSecondary on:click={edit}
+                  >{$t("shared.edit")}</ButtonSecondary
+                >
               </div>
             </div>
 
@@ -174,8 +202,12 @@
                 <div class="lg:grid lg:grid-cols-3 lg:gap-6">
                   <div class="lg:col-span-1">
                     <div class="px-4 sm:px-0">
-                      <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("app.employees.profile.title")}</h3>
-                      <p class="mt-1 text-sm text-gray-600">{$t("app.employees.profile.general")}</p>
+                      <h3 class="text-lg font-medium leading-6 text-gray-900">
+                        {$t("app.employees.profile.title")}
+                      </h3>
+                      <p class="mt-1 text-sm text-gray-600">
+                        {$t("app.employees.profile.general")}
+                      </p>
                     </div>
                   </div>
                   <div class="mt-5 lg:mt-0 lg:col-span-2">
@@ -184,7 +216,10 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                           <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 lg:col-span-3">
-                              <label for="first-name" class="block text-sm font-medium text-gray-700">
+                              <label
+                                for="first-name"
+                                class="block text-sm font-medium text-gray-700"
+                              >
                                 {$t("models.employee.firstName")}
                               </label>
                               <input
@@ -204,7 +239,10 @@
                             </div>
 
                             <div class="col-span-6 lg:col-span-3">
-                              <label for="last-name" class="block text-sm font-medium text-gray-700">
+                              <label
+                                for="last-name"
+                                class="block text-sm font-medium text-gray-700"
+                              >
                                 {$t("models.employee.lastName")}
                               </label>
                               <input
@@ -223,7 +261,10 @@
                             </div>
 
                             <div class="col-span-6">
-                              <label for="email-address" class="block text-sm font-medium text-gray-700">
+                              <label
+                                for="email-address"
+                                class="block text-sm font-medium text-gray-700"
+                              >
                                 {$t("models.employee.email")}
                               </label>
                               <input
@@ -242,7 +283,9 @@
                           </div>
                         </div>
                         {#if editing}
-                          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+                          <div
+                            class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between"
+                          >
                             <div>
                               <button
                                 type="button"
@@ -267,7 +310,8 @@
                                 disabled={!editing || thereAreNoChanges()}
                                 class={classNames(
                                   "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500",
-                                  (!editing || thereAreNoChanges()) && " opacity-50 cursor-not-allowed"
+                                  (!editing || thereAreNoChanges()) &&
+                                    " opacity-50 cursor-not-allowed"
                                 )}
                               >
                                 {$t("shared.save")}
@@ -287,8 +331,14 @@
     {/if}
   </div>
   <SuccessModal bind:this={successModal} />
-  <SuccessModal bind:this={successModalDeleted} on:closed={successModalDeletedClosed} />
+  <SuccessModal
+    bind:this={successModalDeleted}
+    on:closed={successModalDeletedClosed}
+  />
   <ErrorModal bind:this={errorModal} />
   <ConfirmModal bind:this={confirmSave} on:yes={saveConfirm} />
-  <ConfirmModal bind:this={confirmDeleteEmployee} on:yes={confirmedDeleteEmployee} />
+  <ConfirmModal
+    bind:this={confirmDeleteEmployee}
+    on:yes={confirmedDeleteEmployee}
+  />
 </div>

@@ -9,16 +9,48 @@ import type { IEmployeeService } from "./IEmployeeService";
 const fakeUserService = new FakeUserService();
 
 const fakeEmployees = [
-  { firstName: "Charles", lastName: "Gilliam Wiebe", email: "charles@company.com" },
-  { firstName: "Geneva", lastName: "Denis Tompson", email: "geneva@company.com" },
-  { firstName: "Carol", lastName: "Harrington Hunter", email: "carol@company.com" },
-  { firstName: "Kevin", lastName: "Calderon Hodge", email: "kevin@company.com" },
-  { firstName: "Betty", lastName: "Houston Walters", email: "betty@company.com" },
-  { firstName: "Richard", lastName: "Fleming Smith", email: "richard@company.com" },
+  {
+    firstName: "Charles",
+    lastName: "Gilliam Wiebe",
+    email: "charles@company.com",
+  },
+  {
+    firstName: "Geneva",
+    lastName: "Denis Tompson",
+    email: "geneva@company.com",
+  },
+  {
+    firstName: "Carol",
+    lastName: "Harrington Hunter",
+    email: "carol@company.com",
+  },
+  {
+    firstName: "Kevin",
+    lastName: "Calderon Hodge",
+    email: "kevin@company.com",
+  },
+  {
+    firstName: "Betty",
+    lastName: "Houston Walters",
+    email: "betty@company.com",
+  },
+  {
+    firstName: "Richard",
+    lastName: "Fleming Smith",
+    email: "richard@company.com",
+  },
   { firstName: "Brenda", lastName: "Rice Torres", email: "brenda@company.com" },
   { firstName: "Mark", lastName: "Gil Halsey", email: "mark@company.com" },
-  { firstName: "Christy", lastName: "Nolte Meyerson", email: "christy@company.com" },
-  { firstName: "Brandi", lastName: "Salazar Wilmore", email: "brandi@company.com" },
+  {
+    firstName: "Christy",
+    lastName: "Nolte Meyerson",
+    email: "christy@company.com",
+  },
+  {
+    firstName: "Brandi",
+    lastName: "Salazar Wilmore",
+    email: "brandi@company.com",
+  },
 ];
 const employees: EmployeeDto[] = [];
 for (let index = 1; index <= 10; index++) {

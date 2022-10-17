@@ -5,7 +5,10 @@ import type { UpdateContractRequest } from "@/application/contracts/app/contract
 import type { ContractStatusFilter } from "@/application/contracts/app/contracts/ContractStatusFilter";
 
 export interface IContractService {
-  getAllByStatusFilter(filter: ContractStatusFilter, workspaceId?: string): Promise<ContractDto[]>;
+  getAllByStatusFilter(
+    filter: ContractStatusFilter,
+    workspaceId?: string
+  ): Promise<ContractDto[]>;
   getAllByLink(linkId: string): Promise<ContractDto[]>;
   getContract(id: string): Promise<ContractDto>;
   downloadFile(id: string): Promise<any>;

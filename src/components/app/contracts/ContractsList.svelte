@@ -38,10 +38,22 @@
       (f) =>
         f.id?.toUpperCase().includes(searchInput.toUpperCase()) ||
         f.name?.toString().toUpperCase().includes(searchInput.toUpperCase()) ||
-        f.description?.toString().toUpperCase().includes(searchInput.toUpperCase()) ||
-        f.link?.providerWorkspace.name?.toString().toUpperCase().includes(searchInput.toUpperCase()) ||
-        f.link?.clientWorkspace.name?.toString().toUpperCase().includes(searchInput.toUpperCase()) ||
-        f.createdByUser?.email?.toString().toUpperCase().includes(searchInput.toUpperCase())
+        f.description
+          ?.toString()
+          .toUpperCase()
+          .includes(searchInput.toUpperCase()) ||
+        f.link?.providerWorkspace.name
+          ?.toString()
+          .toUpperCase()
+          .includes(searchInput.toUpperCase()) ||
+        f.link?.clientWorkspace.name
+          ?.toString()
+          .toUpperCase()
+          .includes(searchInput.toUpperCase()) ||
+        f.createdByUser?.email
+          ?.toString()
+          .toUpperCase()
+          .includes(searchInput.toUpperCase())
     );
   };
 </script>
@@ -53,13 +65,22 @@
     <div>
       <div class="space-y-2">
         <div class="flex justify-between items-center space-x-0">
-          <div class="space-y-2 sm:space-y-0 flex-col text-right sm:flex-row flex sm:items-center sm:space-x-3" />
+          <div
+            class="space-y-2 sm:space-y-0 flex-col text-right sm:flex-row flex sm:items-center sm:space-x-3"
+          />
         </div>
         <div class="flex justify-between">
           <div class="flex items-center justify-start w-full">
             <div class="relative flex items-center w-full">
-              <div class="focus-within:z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <div
+                class="focus-within:z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
                   <path
                     fill-rule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"

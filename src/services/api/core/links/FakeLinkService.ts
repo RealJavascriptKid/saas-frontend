@@ -31,7 +31,8 @@ for (let index = 1; index <= 10; index++) {
     providerWorkspace: {
       id: index.toString(),
       name: fakeCompanies[index - 1].name,
-      businessMainActivity: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
+      businessMainActivity:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
       type: WorkspaceType.PUBLIC,
       registrationNumber: "",
       registrationDate: undefined,
@@ -42,7 +43,8 @@ for (let index = 1; index <= 10; index++) {
     clientWorkspace: {
       id: (index + 1).toString(),
       name: fakeCompanies[index].name,
-      businessMainActivity: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
+      businessMainActivity:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
       type: WorkspaceType.PRIVATE,
       registrationNumber: "",
       registrationDate: undefined,
@@ -53,7 +55,9 @@ for (let index = 1; index <= 10; index++) {
     status: index <= 2 ? LinkStatus.PENDING : LinkStatus.LINKED,
   };
   // tslint:disable-next-line: max-line-length
-  const contracts = fakeContractService.contracts.filter((f) => f.workspace?.name === provider.providerWorkspace.name);
+  const contracts = fakeContractService.contracts.filter(
+    (f) => f.workspace?.name === provider.providerWorkspace.name
+  );
   provider.contracts = contracts;
   providers.push(provider);
 }
@@ -71,7 +75,8 @@ for (let index = 1; index <= 10; index++) {
     providerWorkspace: {
       id: "1",
       name: fakeCompanies[index - 1].name,
-      businessMainActivity: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
+      businessMainActivity:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
       type: WorkspaceType.PUBLIC,
       registrationNumber: "",
       registrationDate: new Date(),
@@ -82,7 +87,8 @@ for (let index = 1; index <= 10; index++) {
     clientWorkspace: {
       id: "2",
       name: fakeCompanies[index - 1].name,
-      businessMainActivity: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
+      businessMainActivity:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...",
       type: WorkspaceType.PRIVATE,
       registrationNumber: "",
       registrationDate: new Date(),
@@ -93,7 +99,9 @@ for (let index = 1; index <= 10; index++) {
     status: index <= 2 ? LinkStatus.PENDING : LinkStatus.LINKED,
   };
   // tslint:disable-next-line: max-line-length
-  const contracts = fakeContractService.contracts.filter((f) => f.linkId === client.id);
+  const contracts = fakeContractService.contracts.filter(
+    (f) => f.linkId === client.id
+  );
   client.contracts = contracts;
   clients.push(client);
 }
@@ -218,7 +226,10 @@ export class FakeLinkService implements ILinkService {
     }
     return Promise.reject();
   }
-  searchMember(email: string, _workspaceName: string): Promise<WorkspaceUserDto> {
+  searchMember(
+    email: string,
+    _workspaceName: string
+  ): Promise<WorkspaceUserDto> {
     const fakeUsers: any[] = [];
     fakeNamesAndEmails.forEach((fakeEmail) => {
       fakeUsers.push({

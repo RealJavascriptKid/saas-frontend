@@ -8,6 +8,10 @@
   <Breadcrumb
     className="w-full"
     home="/"
-    menu={[{ title: "Home", routePath: "/" }, { title: "Components", routePath: currentRoute }, { title: "Breadcrumbs" }]}
+    menu={[
+      { title: "Home", routePath: "/" },
+      { title: "Components", routePath: currentRoute },
+      { title: "Breadcrumbs" },
+    ]}
   />
 </div>

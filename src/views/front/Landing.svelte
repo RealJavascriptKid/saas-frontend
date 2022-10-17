@@ -11,7 +11,9 @@
 </svelte:head>
 
 <div>
-  <div class="relative overflow-hidden bg-white dark:bg-gray-900 text-coolGray-800 dark:text-slate-200">
+  <div
+    class="relative overflow-hidden bg-white dark:bg-gray-900 text-coolGray-800 dark:text-slate-200"
+  >
     <Hero />
     <Features className="relative z-10" />
     <JoinNow />

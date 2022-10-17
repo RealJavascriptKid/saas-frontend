@@ -43,13 +43,23 @@
             <div>
               <span>{pendingInvitations} </span>
               {#if pendingInvitations === 1}
-                <span class="hidden md:inline-block lowercase">{$t("app.links.pending.one")}</span>
+                <span class="hidden md:inline-block lowercase"
+                  >{$t("app.links.pending.one")}</span
+                >
               {:else}
-                <span class="hidden md:inline-block lowercase">{$t("app.links.pending.multiple")}</span>;
+                <span class="hidden md:inline-block lowercase"
+                  >{$t("app.links.pending.multiple")}</span
+                >;
               {/if}
             </div>
           {/if}
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"

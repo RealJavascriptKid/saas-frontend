@@ -71,21 +71,34 @@
           <ul class="divide-y divide-gray-200">
             {#each sortedItems() as item}
               <li>
-                <Link to={"/app/link/" + item.id} class="block hover:bg-gray-50">
+                <Link
+                  to={"/app/link/" + item.id}
+                  class="block hover:bg-gray-50"
+                >
                   <div class="flex items-center px-4 py-4 sm:px-6">
                     <div class="min-w-0 flex-1 flex items-center">
-                      <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                      <div
+                        class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4"
+                      >
                         <div>
                           <div class="flex items-end justify-between">
-                            <div class="text-sm truncate font-bold text-gray-900 flex-grow">{item.clientWorkspace.name}</div>
+                            <div
+                              class="text-sm truncate font-bold text-gray-900 flex-grow"
+                            >
+                              {item.clientWorkspace.name}
+                            </div>
                           </div>
                         </div>
                         <div class="hidden md:block">
                           <div>
                             <p class="text-sm text-gray-900">
-                              {#if item.createdAt} <time>{dateMonthName(item.createdAt)}</time>{/if}
+                              {#if item.createdAt}
+                                <time>{dateMonthName(item.createdAt)}</time
+                                >{/if}
                             </p>
-                            <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <p
+                              class="mt-2 flex items-center text-sm text-gray-500"
+                            >
                               <!--Heroicon name: solid/check-circle -->
                               <svg
                                 class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
@@ -107,7 +120,13 @@
                     </div>
                     <div>
                       <!--Heroicon name: solid/chevron-right -->
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <svg
+                        class="h-5 w-5 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
                         <path
                           fill-rule="evenodd"
                           d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -126,7 +145,9 @@
         <div class="flex flex-col">
           <div class="overflow-x-auto">
             <div class="py-2 align-middle inline-block min-w-full">
-              <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+              <div
+                class="shadow overflow-hidden border border-gray-200 sm:rounded-lg"
+              >
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
@@ -139,11 +160,24 @@
                             header.name && "cursor-pointer hover:text-gray-700"
                           )}
                         >
-                          <div class="flex items-center space-x-1 text-gray-500">
+                          <div
+                            class="flex items-center space-x-1 text-gray-500"
+                          >
                             <div>{header.title}</div>
-                            <div class={classNames((!header.name || sortByColumn !== header.name) && "invisible")}>
+                            <div
+                              class={classNames(
+                                (!header.name ||
+                                  sortByColumn !== header.name) &&
+                                  "invisible"
+                              )}
+                            >
                               {#if sortDirection === -1}
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-5 w-5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
                                   <path
                                     fill-rule="evenodd"
                                     d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
@@ -151,7 +185,12 @@
                                   />
                                 </svg>
                               {:else}
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-5 w-5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
                                   <path
                                     fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -169,13 +208,22 @@
                     {#each sortedItems() as item}
                       <tr>
                         <td class="px-3 py-2 whitespace-nowrap">
-                          <div class="text-sm font-extrabold text-gray-900">{item.clientWorkspace.name}</div>
+                          <div class="text-sm font-extrabold text-gray-900">
+                            {item.clientWorkspace.name}
+                          </div>
                         </td>
-                        <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                        <td
+                          class="px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
                           {#if item.contracts && item.contracts.length === 0}
-                            <span class="italic text-gray-400">{$t("shared.notApplicable")}</span>
+                            <span class="italic text-gray-400"
+                              >{$t("shared.notApplicable")}</span
+                            >
                           {:else}
-                            <Link to={"/app/contracts/all?l=" + item.id} class="text-theme-600 hover:text-theme-800 lowercase underline font-medium">
+                            <Link
+                              to={"/app/contracts/all?l=" + item.id}
+                              class="text-theme-600 hover:text-theme-800 lowercase underline font-medium"
+                            >
                               {#if item.contracts}
                                 <span>
                                   {item.contracts.length}
@@ -190,9 +238,13 @@
                           {/if}
                         </td>
 
-                        <td class="w-20 px-3 py-2 whitespace-nowrap text-sm text-gray-600">
+                        <td
+                          class="w-20 px-3 py-2 whitespace-nowrap text-sm text-gray-600"
+                        >
                           <div class="flex items-center space-x-2">
-                            <ButtonTertiary to={"/app/contract/new?l=" + item.id}>
+                            <ButtonTertiary
+                              to={"/app/contract/new?l=" + item.id}
+                            >
                               <div>{$t("app.contracts.new.title")}</div>
                             </ButtonTertiary>
                           </div>

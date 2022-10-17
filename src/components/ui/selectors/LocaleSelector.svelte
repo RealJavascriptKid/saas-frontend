@@ -19,7 +19,11 @@
   }
 </script>
 
-<div class={classNames(className, "relative")} use:clickOutside on:click_outside={closeDropDown}>
+<div
+  class={classNames(className, "relative")}
+  use:clickOutside
+  on:click_outside={closeDropDown}
+>
   <button
     type="button"
     on:click={() => (open = !open)}
@@ -37,7 +41,12 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <div class="z-40 origin-top-right absolute right-0 mt-2 w-44 rounded-sm">
-        <div class="rounded-sm bg-white dark:bg-slate-900 border border-primary shadow-xl" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+        <div
+          class="rounded-sm bg-white dark:bg-slate-900 border border-primary shadow-xl"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="user-menu"
+        >
           {#each supportedLocales as language}
             <button
               type="button"

@@ -80,8 +80,12 @@
   <div class="md:grid lg:grid-cols-3 md:gap-2">
     <div class="md:col-span-1">
       <div class="sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("settings.tenant.general")}</h3>
-        <p class="mt-1 text-xs leading-5 text-gray-600">{$t("settings.tenant.generalDescription")}</p>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">
+          {$t("settings.tenant.general")}
+        </h3>
+        <p class="mt-1 text-xs leading-5 text-gray-600">
+          {$t("settings.tenant.generalDescription")}
+        </p>
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
@@ -90,7 +94,10 @@
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-2">
               <div class="col-span-6 sm:col-span-6">
-                <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  for="name"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                >
                   {$t("shared.name")}
                 </label>
                 <input
@@ -115,7 +122,12 @@
     </div>
   </div>
   {#if showUploadImage && !uploadingImage}
-    <UploadImage on:close={() => (showUploadImage = false)} title={$t("shared." + imageType)} initialImage={imageCurrent} on:loaded={loadedImage} />
+    <UploadImage
+      on:close={() => (showUploadImage = false)}
+      title={$t("shared." + imageType)}
+      initialImage={imageCurrent}
+      on:loaded={loadedImage}
+    />
   {/if}
   <SuccessModal bind:this={successModal} />
   <ErrorModal bind:this={errorModal} />

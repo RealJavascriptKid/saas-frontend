@@ -11,6 +11,10 @@
 </svelte:head>
 
 <div>
-  <Breadcrumb menu={[{ title: $t("models.employee.plural"), routePath: "/app/employees" }]} />
+  <Breadcrumb
+    menu={[
+      { title: $t("models.employee.plural"), routePath: "/app/employees" },
+    ]}
+  />
   <EmployeeProfile {id} />
 </div>

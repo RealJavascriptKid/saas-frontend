@@ -23,7 +23,10 @@
     services.tenants.getAll();
     services.workspaces.getAllWorkspaces(true).then((response) => {
       if (response.length === 0) {
-        errorModal?.show($t("app.workspaces.errors.noWorkspaces"), $t("app.workspaces.errors.addAtLeastOneWorkspace"));
+        errorModal?.show(
+          $t("app.workspaces.errors.noWorkspaces"),
+          $t("app.workspaces.errors.addAtLeastOneWorkspace")
+        );
         navigate("/app/settings/workspaces");
       }
     });

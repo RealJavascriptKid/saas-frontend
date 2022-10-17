@@ -78,7 +78,12 @@ for (let index = 1; index <= 10; index++) {
 }
 
 // CONTRACTS
-const contractStatus = [ContractStatus.PENDING, ContractStatus.SIGNED, ContractStatus.SIGNED, ContractStatus.ARCHIVED];
+const contractStatus = [
+  ContractStatus.PENDING,
+  ContractStatus.SIGNED,
+  ContractStatus.SIGNED,
+  ContractStatus.ARCHIVED,
+];
 // tslint:disable-next-line: max-line-length
 const activityTypes = [ContractActivityType.CREATED];
 for (let idxContract = 0; idxContract < contractStatus.length; idxContract++) {
@@ -154,7 +159,9 @@ export class FakeContractService implements IContractService {
       setTimeout(() => {
         let contracts = this.contracts;
         if (status !== ContractStatusFilter.ALL) {
-          contracts = this.contracts.filter((f) => Number(f.status) === Number(status));
+          contracts = this.contracts.filter(
+            (f) => Number(f.status) === Number(status)
+          );
         }
         resolve(contracts);
       }, 500);

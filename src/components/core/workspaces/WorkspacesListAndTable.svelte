@@ -48,12 +48,17 @@
     <div class="flex flex-col">
       <div class="overflow-x-auto">
         <div class="py-2 align-middle inline-block min-w-full">
-          <div class="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
+          <div
+            class="shadow overflow-hidden border border-gray-200 sm:rounded-lg"
+          >
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
                   {#each headers as header}
-                    <th scope="col" class="text-xs px-2 py-1 text-left font-medium text-gray-500 tracking-wider select-none truncate">
+                    <th
+                      scope="col"
+                      class="text-xs px-2 py-1 text-left font-medium text-gray-500 tracking-wider select-none truncate"
+                    >
                       <div class="flex items-center space-x-1 text-gray-500">
                         <div>{header.title}</div>
                       </div>
@@ -64,19 +69,27 @@
               <tbody class="bg-white divide-y divide-gray-200">
                 {#each items as item}
                   <tr>
-                    <td class="px-2 py-1 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="px-2 py-1 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div>
                         <div class="text-sm font-bold">{item.name}</div>
                       </div>
                     </td>
-                    <td class="px-2 py-1 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="px-2 py-1 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div>{workspaceType(item)}</div>
                     </td>
-                    <td class="px-2 py-1 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="px-2 py-1 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div>{userEmails(item)}</div>
                     </td>
 
-                    <td class="w-20 px-2 py-2 whitespace-nowrap text-sm text-gray-600">
+                    <td
+                      class="w-20 px-2 py-2 whitespace-nowrap text-sm text-gray-600"
+                    >
                       <div class="flex items-center space-x-2">
                         <Link
                           to={"/app/settings/workspaces/edit/" + item.id}

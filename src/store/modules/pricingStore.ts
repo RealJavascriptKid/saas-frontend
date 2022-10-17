@@ -4,7 +4,9 @@ import { SubscriptionPriceType } from "@/application/enums/core/subscriptions/Su
 import { writable } from "svelte/store";
 import type { PricingState } from "../types";
 
-const initialState: PricingState = JSON.parse(localStorage.getItem("pricing") ?? "{}") ?? {
+const initialState: PricingState = JSON.parse(
+  localStorage.getItem("pricing") ?? "{}"
+) ?? {
   products: [],
   selectedProduct: null,
   billingPeriod: SubscriptionBillingPeriod.MONTHLY,
@@ -19,7 +21,8 @@ export const pricingStore = {
       self.products = [];
       self.selectedProduct = null;
       self.billingPeriod = SubscriptionBillingPeriod.MONTHLY;
-      self.currency = import.meta.env.VITE_SVELTE_APP_CURRENCY?.toString() ?? "usd";
+      self.currency =
+        import.meta.env.VITE_SVELTE_APP_CURRENCY?.toString() ?? "usd";
       return self;
     });
   },
@@ -41,7 +44,10 @@ export const pricingStore = {
       }
       return self;
     }),
-  setSelected: (payload: { billingPeriod: SubscriptionBillingPeriod; product: SubscriptionProductDto | null }) =>
+  setSelected: (payload: {
+    billingPeriod: SubscriptionBillingPeriod;
+    product: SubscriptionProductDto | null;
+  }) =>
     pricingState.update((self) => {
       self.billingPeriod = payload.billingPeriod;
       self.selectedProduct = payload.product;

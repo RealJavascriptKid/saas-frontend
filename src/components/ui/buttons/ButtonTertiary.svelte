@@ -24,7 +24,9 @@
         disabled && "cursor-not-allowed opacity-75",
         !destructive && "text-theme-600",
         destructive && "text-gray-600",
-        !disabled && !destructive && "hover:text-theme-800 focus:text-theme-900",
+        !disabled &&
+          !destructive &&
+          "hover:text-theme-800 focus:text-theme-900",
         !disabled && destructive && "hover:text-gray-800 focus:text-gray-900"
       )}
     >
@@ -40,7 +42,9 @@
         disabled && "cursor-not-allowed opacity-75",
         !destructive && "text-theme-600",
         destructive && "text-gray-600",
-        !disabled && !destructive && "hover:text-theme-800 focus:text-theme-900",
+        !disabled &&
+          !destructive &&
+          "hover:text-theme-800 focus:text-theme-900",
         !disabled && destructive && "hover:text-gray-800 focus:text-gray-900"
       )}
     >

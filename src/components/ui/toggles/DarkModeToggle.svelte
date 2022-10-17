@@ -16,9 +16,19 @@
   }
 </script>
 
-<button type="button" on:click={toggle} class="flex items-center justify-center space-x-2 w-full focus:outline-none group">
+<button
+  type="button"
+  on:click={toggle}
+  class="flex items-center justify-center space-x-2 w-full focus:outline-none group"
+>
   <span class="text-base font-medium">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-500"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -27,15 +37,25 @@
       />
     </svg>
   </span>
-  <div class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
-    <div class="w-6 h-3.5 transition bg-gray-500 rounded-full shadow-md outline-none" />
+  <div
+    class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500"
+  >
+    <div
+      class="w-6 h-3.5 transition bg-gray-500 rounded-full shadow-md outline-none"
+    />
     <div
       class={`absolute inline-flex bg-white items-center justify-center w-1.5 h-1.5 transition-all duration-200 ease-in-out transform rounded-full shadow-sm top-1 left-1
                   ${theme === 1 ? "translate-x-3" : ""}`}
     />
   </div>
   <span class="text-base font-medium">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-500"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
       <path
         stroke-linecap="round"
         stroke-linejoin="round"

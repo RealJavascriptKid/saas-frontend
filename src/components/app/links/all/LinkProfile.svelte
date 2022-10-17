@@ -50,7 +50,8 @@
       });
   }
 
-  $: workspace = whoAmI(link) === 0 ? link.clientWorkspace : link.providerWorkspace;
+  $: workspace =
+    whoAmI(link) === 0 ? link.clientWorkspace : link.providerWorkspace;
   function reloadContracts() {
     services.contracts.getAllByLink(link.id).then((response) => {
       contracts = response;
@@ -58,7 +59,12 @@
   }
   function deleteLink() {
     closeOptions();
-    confirmDelete?.show($t("shared.confirmDelete"), $t("shared.delete"), $t("shared.cancel"), $t("shared.warningCannotUndo"));
+    confirmDelete?.show(
+      $t("shared.confirmDelete"),
+      $t("shared.delete"),
+      $t("shared.cancel"),
+      $t("shared.warningCannotUndo")
+    );
   }
   function confirmedDelete() {
     loading = true;
@@ -102,7 +108,8 @@
     }
     return 1;
   }
-  $: isOwnerOrAdmin = currentRole == TenantUserRole.OWNER || currentRole == TenantUserRole.ADMIN;
+  $: isOwnerOrAdmin =
+    currentRole == TenantUserRole.OWNER || currentRole == TenantUserRole.ADMIN;
   $: currentRole = $tenantState.current?.currentUser.role;
 </script>
 
@@ -114,11 +121,21 @@
       <div>
         <div class="relative min-h-screen">
           <main class="py-4">
-            <div class="max-w-5xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl">
+            <div
+              class="max-w-5xl mx-auto md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl"
+            >
               <div class="flex items-center space-x-5 truncate">
                 <div class="flex-shrink-0">
                   <div class="relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 172 172" class="h-16 w-16">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      width="48"
+                      height="48"
+                      viewBox="0 0 172 172"
+                      class="h-16 w-16"
+                    >
                       <g
                         fill="none"
                         fill-rule="nonzero"
@@ -139,7 +156,10 @@
                             d="M150.5,150.5h-129v-114.66667c0,-7.88333 6.45,-14.33333 14.33333,-14.33333h100.33333c7.88333,0 14.33333,6.45 14.33333,14.33333z"
                             fill="#a3bffa"
                           />
-                          <path d="M21.5,150.5h129v7.16667h-129z" fill="#667eea" />
+                          <path
+                            d="M21.5,150.5h129v7.16667h-129z"
+                            fill="#667eea"
+                          />
                           <path
                             d="M111.08333,96.75h21.5v17.91667h-21.5zM75.25,96.75h21.5v17.91667h-21.5zM39.41667,96.75h21.5v17.91667h-21.5zM111.08333,125.41667h21.5v17.91667h-21.5zM39.41667,125.41667h21.5v17.91667h-21.5zM111.08333,68.08333h21.5v17.91667h-21.5zM75.25,68.08333h21.5v17.91667h-21.5zM39.41667,68.08333h21.5v17.91667h-21.5zM111.08333,39.41667h21.5v17.91667h-21.5zM75.25,39.41667h21.5v17.91667h-21.5zM39.41667,39.41667h21.5v17.91667h-21.5zM75.25,125.41667h21.5v32.25h-21.5z"
                             fill="#5a67d8"
@@ -151,16 +171,22 @@
                 </div>
                 <div class="truncate">
                   <div class="flex items-center space-x-2">
-                    <h1 class="text-2xl font-bold text-gray-900">{workspace.name}</h1>
+                    <h1 class="text-2xl font-bold text-gray-900">
+                      {workspace.name}
+                    </h1>
                   </div>
                   {#if workspace.createdByUser}
                     <p class="text-sm font-medium text-gray-500 truncate">
                       <span>
                         {$t("shared.added")}
-                        {$t("shared.by")} <span class="text-gray-900">{workspace.createdByUser.email} </span>
+                        {$t("shared.by")}
+                        <span class="text-gray-900"
+                          >{workspace.createdByUser.email}
+                        </span>
                       </span>
                       <span>
-                        {$t("shared.in")} <time>{dateMonthDayYear(workspace.createdAt)}</time>
+                        {$t("shared.in")}
+                        <time>{dateMonthDayYear(workspace.createdAt)}</time>
                       </span>
                     </p>
                   {/if}
@@ -187,8 +213,16 @@
                       aria-expanded="true"
                       aria-haspopup="true"
                     >
-                      <span class="sr-only">{$t("app.shared.buttons.openOptions")}</span>
-                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <span class="sr-only"
+                        >{$t("app.shared.buttons.openOptions")}</span
+                      >
+                      <svg
+                        class="h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
                         <path
                           fill-rule="evenodd"
                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -249,33 +283,52 @@
               </div>
             </div>
 
-            <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-3 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3 xl:gap-6">
+            <div
+              class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-3 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3 xl:gap-6"
+            >
               <div class="space-y-6 lg:col-start-1 lg:col-span-2">
                 <!--Description list-->
                 <section aria-labelledby="applicant-information-title">
                   <div class="bg-white shadow sm:rounded-lg">
                     <div class="px-4 py-5 sm:px-6">
-                      <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900">
+                      <h2
+                        id="applicant-information-title"
+                        class="text-lg leading-6 font-medium text-gray-900"
+                      >
                         {$t("app.links.profile.company")}
                       </h2>
-                      <p class="mt-1 max-w-2xl text-sm text-gray-500">{$t("app.links.profile.general")}</p>
+                      <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                        {$t("app.links.profile.general")}
+                      </p>
                     </div>
                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3">
+                      <dl
+                        class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3"
+                      >
                         <div class="sm:col-span-3">
-                          <dt class="text-sm font-medium text-gray-500">{$t("models.workspace.name")}</dt>
-                          <dd class="mt-1 text-sm text-gray-900">{workspace.name}</dd>
+                          <dt class="text-sm font-medium text-gray-500">
+                            {$t("models.workspace.name")}
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900">
+                            {workspace.name}
+                          </dd>
                         </div>
 
                         <div class="sm:col-span-2">
-                          <dt class="text-sm font-medium text-gray-500">{$t("app.workspaces.typesDescription.PUBLIC")}</dt>
+                          <dt class="text-sm font-medium text-gray-500">
+                            {$t("app.workspaces.typesDescription.PUBLIC")}
+                          </dt>
                           <dd class="mt-1 text-sm text-gray-900">
                             {#if workspace.type === 1}
-                              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                              <span
+                                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-teal-100 text-teal-800"
+                              >
                                 {$t("shared.yes")}
                               </span>
                             {:else}
-                              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                              <span
+                                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
+                              >
                                 {$t("shared.no")}
                               </span>
                             {/if}
@@ -283,8 +336,12 @@
                         </div>
 
                         <div class="sm:col-span-3">
-                          <dt class="text-sm font-medium text-gray-500">{$t("models.workspace.businessMainActivity")}</dt>
-                          <dd class="mt-1 text-sm text-gray-900">{workspace.businessMainActivity}</dd>
+                          <dt class="text-sm font-medium text-gray-500">
+                            {$t("models.workspace.businessMainActivity")}
+                          </dt>
+                          <dd class="mt-1 text-sm text-gray-900">
+                            {workspace.businessMainActivity}
+                          </dd>
                         </div>
                       </dl>
                     </div>
@@ -292,9 +349,15 @@
                 </section>
               </div>
 
-              <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+              <section
+                aria-labelledby="timeline-title"
+                class="lg:col-start-3 lg:col-span-1"
+              >
                 <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-                  <h2 id="timeline-title" class="text-lg font-medium text-gray-900">
+                  <h2
+                    id="timeline-title"
+                    class="text-lg font-medium text-gray-900"
+                  >
                     {$t("app.shared.activity.title")}
                   </h2>
 
@@ -303,11 +366,23 @@
                     <ul class="-mb-8">
                       <li>
                         <div class="relative pb-8">
-                          {#if contracts.length > 0} <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />{/if}
+                          {#if contracts.length > 0}
+                            <span
+                              class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                              aria-hidden="true"
+                            />{/if}
                           <div class="relative flex space-x-3">
                             <div>
-                              <span class="h-8 w-8 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center ring-8 ring-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <span
+                                class="h-8 w-8 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center ring-8 ring-white"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="w-5 h-5"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
                                   <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
@@ -317,7 +392,9 @@
                                 </svg>
                               </span>
                             </div>
-                            <div class="min-w-0 flex-1 flex justify-between space-x-2">
+                            <div
+                              class="min-w-0 flex-1 flex justify-between space-x-2"
+                            >
                               <div>
                                 {#if workspace.createdByUser}
                                   <p class="text-sm text-gray-500">
@@ -330,7 +407,9 @@
                                   </p>
                                 {/if}
                               </div>
-                              <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                              <div
+                                class="text-right text-sm whitespace-nowrap text-gray-500"
+                              >
                                 <time>{dateDM(workspace.createdAt)}</time>
                               </div>
                             </div>
@@ -341,24 +420,45 @@
                         <li>
                           <div class="relative pb-8">
                             {#if idx < contracts.length - 1}
-                              <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+                              <span
+                                class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                                aria-hidden="true"
+                              />
                             {/if}
                             <div class="relative flex space-x-3">
                               <div class="flex-shrink-0">
-                                {#if contract.status === 0} <IconContractClock className="h-8 w-8 text-yellow-500" />{/if}
-                                {#if contract.status === 1} <IconContractCheck className="h-8 w-8 text-teal-500" />{/if}
-                                {#if contract.status === 2} <IconContractArchived className="h-8 w-8 text-gray-500" />{/if}
+                                {#if contract.status === 0}
+                                  <IconContractClock
+                                    className="h-8 w-8 text-yellow-500"
+                                  />{/if}
+                                {#if contract.status === 1}
+                                  <IconContractCheck
+                                    className="h-8 w-8 text-teal-500"
+                                  />{/if}
+                                {#if contract.status === 2}
+                                  <IconContractArchived
+                                    className="h-8 w-8 text-gray-500"
+                                  />{/if}
                               </div>
-                              <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-2">
+                              <div
+                                class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-2"
+                              >
                                 <div class="truncate">
                                   <p class="text-sm text-gray-500">
-                                    <Link to={"/app/contract/" + contract.id} class="font-medium text-gray-600 underline hover:text-gray-700">
+                                    <Link
+                                      to={"/app/contract/" + contract.id}
+                                      class="font-medium text-gray-600 underline hover:text-gray-700"
+                                    >
                                       {contract.name}
                                     </Link>
                                   </p>
                                 </div>
-                                <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                  {#if contract.createdAt} <time>{dateDM(contract.createdAt)}</time>{/if}
+                                <div
+                                  class="text-right text-sm whitespace-nowrap text-gray-500"
+                                >
+                                  {#if contract.createdAt}
+                                    <time>{dateDM(contract.createdAt)}</time
+                                    >{/if}
                                 </div>
                               </div>
                             </div>
@@ -377,7 +477,10 @@
       <div />
     {/if}
   </div>
-  <SuccessModal bind:this={successModalDeleted} on:closed={successModalDeletedClosed} />
+  <SuccessModal
+    bind:this={successModalDeleted}
+    on:closed={successModalDeletedClosed}
+  />
   <ConfirmModal bind:this={confirmDelete} on:yes={confirmedDelete} />
   <ErrorModal bind:this={errorModal} />
 </div>

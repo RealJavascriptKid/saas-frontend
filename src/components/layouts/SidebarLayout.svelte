@@ -41,27 +41,48 @@
           </div>
         </transition>
 
-        <div class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-gray-900">
+        <div
+          class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-gray-900"
+        >
           <div class="absolute top-0 right-0 -mr-14 p-1 mt-2">
             <button
               class="flex items-center justify-center h-12 w-12 rounded-sm focus:outline-none focus:bg-gray-600"
               aria-label="Close sidebar"
               on:click={() => (sidebarOpen = !sidebarOpen)}
             >
-              <svg class="text-white h-7 w-7" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                class="text-white h-7 w-7"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
           <div class="mt-5 flex-1 h-0 overflow-y-auto">
             <nav class="px-2 space-y-2">
-              <TenantSelector className="text-sm" on:add={() => dispatch("addTenant")} />
-              {#if layout === "app"} <WorkspaceSelector className="text-sm" />{/if}
-              <SidebarMenu {layout} on:selected={() => (sidebarOpen = !sidebarOpen)} />
+              <TenantSelector
+                className="text-sm"
+                on:add={() => dispatch("addTenant")}
+              />
+              {#if layout === "app"}
+                <WorkspaceSelector className="text-sm" />{/if}
+              <SidebarMenu
+                {layout}
+                on:selected={() => (sidebarOpen = !sidebarOpen)}
+              />
             </nav>
           </div>
         </div>
-        <div class="flex-shrink-0 w-14"><!--Dummy element to force sidebar to shrink to fit close icon --></div>
+        <div class="flex-shrink-0 w-14">
+          <!--Dummy element to force sidebar to shrink to fit close icon -->
+        </div>
       </div>
     {/if}
   </div>
@@ -76,9 +97,16 @@
       <div class="flex flex-col h-0 flex-1 shadow-md bg-theme-600">
         <div class="flex-1 flex flex-col overflow-y-auto">
           <nav class="flex-1 px-2 py-4 space-y-3 bg-gray-900 select-none">
-            <TenantSelector className="text-xs sm:text-sm" on:add={() => dispatch("addTenant")} />
+            <TenantSelector
+              className="text-xs sm:text-sm"
+              on:add={() => dispatch("addTenant")}
+            />
             {#if layout === "app"}
-              <WorkspaceSelector className="text-xs sm:text-sm" on:add={() => (sidebarOpen = false)} on:selected={() => (sidebarOpen = false)} />
+              <WorkspaceSelector
+                className="text-xs sm:text-sm"
+                on:add={() => (sidebarOpen = false)}
+                on:selected={() => (sidebarOpen = false)}
+              />
             {/if}
             <SidebarMenu {layout} />
           </nav>
@@ -89,14 +117,26 @@
 
   <!--Content -->
   <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="relative flex-shrink-0 flex h-14 bg-white shadow-inner border-b border-gray-200">
+    <div
+      class="relative flex-shrink-0 flex h-14 bg-white shadow-inner border-b border-gray-200"
+    >
       <button
         class="px-4 border-r border-gray-200 text-gray-600 focus:outline-none focus:bg-gray-100 focus:text-gray-600"
         aria-label="Open sidebar"
         on:click={() => (sidebarOpen = !sidebarOpen)}
       >
-        <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+        <svg
+          class="h-5 w-5"
+          stroke="currentColor"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h7"
+          />
         </svg>
       </button>
 
@@ -107,13 +147,27 @@
               <!--Logo -->
               <nav class="lg:hidden">
                 <Link to="/app">
-                  <img alt="Logo" class="h-7 w-auto sm:hidden" src={IconLight} />
-                  <img alt="Logo" class="h-7 w-auto hidden sm:block" src={LogoLight} />
+                  <img
+                    alt="Logo"
+                    class="h-7 w-auto sm:hidden"
+                    src={IconLight}
+                  />
+                  <img
+                    alt="Logo"
+                    class="h-7 w-auto hidden sm:block"
+                    src={LogoLight}
+                  />
                 </Link>
               </nav>
-              <nav class="hidden lg:flex items-center text-base leading-5 font-medium">
+              <nav
+                class="hidden lg:flex items-center text-base leading-5 font-medium"
+              >
                 <Link to="/app">
-                  <img alt="Logo" class="hidden sm:block h-7 sm:h-8 w-auto" src={LogoLight} />
+                  <img
+                    alt="Logo"
+                    class="hidden sm:block h-7 sm:h-8 w-auto"
+                    src={LogoLight}
+                  />
                 </Link>
               </nav>
               <!--Logo: End -->
@@ -131,7 +185,10 @@
       </div>
     </div>
 
-    <main class="flex-1 focus:outline-none overflow-y-auto bg-gray-50" tabIndex={0}>
+    <main
+      class="flex-1 focus:outline-none overflow-y-auto bg-gray-50"
+      tabIndex={0}
+    >
       {#key currentWorkspaceId}
         <div class="pb-20 sm:pb-0">
           <slot />

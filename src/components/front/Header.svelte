@@ -32,8 +32,13 @@
   <div class="bg-white dark:bg-gray-900 pb-6">
     <div class="relative pt-6 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <nav class="relative flex items-center justify-between sm:h-10 md:justify-center" aria-label="Global">
-          <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
+        <nav
+          class="relative flex items-center justify-between sm:h-10 md:justify-center"
+          aria-label="Global"
+        >
+          <div
+            class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0"
+          >
             <div class="flex items-center justify-between w-full md:w-auto">
               <Logo className="hidden lg:block" size="h-9" />
               <Icon className="lg:hidden" size="h-9" />
@@ -63,8 +68,20 @@
                   aria-haspopup="true"
                 >
                   <span class="sr-only">{$t("shared.close")}</span>
-                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  <svg
+                    class="h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
                   </svg>
                 </button>
               </div>
@@ -76,7 +93,8 @@
                 to={link.path}
                 class={classNames(
                   "text-base leading-6 font-medium focus:outline-none transition ease-in-out duration-150 px-3 py-1 rounded-sm",
-                  !isCurrent(link.path) && "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300",
+                  !isCurrent(link.path) &&
+                    "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300",
                   isCurrent(link.path) && "text-gray-900 dark:text-white"
                 )}
               >
@@ -86,7 +104,9 @@
             <LocaleSelector className="hidden lg:block" />
             <DarkModeToggle />
           </div>
-          <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 z-40">
+          <div
+            class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 z-40"
+          >
             <span class="inline-flex rounded-md shadow">
               <Link
                 to={authenticated ? "/app" : "/login"}
@@ -113,7 +133,9 @@
         leave-to-class="opacity-0 scale-95"
       >
         {#if open}
-          <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-40">
+          <div
+            class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-40"
+          >
             <div
               class="rounded-lg bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden"
             >
@@ -122,7 +144,11 @@
                   {#if theme === Theme.DARK}
                     <img alt="Icon" class="h-8 w-auto sm:h-10" src={IconDark} />
                   {:else}
-                    <img alt="Icon" class="h-8 w-auto sm:h-10" src={IconLight} />
+                    <img
+                      alt="Icon"
+                      class="h-8 w-auto sm:h-10"
+                      src={IconLight}
+                    />
                   {/if}
                 </div>
                 <div class="-mr-2">
@@ -133,13 +159,29 @@
                   >
                     <span class="sr-only">{$t("shared.close")}</span>
                     <!-- Heroicon name: x -->
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      class="h-6 w-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
               </div>
-              <div role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
+              <div
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="main-menu"
+              >
                 <div class="px-2 pt-2 pb-3" role="none">
                   {#each links as link}
                     <Link
@@ -147,7 +189,9 @@
                       role="menuitem"
                       class={classNames(
                         "block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-slate-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-slate-800",
-                        isCurrent(link.path) ? "bg-slate-100 dark:bg-gray-900" : ""
+                        isCurrent(link.path)
+                          ? "bg-slate-100 dark:bg-gray-900"
+                          : ""
                       )}
                     >
                       {link.title}

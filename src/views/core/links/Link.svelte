@@ -7,6 +7,8 @@
 </script>
 
 <div>
-  <Breadcrumb menu={[{ title: $t("models.link.plural"), routePath: "/app/links/all" }]} />
+  <Breadcrumb
+    menu={[{ title: $t("models.link.plural"), routePath: "/app/links/all" }]}
+  />
   <LinkProfile {id} />
 </div>

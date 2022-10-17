@@ -42,7 +42,9 @@
               selectedCurrency !== currency
                 ? "text-xs p-2 cursor-pointer bg-gray-50 dark:bg-gray-700 "
                 : "text-xs p-2 cursor-pointer bg-white dark:bg-gray-900 border shadow-md border-slate-300 dark:border-gray-600",
-              idx === 0 ? "rounded-l-md border-r-none" : "rounded-r-md border-l-none"
+              idx === 0
+                ? "rounded-l-md border-r-none"
+                : "rounded-r-md border-l-none"
             )}
           >
             {currency}

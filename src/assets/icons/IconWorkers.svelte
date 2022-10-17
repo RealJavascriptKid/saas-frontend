@@ -2,9 +2,19 @@
   export let className: string = "";
 </script>
 
-<svg class={className} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
+<svg
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  x="0px"
+  y="0px"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+>
   <rect width="12" height="2" x="1" y="14" rx="1" />
-  <path d="M8,10H8v3a1,1,0,0,1-2,0V10H6a4,4,0,0,0-4,4v1H12V14A4,4,0,0,0,8,10Z" />
+  <path
+    d="M8,10H8v3a1,1,0,0,1-2,0V10H6a4,4,0,0,0-4,4v1H12V14A4,4,0,0,0,8,10Z"
+  />
   <rect width="12" height="2" x="12" y="6" rx="1" />
   <path d="M19,2h0V5a1,1,0,0,1-2,0V2h0a4,4,0,0,0-4,4V7H23V6A4,4,0,0,0,19,2Z" />
   <path

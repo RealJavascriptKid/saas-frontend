@@ -17,6 +17,10 @@
   {#if theme === Theme.DARK}
     <img class={classNames(size, "w-auto mx-auto")} src={IconDark} alt="Logo" />
   {:else}
-    <img class={classNames(size, "w-auto mx-auto")} src={IconLight} alt="Logo" />
+    <img
+      class={classNames(size, "w-auto mx-auto")}
+      src={IconLight}
+      alt="Logo"
+    />
   {/if}
 </div>

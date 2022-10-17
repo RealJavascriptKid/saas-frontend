@@ -66,7 +66,10 @@
   }
   function save() {
     if (workspaces.length === 0) {
-      errorModal?.show($t("shared.error"), $t("account.tenant.members.errors.atLeastOneWorkspace"));
+      errorModal?.show(
+        $t("shared.error"),
+        $t("account.tenant.members.errors.atLeastOneWorkspace")
+      );
       return;
     }
     loading = true;
@@ -115,7 +118,8 @@
     return workspaces.map((f) => f.name).join(", ");
   };
   $: maxUsers = $appState.features?.maxUsers ?? 0;
-  $: maxUsersReached = maxUsers > 0 && ($tenantState.members?.length ?? 0) >= maxUsers;
+  $: maxUsersReached =
+    maxUsers > 0 && ($tenantState.members?.length ?? 0) >= maxUsers;
 
   useEscapeKeypress(close);
 </script>
@@ -123,7 +127,9 @@
 <div>
   <div>
     <div class="fixed inset-0 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0"
@@ -137,7 +143,10 @@
           </div>
         </transition>
 
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true" />
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+        />
         <transition
           enter-active-class="ease-out duration-300"
           enter-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -162,21 +171,37 @@
                 class="p-1 bg-white hover:bg-gray-200 border border-gray-200 rounded-full text-gray-600 justify-center flex items-center hover:text-gray-500 focus:outline-none"
               >
                 <span class="sr-only">{$t("shared.close")}</span>
-                <svg class="h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  class="h-5 w-5 text-gray-700"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
             <div class="mt-3 space-y-3">
               <div class="flex items-center justify-between">
-                <h4 class="text-lg font-medium">{$t("settings.members.actions.new")}</h4>
+                <h4 class="text-lg font-medium">
+                  {$t("settings.members.actions.new")}
+                </h4>
               </div>
               {#if maxUsersReached}
                 <div>
                   <WarningBanner
                     redirect="/app/settings/subscription"
                     title={$t("app.subscription.errors.limitReached")}
-                    text={$t("app.subscription.errors.limitReachedUsers", { values: { p1: maxUsers } })}
+                    text={$t("app.subscription.errors.limitReachedUsers", {
+                      values: { p1: maxUsers },
+                    })}
                   />
                 </div>
               {/if}
@@ -188,7 +213,10 @@
                   <div class="grid grid-cols-2 gap-2">
                     <!--Email -->
                     <div class="col-span-2">
-                      <label for="email" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="email"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.user.email")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -212,7 +240,10 @@
 
                     <!--User First Name -->
                     <div>
-                      <label for="first-name" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="first-name"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.user.firstName")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -234,7 +265,10 @@
 
                     <!--User Last Name -->
                     <div>
-                      <label for="last-name" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="last-name"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.user.lastName")}
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm w-full">
@@ -256,21 +290,29 @@
 
                     <!--User Role -->
                     <div class="col-span-2">
-                      <label for="last-name" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="last-name"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.user.role")}
                       </label>
                       <div class="mt-1 rounded-md shadow-sm w-full">
                         <fieldset>
-                          <legend class="sr-only">{$t("models.user.role")}</legend>
+                          <legend class="sr-only"
+                            >{$t("models.user.role")}</legend
+                          >
                           <div class="bg-white rounded-md -space-y-px">
                             {#each roleOptions as option, idxRole}
                               <label
                                 class={classNames(
                                   "relative border py-2 px-4 flex cursor-pointer focus:outline-none",
-                                  role === option.value && "bg-theme-50 border-theme-200 z-10",
+                                  role === option.value &&
+                                    "bg-theme-50 border-theme-200 z-10",
                                   role !== option.value && "border-gray-200",
-                                  idxRole === 0 && "rounded-tl-md rounded-tr-md",
-                                  idxRole === roleOptions.length - 1 && "rounded-bl-md rounded-br-md"
+                                  idxRole === 0 &&
+                                    "rounded-tl-md rounded-tr-md",
+                                  idxRole === roleOptions.length - 1 &&
+                                    "rounded-bl-md rounded-br-md"
                                 )}
                               >
                                 <input
@@ -297,7 +339,11 @@
 
                                   <span
                                     id="tenant-user-role-0-description"
-                                    class={classNames("block text-sm", role === option.value && "text-theme-700", role !== option.value && "text-gray-500")}
+                                    class={classNames(
+                                      "block text-sm",
+                                      role === option.value && "text-theme-700",
+                                      role !== option.value && "text-gray-500"
+                                    )}
                                   >
                                     {option.description}
                                   </span>
@@ -312,7 +358,10 @@
 
                     <!--User Workspaces -->
                     <div class="col-span-2">
-                      <label for="description" class="block text-xs font-medium text-gray-700 truncate">
+                      <label
+                        for="description"
+                        class="block text-xs font-medium text-gray-700 truncate"
+                      >
                         {$t("models.workspace.plural")}
                       </label>
                       <div class="mt-2 rounded-md w-full space-y-2">
@@ -324,11 +373,30 @@
                           value={currentWorkspacesDescription(workspaces)}
                           class="bg-gray-100 cursor-not-allowed w-full flex-1 focus:ring-theme-500 focus:border-theme-500 block min-w-0 rounded-md sm:text-sm border-gray-300"
                         />
-                        <button type="button" on:click={selectUserWorkspaces} class="flex items-center space-x-1 text-xs text-theme-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        <button
+                          type="button"
+                          on:click={selectUserWorkspaces}
+                          class="flex items-center space-x-1 text-xs text-theme-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            />
                           </svg>
-                          <span class="uppercase font-medium">{$t("app.workspaces.actions.selectUserWorkspaces")}</span>
+                          <span class="uppercase font-medium"
+                            >{$t(
+                              "app.workspaces.actions.selectUserWorkspaces"
+                            )}</span
+                          >
                         </button>
                       </div>
                     </div>
@@ -375,5 +443,8 @@
 
   <ErrorModal bind:this={errorModal} />
   <SuccessModal bind:this={successModal} on:closed={close} />
-  <SelectWorkspaces bind:this={selectWorkspaces} on:selected={selectedWorkspaces} />
+  <SelectWorkspaces
+    bind:this={selectWorkspaces}
+    on:selected={selectedWorkspaces}
+  />
 </div>

@@ -7,7 +7,10 @@ import es from "./es-MX.json";
 addMessages("en-US", en);
 addMessages("es-MX", es);
 
-const locale = localStorage.getItem("locale") ?? import.meta.env.VITE_SVELTE_APP_LANGUAGE?.toString() ?? "en-US";
+const locale =
+  localStorage.getItem("locale") ??
+  import.meta.env.VITE_SVELTE_APP_LANGUAGE?.toString() ??
+  "en-US";
 init({
   fallbackLocale: locale,
   initialLocale: locale,

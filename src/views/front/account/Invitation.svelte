@@ -16,7 +16,9 @@
   import { authStore } from "@/store/modules/authStore";
 
   const emailQueryParam = new URLSearchParams(window.location.search).get("e");
-  const invitationQueryParam = new URLSearchParams(window.location.search).get("i");
+  const invitationQueryParam = new URLSearchParams(window.location.search).get(
+    "i"
+  );
 
   let loadingButton: LoadingButton;
   let errorModal: ErrorModal;
@@ -83,7 +85,9 @@
 
 <div>
   <div>
-    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
         {#if tenant && (tenant.logo || tenant.logoDarkmode)}
           <div>
@@ -98,17 +102,27 @@
       {#if loading}
         <div />
       {:else if !invitation || !invitation.user}
-        <div class="text-red-500 text-center">{$t("shared.invalidInvitation")}</div>
+        <div class="text-red-500 text-center">
+          {$t("shared.invalidInvitation")}
+        </div>
       {:else}
         <div>
-          <h2 class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200">
+          <h2
+            class="mt-6 text-center text-lg font-extrabold text-gray-800 dark:text-slate-200"
+          >
             {$t("shared.hi")}
-            {invitation.user.firstName ? invitation.user.firstName : invitation.user.email}, {$t("account.invitation.youWereInvited")}{" "}
+            {invitation.user.firstName
+              ? invitation.user.firstName
+              : invitation.user.email}, {$t(
+              "account.invitation.youWereInvited"
+            )}{" "}
             {invitation.tenant.name}
           </h2>
           <p class="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
             {$t("account.register.alreadyRegistered")}{" "}
-            <span class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150">
+            <span
+              class="font-medium text-theme-500 hover:text-theme-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+            >
               <Link to="/login">{$t("account.register.clickHereToLogin")}</Link>
             </span>
           </p>
@@ -117,7 +131,10 @@
             <div class="py-8 px-4 sm:rounded-sm sm:px-10">
               <form on:submit|preventDefault={accept} class="sm:w-96">
                 <div>
-                  <label for="email" class="block text-sm font-medium leading-5">
+                  <label
+                    for="email"
+                    class="block text-sm font-medium leading-5"
+                  >
                     {$t("account.shared.email")}
                   </label>
                   <div class="mt-1 rounded-sm shadow-sm">
@@ -133,7 +150,10 @@
                 </div>
                 {#if requirePassword}
                   <div class="mt-6">
-                    <label for="password" class="block text-sm font-medium leading-5">
+                    <label
+                      for="password"
+                      class="block text-sm font-medium leading-5"
+                    >
                       {$t("account.shared.password")}
                     </label>
                     <div class="mt-1 rounded-sm shadow-sm">
@@ -149,7 +169,10 @@
                 {/if}
                 {#if requirePassword}
                   <div class="mt-6">
-                    <label for="confirmPassword" class="block text-sm font-medium leading-5">
+                    <label
+                      for="confirmPassword"
+                      class="block text-sm font-medium leading-5"
+                    >
                       {$t("account.register.confirmPassword")}
                     </label>
                     <div class="mt-1 rounded-sm shadow-sm">
@@ -166,7 +189,11 @@
 
                 <div class="mt-6">
                   <span class="block w-full rounded-sm shadow-sm">
-                    <LoadingButton className="w-full block" type="submit" bind:this={loadingButton}>
+                    <LoadingButton
+                      className="w-full block"
+                      type="submit"
+                      bind:this={loadingButton}
+                    >
                       {$t("account.invitation.button")}
                     </LoadingButton>
                   </span>

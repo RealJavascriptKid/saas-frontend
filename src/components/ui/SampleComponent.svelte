@@ -14,5 +14,6 @@
 </script>
 
 <div>
-  <ButtonPrimary on:click={() => increment(1)}>Counter: {counter}</ButtonPrimary>
+  <ButtonPrimary on:click={() => increment(1)}>Counter: {counter}</ButtonPrimary
+  >
 </div>

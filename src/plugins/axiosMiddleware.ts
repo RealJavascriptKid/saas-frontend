@@ -40,7 +40,8 @@ server.interceptors.request.use(
     }
     let token = get(authState).token;
     let currentTenant: TenantDto | null = get(tenantState).current;
-    let currentWorkspace: WorkspaceDto | null = get(tenantState).currentWorkspace;
+    let currentWorkspace: WorkspaceDto | null =
+      get(tenantState).currentWorkspace;
 
     if (currentTenant) {
       config.headers.common["X-Tenant-Key"] = currentTenant.uuid;

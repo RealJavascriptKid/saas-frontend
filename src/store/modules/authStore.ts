@@ -6,7 +6,9 @@ import type { AuthState } from "../types";
 //   authenticated: false,
 //   token: "",
 // };
-const initialState: AuthState = JSON.parse(localStorage.getItem("auth") ?? "{}") ?? {
+const initialState: AuthState = JSON.parse(
+  localStorage.getItem("auth") ?? "{}"
+) ?? {
   authenticated: false,
   token: "",
 };

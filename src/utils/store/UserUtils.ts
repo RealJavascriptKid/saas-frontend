@@ -53,7 +53,10 @@ const logged = (response: UserLoggedResponse) => {
   if (redirect) {
     navigate(redirect);
   } else {
-    if ((response.user as UserDto).type === UserType.Admin && import.meta.env.VITE_SVELTE_APP_SERVICE !== "sandbox") {
+    if (
+      (response.user as UserDto).type === UserType.Admin &&
+      import.meta.env.VITE_SVELTE_APP_SERVICE !== "sandbox"
+    ) {
       navigate("/admin");
     } else {
       navigate("/app/dashboard");

@@ -28,27 +28,45 @@
           <!--Profile -->
           <div class="flex items-center">
             <Link to="/app/settings/profile"
-              >{#if avatar} <img class="hidden h-12 w-12 rounded-full sm:block" src={avatar} alt="Profile" />{/if}</Link
+              >{#if avatar}
+                <img
+                  class="hidden h-12 w-12 rounded-full sm:block"
+                  src={avatar}
+                  alt="Profile"
+                />{/if}</Link
             >
             <div>
               <div class="flex items-center">
                 <div>
                   {#if avatar}
-                    <img class="h-12 w-12 rounded-sm sm:hidden" src={avatar} alt="Avatar" />
+                    <img
+                      class="h-12 w-12 rounded-sm sm:hidden"
+                      src={avatar}
+                      alt="Avatar"
+                    />
                   {:else}
-                    <span class="sm:hidden inline-flex items-center justify-center h-12 w-12 rounded-sm bg-slate-800 shadow-xl">
-                      <span class="text-sm font-medium leading-none text-white">{avatarText}</span>
+                    <span
+                      class="sm:hidden inline-flex items-center justify-center h-12 w-12 rounded-sm bg-slate-800 shadow-xl"
+                    >
+                      <span class="text-sm font-medium leading-none text-white"
+                        >{avatarText}</span
+                      >
                     </span>
                   {/if}
                 </div>
-                <h1 class="ml-3 text-lg font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                <h1
+                  class="ml-3 text-lg font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate"
+                >
                   {$t("shared.hi")}
-                  {#if currentUser.firstName} <span>{currentUser.firstName} 👋!</span>{/if}
+                  {#if currentUser.firstName}
+                    <span>{currentUser.firstName} 👋!</span>{/if}
                 </h1>
               </div>
               <dl class="flex flex-col sm:ml-3 sm:flex-row sm:flex-wrap">
                 <dt class="sr-only">{$t("models.user.email")}</dt>
-                <dd class="flex items-center text-xs text-gray-500 font-medium lowercase sm:mr-6">
+                <dd
+                  class="flex items-center text-xs text-gray-500 font-medium lowercase sm:mr-6"
+                >
                   <!--Heroicon name: office-building -->
                   <svg
                     class="flex-shrink-0 mr-0.5 h-3.5 w-3.5 text-gray-400"
@@ -76,14 +94,21 @@
   <div class="px-4 sm:px-8 max-w-5xl mx-auto py-5 grid gap-5">
     <div class="mt-2 grid sm:grid-cols-1 gap-5">
       <div class="space-y-5">
-        <MySubscriptionProducts withCurrentPlan={true} cols="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-4" />
+        <MySubscriptionProducts
+          withCurrentPlan={true}
+          cols="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-4"
+        />
         <div>
           <div>
             <div class="flex items-center space-x-2 justify-between">
-              <h3 class="leading-5 text-gray-900">{$t("app.dashboard.summary")}</h3>
+              <h3 class="leading-5 text-gray-900">
+                {$t("app.dashboard.summary")}
+              </h3>
             </div>
 
-            <dl class="mt-2 grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-4">
+            <dl
+              class="mt-2 grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-4"
+            >
               <ProvidersUsage />
               <ClientsUsage />
               <EmployeesUsage />

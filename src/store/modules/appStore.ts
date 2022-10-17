@@ -5,7 +5,9 @@ import { ApplicationLayout } from "@/application/enums/shared/ApplicationLayout"
 import { writable } from "svelte/store";
 import type { AppState } from "../types";
 
-const initialState: AppState = JSON.parse(localStorage.getItem("app") ?? "{}") ?? {
+const initialState: AppState = JSON.parse(
+  localStorage.getItem("app") ?? "{}"
+) ?? {
   usage: {
     type: 0,
     providers: 0,

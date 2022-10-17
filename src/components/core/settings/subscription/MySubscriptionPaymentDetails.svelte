@@ -66,7 +66,10 @@
         .updateCardToken(data.token.id)
         .then(() => {
           services.subscriptionManager.getCurrentSubscription();
-          successModal?.show($t("shared.updated"), $t("settings.tenant.payment.updated"));
+          successModal?.show(
+            $t("shared.updated"),
+            $t("settings.tenant.payment.updated")
+          );
         })
         .catch((error) => {
           errorModal?.show($t("shared.error"), error);
@@ -80,7 +83,8 @@
     }
   }
   const subscriptionCard =
-    $tenantState.subscription?.paymentMethods && $tenantState.subscription?.paymentMethods.length > 0
+    $tenantState.subscription?.paymentMethods &&
+    $tenantState.subscription?.paymentMethods.length > 0
       ? $tenantState?.subscription?.paymentMethods[0].card
       : undefined;
 
@@ -88,7 +92,11 @@
     return subscriptionCard?.lastFourDigits;
   };
   $: subscriptionCardExpDesc = () => {
-    return ("0" + subscriptionCard?.expiryMonth).slice(-2) + " / " + subscriptionCard?.expiryYear;
+    return (
+      ("0" + subscriptionCard?.expiryMonth).slice(-2) +
+      " / " +
+      subscriptionCard?.expiryYear
+    );
   };
 </script>
 
@@ -97,13 +105,17 @@
     <div class="px-4 py-5 bg-white sm:p-6">
       <div class="grid grid-cols-6 gap-2">
         <div class="col-span-6 sm:col-span-6 w-full">
-          <span id="listbox-label" class="flex justify-between leading-5 font-medium text-gray-900 mb-4">
+          <span
+            id="listbox-label"
+            class="flex justify-between leading-5 font-medium text-gray-900 mb-4"
+          >
             {$t("settings.tenant.payment.title")}
           </span>
           {#if subscriptionCard && !editing}
             <div class="text-gray-600 text-sm font-semibold">
               <span class="uppercase">{subscriptionCard.brand}</span>
-              {$t("settings.tenant.payment.ending")} **** {subscriptionCardLast4()} -{" "}
+              {$t("settings.tenant.payment.ending")} **** {subscriptionCardLast4()}
+              -{" "}
               {subscriptionCardExpDesc()}
             </div>
           {:else}
@@ -113,10 +125,17 @@
                   <PayCard
                     on:payed={updateCardToken}
                     on:error={(event) => {
-                      errorModal?.show($t("shared.error"), $t(event.detail.error));
+                      errorModal?.show(
+                        $t("shared.error"),
+                        $t(event.detail.error)
+                      );
                     }}
                   >
-                    <LoadingButton bind:this={loadingButton} className="w-full block" type="submit">
+                    <LoadingButton
+                      bind:this={loadingButton}
+                      className="w-full block"
+                      type="submit"
+                    >
                       {$t("shared.confirm")}
                     </LoadingButton>
                   </PayCard>
@@ -133,7 +152,9 @@
                   /> -->
                 </div>
               {:else}
-                <div class="text-red-500 text-sm">{$t("settings.tenant.payment.notSet")}</div>
+                <div class="text-red-500 text-sm">
+                  {$t("settings.tenant.payment.notSet")}
+                </div>
               {/if}
             </div>
           {/if}

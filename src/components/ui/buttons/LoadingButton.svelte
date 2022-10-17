@@ -20,7 +20,11 @@
 
 <ButtonPrimary
   disabled={disabled || loading}
-  className={classNames(className, "relative justify-center", loading && "base-spinner cursor-not-allowed")}
+  className={classNames(
+    className,
+    "relative justify-center",
+    loading && "base-spinner cursor-not-allowed"
+  )}
   {type}
   on:click={() => dispatch("click")}
 >

@@ -16,6 +16,10 @@
   {#if theme === Theme.DARK}
     <img class={classNames(size, "w-auto mx-auto")} src={LogoDark} alt="Logo" />
   {:else}
-    <img class={classNames(size, "w-auto mx-auto")} src={LogoLight} alt="Logo" />
+    <img
+      class={classNames(size, "w-auto mx-auto")}
+      src={LogoLight}
+      alt="Logo"
+    />
   {/if}
 </Link>

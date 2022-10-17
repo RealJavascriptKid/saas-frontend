@@ -14,7 +14,10 @@ import type { ITenantUserInvitationService } from "./ITenantUserInvitationServic
 import { tenantState } from "@/store/modules/tenantStore";
 import { get } from "svelte/store";
 
-export class TenantUserInvitationService extends ApiService implements ITenantUserInvitationService {
+export class TenantUserInvitationService
+  extends ApiService
+  implements ITenantUserInvitationService
+{
   constructor() {
     super("TenantUserInvitation");
   }
@@ -34,7 +37,10 @@ export class TenantUserInvitationService extends ApiService implements ITenantUs
   inviteUser(invitation: UserInviteRequest): Promise<TenantUserDto> {
     return super.post(invitation, `InviteUser`);
   }
-  requestAccess(linkUuid: string, payload: UserVerifyRequest): Promise<TenantUserDto> {
+  requestAccess(
+    linkUuid: string,
+    payload: UserVerifyRequest
+  ): Promise<TenantUserDto> {
     return new Promise((resolve, reject) => {
       super
         .post(payload, `RequestAccess/${linkUuid}`)
@@ -57,7 +63,10 @@ export class TenantUserInvitationService extends ApiService implements ITenantUs
   acceptUser(payload: TenantUserDto): Promise<void> {
     return super.post(payload, `AcceptUser/${payload.id}`);
   }
-  acceptInvitation(tenantUserId: string, payload: UserVerifyRequest): Promise<UserLoggedResponse> {
+  acceptInvitation(
+    tenantUserId: string,
+    payload: UserVerifyRequest
+  ): Promise<UserLoggedResponse> {
     return new Promise((resolve, reject) => {
       super
         .post(payload, `AcceptInvitation/${tenantUserId}`)
@@ -69,7 +78,9 @@ export class TenantUserInvitationService extends ApiService implements ITenantUs
         });
     });
   }
-  updateInvitationSettings(payload: TenantUpdateJoinSettingsRequest): Promise<TenantJoinSettingsDto> {
+  updateInvitationSettings(
+    payload: TenantUpdateJoinSettingsRequest
+  ): Promise<TenantJoinSettingsDto> {
     return super.post(payload, `UpdateInvitationSettings`);
   }
 }

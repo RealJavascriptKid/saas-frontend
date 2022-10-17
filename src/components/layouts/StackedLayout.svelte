@@ -38,7 +38,8 @@
   });
 
   $: currentUserType = $accountState.user?.type ?? UserType.Tenant;
-  $: currentUserRole = $tenantState.current?.currentUser?.role as TenantUserRole;
+  $: currentUserRole = $tenantState.current?.currentUser
+    ?.role as TenantUserRole;
 
   function allowCurrentUserType(types: UserType[] | undefined) {
     return !types || types.includes(currentUserType);
@@ -53,11 +54,19 @@
   $: getMenu = (): SidebarGroup[] => {
     const _menu: SidebarGroup[] = [];
     menu
-      .filter((f) => allowCurrentUserType(f.userTypes) && allowCurrentRole(f.userRoles))
+      .filter(
+        (f) =>
+          allowCurrentUserType(f.userTypes) && allowCurrentRole(f.userRoles)
+      )
       .forEach(({ title, items }) => {
         _menu.push({
           title: title.toString(),
-          items: items?.filter((f) => allowCurrentUserType(f.userTypes) && allowCurrentRole(f.userRoles)) ?? [],
+          items:
+            items?.filter(
+              (f) =>
+                allowCurrentUserType(f.userTypes) &&
+                allowCurrentRole(f.userRoles)
+            ) ?? [],
         });
       });
     return _menu.filter((f) => f.items.length > 0);
@@ -86,7 +95,9 @@
                         to={menuItem.path}
                         class={classNames(
                           "px-3 py-2 rounded-md text-sm font-medium truncate",
-                          currentRoute === menuItem.path ? "text-white bg-theme-700" : "text-gray-500 hover:bg-gray-700 hover:text-white"
+                          currentRoute === menuItem.path
+                            ? "text-white bg-theme-700"
+                            : "text-gray-500 hover:bg-gray-700 hover:text-white"
                         )}
                         aria-current="page"
                         on:click={() => (menuOpened = false)}
@@ -103,7 +114,8 @@
         <div class="flex items-center space-x-2 flex-shrink-0">
           {#if layout === "admin"} <LayoutSelector className="text-sm" />{/if}
           {#if layout === "admin"} <LocaleSelector className="text-sm" />{/if}
-          {#if layout === "app"} <QuickActionsButton className="text-gray-400" />{/if}
+          {#if layout === "app"}
+            <QuickActionsButton className="text-gray-400" />{/if}
           <ProfileButton />
           <button
             on:click={() => (menuOpened = !menuOpened)}
@@ -114,12 +126,36 @@
           >
             <span class="sr-only">Open main menu</span>
             <!--Heroicon name: outline/menu -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              class="block h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
             <!--Heroicon name: outline/x -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg
+              class="hidden h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>

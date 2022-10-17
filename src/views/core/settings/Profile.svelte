@@ -60,7 +60,10 @@
     services.users
       .update(id, updateRequest)
       .then(() => {
-        successModal?.show($t("shared.updated"), $t("settings.profile.profileUpdated"));
+        successModal?.show(
+          $t("shared.updated"),
+          $t("settings.profile.profileUpdated")
+        );
       })
       .catch((error) => {
         errorModal?.show($t("shared.error"), $t(error));
@@ -78,7 +81,10 @@
         passwordConfirm,
       })
       .then(() => {
-        successModal?.show($t("shared.updated"), $t("settings.profile.passwordUpdated"));
+        successModal?.show(
+          $t("shared.updated"),
+          $t("settings.profile.passwordUpdated")
+        );
         passwordCurrent = "";
         passwordNew = "";
         passwordConfirm = "";
@@ -91,7 +97,12 @@
     if ($accountState.user?.type === UserType.Admin) {
       errorModal?.show($t("settings.profile.errors.cannotDeleteAdmin"));
     } else {
-      confirmModal?.show($t("settings.danger.confirmDelete"), $t("shared.confirm"), $t("shared.cancel"), $t("shared.warningCannotUndo"));
+      confirmModal?.show(
+        $t("settings.danger.confirmDelete"),
+        $t("shared.confirm"),
+        $t("shared.cancel"),
+        $t("shared.warningCannotUndo")
+      );
     }
   }
   function confirmDelete() {
@@ -135,8 +146,12 @@
     <div class="md:grid lg:grid-cols-3 md:gap-2">
       <div class="md:col-span-1">
         <div class="sm:px-0">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("settings.profile.profileTitle")}</h3>
-          <p class="mt-1 text-xs leading-5 text-gray-600">{$t("settings.profile.profileText")}</p>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            {$t("settings.profile.profileTitle")}
+          </h3>
+          <p class="mt-1 text-xs leading-5 text-gray-600">
+            {$t("settings.profile.profileText")}
+          </p>
         </div>
       </div>
       <div class="mt-5 md:mt-0 md:col-span-2">
@@ -145,7 +160,10 @@
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-2">
                 <div class="col-span-6 sm:col-span-6 md:col-span-6">
-                  <label for="email_address" class="block text-sm font-medium leading-5 text-gray-700">
+                  <label
+                    for="email_address"
+                    class="block text-sm font-medium leading-5 text-gray-700"
+                  >
                     {$t("account.shared.email")}
                   </label>
                   <input
@@ -158,7 +176,10 @@
                   />
                 </div>
                 <div class="col-span-6 md:col-span-3">
-                  <label for="firstName" class="block text-sm font-medium leading-5 text-gray-700">
+                  <label
+                    for="firstName"
+                    class="block text-sm font-medium leading-5 text-gray-700"
+                  >
                     {$t("settings.profile.firstName")}
                   </label>
                   <input
@@ -170,7 +191,10 @@
                 </div>
 
                 <div class="col-span-6 md:col-span-3">
-                  <label for="lastName" class="block text-sm font-medium leading-5 text-gray-700">
+                  <label
+                    for="lastName"
+                    class="block text-sm font-medium leading-5 text-gray-700"
+                  >
                     {$t("settings.profile.lastName")}
                   </label>
                   <input
@@ -181,15 +205,25 @@
                 </div>
 
                 <div class="col-span-6 sm:col-span-6">
-                  <label for="avatar" class="block text-sm leading-5 font-medium text-gray-700">
+                  <label
+                    for="avatar"
+                    class="block text-sm leading-5 font-medium text-gray-700"
+                  >
                     {$t("shared.avatar")}
                   </label>
                   <div class="mt-2 flex items-center space-x-3">
-                    <div class="h-12 w-12 rounded-md overflow-hidden bg-gray-100">
+                    <div
+                      class="h-12 w-12 rounded-md overflow-hidden bg-gray-100"
+                    >
                       {#if avatar}
                         <img id="avatar" alt="Avatar" src={avatar} />
                       {:else}
-                        <svg id="avatar" class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          id="avatar"
+                          class="h-full w-full text-gray-300"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           <path
                             d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
                           />
@@ -197,11 +231,18 @@
                       {/if}
                     </div>
 
-                    <ButtonTertiary on:click={() => (showUploadImage = true)} type="button">
+                    <ButtonTertiary
+                      on:click={() => (showUploadImage = true)}
+                      type="button"
+                    >
                       {$t("shared.upload")}
                     </ButtonTertiary>
                     {#if avatar}
-                      <ButtonTertiary destructive={true} on:click={() => loadedImage(null)} type="button">
+                      <ButtonTertiary
+                        destructive={true}
+                        on:click={() => loadedImage(null)}
+                        type="button"
+                      >
                         {$t("shared.delete")}
                       </ButtonTertiary>
                     {/if}
@@ -233,10 +274,16 @@
     <div class="md:grid lg:grid-cols-3 md:gap-2">
       <div class="md:col-span-1">
         <div class="sm:px-0">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("settings.profile.securityTitle")}</h3>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            {$t("settings.profile.securityTitle")}
+          </h3>
           <p class="mt-1 text-xs leading-5 text-gray-600">
             {$t("account.login.forgot")}{" "}
-            <a on:click={signOut} class="text-theme-600 font-bold hover:text-theme-500" href={"/forgot-password?e=" + email}>
+            <a
+              on:click={signOut}
+              class="text-theme-600 font-bold hover:text-theme-500"
+              href={"/forgot-password?e=" + email}
+            >
               {$t("account.reset.button")}
             </a>
           </p>
@@ -250,7 +297,10 @@
                 <div class="px-4 py-5 bg-white sm:p-6">
                   <div class="grid grid-cols-6 gap-2">
                     <div class="col-span-6 sm:col-span-6">
-                      <label for="passwordCurrent" class="block text-sm font-medium leading-5 text-gray-700">
+                      <label
+                        for="passwordCurrent"
+                        class="block text-sm font-medium leading-5 text-gray-700"
+                      >
                         {$t("settings.profile.passwordCurrent")}
                       </label>
                       <input
@@ -262,7 +312,10 @@
                       />
                     </div>
                     <div class="col-span-6 md:col-span-3">
-                      <label for="password" class="block text-sm font-medium leading-5 text-gray-700">
+                      <label
+                        for="password"
+                        class="block text-sm font-medium leading-5 text-gray-700"
+                      >
                         {$t("settings.profile.password")}
                       </label>
                       <input
@@ -275,7 +328,10 @@
                     </div>
 
                     <div class="col-span-6 md:col-span-3">
-                      <label for="passwordConfirm" class="block text-sm font-medium leading-5 text-gray-700">
+                      <label
+                        for="passwordConfirm"
+                        class="block text-sm font-medium leading-5 text-gray-700"
+                      >
                         {$t("settings.profile.passwordConfirm")}
                       </label>
                       <input
@@ -298,7 +354,9 @@
                 </div>
               </div>
             {:else}
-              <div class="px-4 py-5 bg-white sm:p-6 block text-sm font-medium leading-5 text-gray-700">
+              <div
+                class="px-4 py-5 bg-white sm:p-6 block text-sm font-medium leading-5 text-gray-700"
+              >
                 {$t("settings.profile.cannotChangePassword")}
               </div>
             {/if}
@@ -318,8 +376,12 @@
     <div class="md:grid lg:grid-cols-3 md:gap-2">
       <div class="md:col-span-1">
         <div class="sm:px-0">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("settings.preferences.title")}</h3>
-          <p class="mt-1 text-xs leading-5 text-gray-600">{$t("settings.preferences.description")}</p>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            {$t("settings.preferences.title")}
+          </h3>
+          <p class="mt-1 text-xs leading-5 text-gray-600">
+            {$t("settings.preferences.description")}
+          </p>
         </div>
       </div>
       <div class="mt-5 md:mt-0 md:col-span-2">
@@ -328,7 +390,10 @@
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-2">
                 <div class="col-span-6 sm:col-span-6">
-                  <label for="locale" class="block text-sm font-medium leading-5 text-gray-700">
+                  <label
+                    for="locale"
+                    class="block text-sm font-medium leading-5 text-gray-700"
+                  >
                     {$t("settings.preferences.language")}
                   </label>
                   <select
@@ -361,20 +426,30 @@
     <div class="md:grid lg:grid-cols-3 md:gap-2">
       <div class="md:col-span-1">
         <div class="sm:px-0">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">{$t("settings.danger.title")}</h3>
-          <p class="mt-1 text-xs leading-5 text-gray-600">{$t("settings.danger.description")}</p>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            {$t("settings.danger.title")}
+          </h3>
+          <p class="mt-1 text-xs leading-5 text-gray-600">
+            {$t("settings.danger.description")}
+          </p>
         </div>
       </div>
       <div class="mt-12 md:mt-0 md:col-span-2">
         <form>
           <div class="bg-white shadow sm:rounded-sm">
             <div class="px-4 py-5 sm:p-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">{$t("settings.danger.deleteYourAccount")}</h3>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                {$t("settings.danger.deleteYourAccount")}
+              </h3>
               <div class="mt-2 max-w-xl text-sm leading-5 text-gray-500">
                 <p>{$t("settings.danger.onceYouDelete")}.</p>
               </div>
               <div class="mt-5">
-                <ButtonPrimary destructive={true} on:click={deleteAccount} type="button">
+                <ButtonPrimary
+                  destructive={true}
+                  on:click={deleteAccount}
+                  type="button"
+                >
                   {$t("settings.danger.deleteAccount")}
                 </ButtonPrimary>
               </div>
@@ -385,7 +460,12 @@
     </div>
   </div>
   {#if showUploadImage && !uploadingImage}
-    <UploadImage on:close={() => (showUploadImage = false)} title={$t("shared.avatar")} initialImage={avatar} on:loaded={loadedImage} />
+    <UploadImage
+      on:close={() => (showUploadImage = false)}
+      title={$t("shared.avatar")}
+      initialImage={avatar}
+      on:loaded={loadedImage}
+    />
   {/if}
   <SuccessModal bind:this={successModal} />
   <ErrorModal bind:this={errorModal} />
