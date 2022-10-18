@@ -56,7 +56,12 @@
       </nav>
       <div class="mt-8 flex justify-center space-x-6">
         <!-- svelte-ignore a11y-invalid-attribute -->
-        <a target="_blank" href="#" class="text-gray-400 hover:text-gray-500">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="#"
+          class="text-gray-400 hover:text-gray-500"
+        >
           <span class="sr-only">Facebook</span>
           <svg
             class="h-6 w-6"
@@ -73,7 +78,12 @@
         </a>
 
         <!-- svelte-ignore a11y-invalid-attribute -->
-        <a target="_blank" href="#" class="text-gray-400 hover:text-gray-500">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="#"
+          class="text-gray-400 hover:text-gray-500"
+        >
           <span class="sr-only">Instagram</span>
           <svg
             class="h-6 w-6"
@@ -90,7 +100,12 @@
         </a>
 
         <!-- svelte-ignore a11y-invalid-attribute -->
-        <a target="_blank" href="#" class="text-gray-400 hover:text-gray-500">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="#"
+          class="text-gray-400 hover:text-gray-500"
+        >
           <span class="sr-only">Twitter</span>
           <svg
             class="h-6 w-6"
