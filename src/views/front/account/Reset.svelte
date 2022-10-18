@@ -56,7 +56,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("account.reset.title")} | Svelte SaasFrontend</title>
+  <title>{$t("account.reset.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

@@ -4,10 +4,12 @@
   import JoinNow from "@/components/front/JoinNow.svelte";
   import Faq from "@/components/front/Faq.svelte";
   import Footer from "@/components/front/Footer.svelte";
+
+  import { _ as t } from "svelte-i18n";
 </script>
 
 <svelte:head>
-  <title>Svelte SaasFrontend</title>
+  <title>{$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

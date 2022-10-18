@@ -343,7 +343,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("account.register.title")} | Svelte SaasFrontend</title>
+  <title>{$t("account.register.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

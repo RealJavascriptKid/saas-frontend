@@ -101,7 +101,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("admin.tenants.title")} | Svelte SaasFrontend</title>
+  <title>{$t("admin.tenants.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

@@ -42,7 +42,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("admin.navigation.title")} | Svelte SaasFrontend</title>
+  <title>{$t("admin.navigation.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

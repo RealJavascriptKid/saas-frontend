@@ -55,7 +55,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("models.workspace.plural")} | Svelte SaasFrontend</title>
+  <title>{$t("models.workspace.plural")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

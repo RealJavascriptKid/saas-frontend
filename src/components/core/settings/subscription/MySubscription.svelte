@@ -53,7 +53,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("app.navbar.subscription")} | Svelte SaasFrontend</title>
+  <title>{$t("app.navbar.subscription")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 <div class="py-4 space-y-2 mx-auto max-w-5xl xl:max-w-7xl px-4 sm:px-6 lg:px-8">
   <div class="md:grid lg:grid-cols-3 md:gap-2">

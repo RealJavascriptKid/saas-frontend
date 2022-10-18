@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("front.privacy.title")} | Svelte SaasFrontend</title>
+  <title>{$t("front.privacy.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

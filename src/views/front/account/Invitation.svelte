@@ -80,7 +80,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("account.invitation.title")} | Svelte SaasFrontend</title>
+  <title>{$t("account.invitation.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

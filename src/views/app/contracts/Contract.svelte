@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("models.contract.object")} | Svelte SaasFrontend</title>
+  <title>{$t("models.contract.object")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

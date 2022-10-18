@@ -131,7 +131,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("models.user.plural")} | Svelte SaasFrontend</title>
+  <title>{$t("models.user.plural")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

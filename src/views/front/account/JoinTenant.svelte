@@ -94,7 +94,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("account.join.title")} | Svelte SaasFrontend</title>
+  <title>{$t("account.join.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

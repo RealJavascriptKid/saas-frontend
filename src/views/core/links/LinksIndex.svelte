@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("app.links.my")} | Svelte SaasFrontend</title>
+  <title>{$t("app.links.my")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

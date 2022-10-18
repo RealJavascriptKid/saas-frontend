@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("app.sidebar.dashboard")} | Svelte SaasFrontend</title>
+  <title>{$t("app.sidebar.dashboard")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <main class="flex-1 relative pb-8 z-0 overflow-y-auto">

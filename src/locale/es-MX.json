@@ -1,5 +1,6 @@
 {
   "shared": {
+    "websiteTitle": "Svelte SaasFrontend",
     "hi": "Hola",
     "or": "O",
     "plan": "Plan",

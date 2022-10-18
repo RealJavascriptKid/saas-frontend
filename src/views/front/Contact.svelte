@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("front.contact.title")} | Svelte SaasFrontend</title>
+  <title>{$t("front.contact.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 <div>
   <div>

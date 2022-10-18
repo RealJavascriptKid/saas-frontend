@@ -66,7 +66,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("admin.emails.title")} | Svelte SaasFrontend</title>
+  <title>{$t("admin.emails.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>

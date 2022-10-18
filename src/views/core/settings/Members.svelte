@@ -152,7 +152,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t("settings.members.title")} | Svelte SaasFrontend</title>
+  <title>{$t("settings.members.title")} | {$t("shared.websiteTitle")}</title>
 </svelte:head>
 
 <div>
