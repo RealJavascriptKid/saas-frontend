@@ -80,14 +80,17 @@
       <span class="flex space-x-4 justify-center">
         <span
           class="text-transparent bg-clip-text bg-gradient-to-br from-theme-400 to-theme-700"
-          >{$t("front.hero.headline1")}</span
+          style="padding-bottom: 0.1em;"
         >
+          {$t("front.hero.headline1")}
+        </span>
         <span>{$t("front.hero.headline2")}</span>
       </span>
       <span
         class="text-transparent bg-clip-text bg-gradient-to-br from-slate-300 to-slate-700"
-        >{$t("front.hero.headline3")}</span
       >
+        {$t("front.hero.headline3")}
+      </span>
     </h1>
     <div
       class="relative z-10 pb-10 text-gray-500 text-lg md:text-2xl text-center leading-normal md:leading-9"
