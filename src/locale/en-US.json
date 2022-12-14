@@ -929,10 +929,10 @@
         "ends": "Trial ends"
       },
       "plans": {
-        "select": "Select a plan"
+        "select": "Select plan"
       },
       "errors": {
-        "selectPlan": "Select a plan"
+        "selectPlan": "Select plan"
       }
     },
     "members": {

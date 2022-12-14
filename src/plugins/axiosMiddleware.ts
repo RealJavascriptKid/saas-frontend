@@ -2,7 +2,8 @@ import type { TenantDto } from "@/application/dtos/core/tenants/TenantDto";
 import type { WorkspaceDto } from "@/application/dtos/core/workspaces/WorkspaceDto";
 import { authState, authStore } from "@/store/modules/authStore";
 import { tenantState } from "@/store/modules/tenantStore";
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios from "axios";
+import type { AxiosInstance, AxiosRequestConfig } from "axios";
 import { get } from "svelte/store";
 
 const apiUrl = import.meta.env.VITE_SVELTE_APP_SERVER_URL?.toString() + "api";

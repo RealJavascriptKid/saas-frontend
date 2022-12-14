@@ -233,6 +233,7 @@
                       {#each headers as header}
                         <th
                           on:click={() => sortBy(header.name)}
+                          on:keypress={() => sortBy(header.name)}
                           scope="col"
                           class={classNames(
                             "px-6 py-2 text-left text-xs font-medium text-gray-500 tracking-wider select-none",
@@ -286,6 +287,7 @@
                   {#each sortedItems() as contract}
                     <tbody
                       on:click={() => clicked(contract)}
+                      on:keypress={() => clicked(contract)}
                       class="bg-white divide-y divide-gray-200"
                     >
                       <tr class="hover:bg-gray-50 cursor-pointer">

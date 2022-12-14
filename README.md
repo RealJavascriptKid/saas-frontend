@@ -4,21 +4,6 @@ Svelte SaaS template, TypeScript, Tailwind CSS, Modular persisted store, Meta-ta
 
 ![Svelte Codebase](https://yahooder.sirv.com/saasfrontends/oss/svelte.png)
 
-### Other SaaS kits
-
-- [Vue2 SaaS kit](https://github.com/AlexandroMtzG/vue2-saas-kit)
-- [Vue3 SaaS kit](https://github.com/AlexandroMtzG/vue3-saas-kit)
-- [Svelte SaaS kit](https://github.com/AlexandroMtzG/svelte-saas-kit) (current)
-- [React SaaS kit](https://github.com/AlexandroMtzG/react-saas-kit)
-- [Remix SaaS kit](https://alexandromg.gumroad.com/l/SaasFrontends-Remix) (commercial)
-
-### Need a .NET API?
-
-- [.NET + Vue2 SaaS kit](https://github.com/AlexandroMtzG/netcore-vue2-saas-kit)
-- [.NET + Vue3 SaaS kit](https://github.com/AlexandroMtzG/netcore-vue3-saas-kit)
-- [.NET + Svelte SaaS kit](https://github.com/AlexandroMtzG/netcore-svelte-saas-kit)
-- [.NET + React SaaS kit](https://github.com/AlexandroMtzG/netcore-react-saas-kit)
-
 ### Features
 
 - [Vite](https://vitejs.dev/)

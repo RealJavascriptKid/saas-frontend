@@ -98,6 +98,7 @@
                       "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                   )}
                   on:click={() => dispatch("selected")}
+                  on:keypress={() => dispatch("selected")}
                 >
                   {#if menuItem.icon !== undefined}
                     <SidebarIcon
@@ -112,6 +113,7 @@
                 <div
                   class="px-4 justify-between mt-1 group flex items-center py-2 text-base leading-5 rounded-sm hover:text-white focus:outline-none focus:text-gray-50 focus:bg-slate-800 transition ease-in-out duration-150 text-slate-200 hover:bg-slate-800"
                   on:click={() => toggleMenuItem(index)}
+                  on:keypress={() => toggleMenuItem(index)}
                 >
                   <div class="flex items-center space-x-4">
                     <span class="text-slate-200 h-5 w-5 transition ease-in-out">
@@ -150,6 +152,7 @@
                             "text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                         )}
                         on:click={() => dispatch("selected")}
+                        on:keypress={() => dispatch("selected")}
                       >
                         {#if subItem.icon !== undefined}
                           <span class="mr-1 h-5 w-5 transition ease-in-out">
@@ -213,6 +216,7 @@
                   type="button"
                   class="w-full px-4 justify-between mt-1 group flex items-center py-2 text-sm leading-5 rounded-sm hover:text-white focus:outline-none focus:text-gray-50 transition ease-in-out duration-150 text-slate-200 hover:bg-slate-800 focus:bg-slate-800"
                   on:click={() => toggleMenuItem(index)}
+                  on:keypress={() => toggleMenuItem(index)}
                 >
                   <div class="flex items-center space-x-5">
                     {#if menuItem.icon !== undefined}

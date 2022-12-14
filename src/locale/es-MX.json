@@ -929,10 +929,10 @@
         "ends": "Prueba termina"
       },
       "plans": {
-        "select": "Selecciona un plan"
+        "select": "Selecciona plan"
       },
       "errors": {
-        "selectPlan": "Selecciona un plan"
+        "selectPlan": "Selecciona plan"
       }
     },
     "members": {
