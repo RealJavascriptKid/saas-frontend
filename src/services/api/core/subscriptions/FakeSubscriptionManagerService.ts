@@ -101,6 +101,7 @@ export class FakeSubscriptionManagerService
               .billingPeriod
           );
         }
+        console.log("FakeSubscriptionManagerService.getCurrentSubscription:",this.currentSubscription)
         resolve(this.currentSubscription);
       }, 500);
     });

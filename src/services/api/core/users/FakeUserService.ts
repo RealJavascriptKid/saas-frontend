@@ -44,6 +44,7 @@ export class FakeUserService implements IUserService {
   adminGetAll(): Promise<UserDto[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log("FakeUserService.users:",users)
         return resolve(users);
       }, 500);
     });
@@ -51,6 +52,7 @@ export class FakeUserService implements IUserService {
   get(id: string): Promise<UserDto> {
     const user = this.users.find((f) => f.id === id);
     if (user) {
+      console.log("FakeUserService.get:",user)
       return Promise.resolve(user);
     } else {
       return Promise.reject();
@@ -61,6 +63,7 @@ export class FakeUserService implements IUserService {
     return new Promise((resolve) => {
       accountStore.setAvatar(payload.avatar);
       if (user != null) {
+        console.log("FakeUserService.updateAvatar:",user)
         return resolve(user);
       }
     });

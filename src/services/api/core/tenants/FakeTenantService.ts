@@ -143,6 +143,7 @@ export class FakeTenantService implements ITenantService {
       monthlyContracts: currentSubcription?.monthlyContracts ?? 0,
     };
     appStore.setFeatures(features);
+    console.log("FakeTenantService.getFeatures:",features)
     return Promise.resolve(features);
   }
   getCurrentUsage(_type: AppUsageType): Promise<AppUsageSummaryDto> {
@@ -159,6 +160,7 @@ export class FakeTenantService implements ITenantService {
           pendingInvitations: 1,
         };
         appStore.setUsage(summary);
+        console.log("FakeTenantService.getCurrentUsage:",summary)
         resolve(summary);
       }, 2000);
     });

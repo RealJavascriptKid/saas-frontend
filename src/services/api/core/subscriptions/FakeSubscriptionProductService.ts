@@ -26,6 +26,7 @@ export class FakeSubscriptionProductService
         }
         pricingStore.setProducts(plans);
 
+        console.log("FakeSubscriptionProductService.setProducts:",plans)
         resolve(plans);
       }, 500);
     });

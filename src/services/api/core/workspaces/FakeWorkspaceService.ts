@@ -48,6 +48,7 @@ export class FakeWorkspaceService implements IWorkspaceService {
         if (saveInStore) {
           tenantStore.setWorkspaces(workspaces);
         }
+        console.log("FakeUserService.getAllWorkspaces:",workspaces)
         resolve(workspaces);
       }, 500);
     });

@@ -26,6 +26,7 @@ export class FakeTenantUserInvitationService
   getInvitation(_tenantUserId: string): Promise<TenantInvitationResponse> {
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log("FakeTenantUserInvitationService.getInvitation:",invitation)
         resolve(invitation);
       }, 500);
     });
@@ -33,22 +34,25 @@ export class FakeTenantUserInvitationService
   getInviteURL(_linkUuid: string): Promise<TenantDto> {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
+        console.log("FakeTenantUserInvitationService.getInviteURL:",invitation.tenant)
         resolve(invitation.tenant);
       }, 500);
     });
   }
   getInvitationSettings(_tenantId?: string): Promise<TenantJoinSettingsDto> {
+    let settings = {
+      id: "",
+      tenantId: "",
+      tenant: {} as TenantDto,
+      link: "",
+      linkActive: false,
+      publicUrl: false,
+      requireAcceptance: false,
+    }
+    console.log("FakeTenantUserInvitationService.getInvitationSettings:",settings)
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
-        resolve({
-          id: "",
-          tenantId: "",
-          tenant: {} as TenantDto,
-          link: "",
-          linkActive: false,
-          publicUrl: false,
-          requireAcceptance: false,
-        });
+        resolve(settings);
       }, 500);
     });
   }

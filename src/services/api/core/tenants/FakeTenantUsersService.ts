@@ -17,6 +17,7 @@ export class FakeTenantUsersService implements ITenantUsersService {
   getAll(): Promise<TenantUserDto[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log("FakeTenantUsersService.getAll:",this.tenantUsers)
         resolve(this.tenantUsers);
       }, 500);
     });
@@ -26,6 +27,7 @@ export class FakeTenantUsersService implements ITenantUsersService {
       setTimeout(() => {
         const user = this.tenantUsers.find((f) => f.id === tenantUserId);
         if (user) {
+          console.log("FakeTenantUsersService.get:",user)
           resolve(user);
         }
         reject();
@@ -42,6 +44,7 @@ export class FakeTenantUsersService implements ITenantUsersService {
         if (user) {
           user.role = payload.role;
           user.phone = payload.phone;
+          console.log("FakeTenantUsersService.update:",user)
           resolve(user);
         }
         reject();
@@ -55,6 +58,7 @@ export class FakeTenantUsersService implements ITenantUsersService {
         if (user) {
           this.tenantUsers = this.tenantUsers.filter((f) => f.id !== user.id);
         }
+        console.log("FakeTenantUsersService.delete:",true)
         resolve(true);
       }, 500);
     });

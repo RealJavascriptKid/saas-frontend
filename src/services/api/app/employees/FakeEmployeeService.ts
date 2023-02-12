@@ -71,6 +71,7 @@ export class FakeEmployeeService implements IEmployeeService {
   getAll(): Promise<EmployeeDto[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log('FakeEmployeeService.getAll',employees)
         return resolve(employees);
       }, 500);
     });
@@ -80,6 +81,7 @@ export class FakeEmployeeService implements IEmployeeService {
       setTimeout(() => {
         const employee = this.employees.find((f) => f.id === id);
         if (employee) {
+          console.log('FakeEmployeeService.get',employee)
           resolve(employee);
         } else {
           reject();
@@ -94,6 +96,7 @@ export class FakeEmployeeService implements IEmployeeService {
           element.id = (this.employees.length + 1).toString();
           this.employees.push(element);
         });
+        console.log('FakeEmployeeService.createMultiple',data.employees)
         resolve(data.employees);
       }, 500);
     });
@@ -106,6 +109,7 @@ export class FakeEmployeeService implements IEmployeeService {
           item.firstName = data.firstName;
           item.lastName = data.lastName;
           item.email = data.email;
+          console.log('FakeEmployeeService.update',item)
           resolve(item);
         } else {
           reject();

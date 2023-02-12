@@ -187,6 +187,7 @@ export class FakeLinkService implements ILinkService {
         role: Role.MEMBER,
       });
     });
+    console.log("FakeLinkService.getLinkUsers:",users)
     return Promise.resolve(users);
   }
   getInvitation(id: string): Promise<LinkInvitationDto> {
@@ -194,6 +195,7 @@ export class FakeLinkService implements ILinkService {
       setTimeout(() => {
         const invitation = this.invitations.find((f) => f.id === id);
         if (invitation) {
+          console.log("FakeLinkService.getInvitation:",invitation)
           resolve(invitation);
         }
         reject();
@@ -204,6 +206,7 @@ export class FakeLinkService implements ILinkService {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
         this.invitations.push(payload);
+        console.log("FakeLinkService.createInvitation:",payload)
         resolve(payload);
       }, 500);
     });
@@ -222,6 +225,7 @@ export class FakeLinkService implements ILinkService {
     });
     const user = fakeUsers.find((f) => f.email === email);
     if (user) {
+      console.log("FakeLinkService.searchUser:",user)
       return Promise.resolve(user);
     }
     return Promise.reject();
@@ -240,6 +244,7 @@ export class FakeLinkService implements ILinkService {
     });
     const user = fakeUsers.find((f) => f.email === email);
     if (user) {
+      console.log("FakeLinkService.searchMember:",user)
       return Promise.resolve(user);
     }
     return Promise.reject();
@@ -249,6 +254,7 @@ export class FakeLinkService implements ILinkService {
       setTimeout(() => {
         const link = this.links.find((f) => f.id === id);
         if (link) {
+          console.log("FakeLinkService.get:",link)
           resolve(link);
         } else {
           reject();
@@ -257,6 +263,7 @@ export class FakeLinkService implements ILinkService {
     });
   }
   create(_data: CreateLinkRequest): Promise<LinkDto> {
+    console.log("FakeLinkService.create:",this.links[0])
     return Promise.resolve(this.links[0]);
   }
   acceptOrReject(id: string, data: UpdateLinkRequest): Promise<LinkDto> {
@@ -264,6 +271,7 @@ export class FakeLinkService implements ILinkService {
     if (link) {
       link.status = data.accepted ? LinkStatus.LINKED : LinkStatus.REJECTED;
 
+      console.log("FakeLinkService.acceptOrReject:",link)
       return Promise.resolve(link);
     }
     return Promise.reject();

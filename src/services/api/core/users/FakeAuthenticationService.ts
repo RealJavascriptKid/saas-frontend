@@ -25,6 +25,7 @@ export class FakeAuthenticationService implements IAuthenticationService {
   login(_payload: UserLoginRequest): Promise<UserLoggedResponse> {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
+        console.log("FakeAuthenticationService.login:",userLoggedResponse)
         resolve(userLoggedResponse);
       }, 500);
     });

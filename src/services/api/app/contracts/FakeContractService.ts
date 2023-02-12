@@ -163,6 +163,7 @@ export class FakeContractService implements IContractService {
             (f) => Number(f.status) === Number(status)
           );
         }
+        console.log('FakeContractService.getAllByStatusFilter:',contracts)
         resolve(contracts);
       }, 500);
     });
@@ -171,6 +172,7 @@ export class FakeContractService implements IContractService {
     return new Promise((resolve) => {
       setTimeout(() => {
         const contracts = this.contracts.filter((f) => f.linkId === linkId);
+        console.log('FakeContractService.getAllByLink:',contracts)
         resolve(contracts);
       }, 500);
     });
@@ -180,6 +182,7 @@ export class FakeContractService implements IContractService {
       setTimeout(() => {
         const contract = this.contracts.find((f) => f.id?.toString() === id);
         if (contract) {
+          console.log('FakeContractService.getContract:',contract)
           resolve(contract);
         } else {
           reject();
@@ -237,11 +240,13 @@ export class FakeContractService implements IContractService {
     });
 
     this.contracts.push(contract);
+    console.log('FakeContractService.create:',contract)
     return Promise.resolve(contract);
   }
   downloadFile(id: string): Promise<any> {
     const contract = this.contracts.find((f) => f.id?.toString() === id);
     if (contract) {
+      console.log('FakeContractService.downloadFile:',FakePdfBase64)
       return Promise.resolve(FakePdfBase64);
     } else {
       return Promise.reject();
@@ -251,6 +256,7 @@ export class FakeContractService implements IContractService {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
   send(_id: string, _request: SendContractRequest): Promise<any> {
+    console.log('FakeContractService.send:',true)
     return Promise.resolve(true);
   }
   update(id: string, data: UpdateContractRequest): Promise<ContractDto> {
@@ -265,6 +271,7 @@ export class FakeContractService implements IContractService {
       if (data.file) {
         contract.hasFile = true;
       }
+      console.log('FakeContractService.update:',contract)
       return Promise.resolve(contract);
     } else {
       return Promise.reject();
@@ -272,6 +279,7 @@ export class FakeContractService implements IContractService {
   }
   delete(id: string): Promise<any> {
     this.contracts = this.contracts.filter((f) => f.id !== id);
+    console.log('FakeContractService.delete:',this.contracts)
     return Promise.resolve(this.contracts);
   }
 }

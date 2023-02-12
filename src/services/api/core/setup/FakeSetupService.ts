@@ -5,6 +5,7 @@ export class FakeSetupService implements ISetupService {
   getPostmarkTemplates(): Promise<EmailTemplateDto[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log("FakeSetupService.getPostmarkTemplates:",[])
         resolve([]);
       }, 500);
     });

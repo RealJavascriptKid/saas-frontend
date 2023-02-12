@@ -6,7 +6,7 @@ const currency = import.meta.env.VITE_SVELTE_APP_CURRENCY?.toString() ?? "usd";
 const plans: SubscriptionProductDto[] = [
   {
     serviceId: "",
-    id: undefined,
+    id: "1sda",
     tier: 1,
     title: "pricing.products.plan1.title",
     description: "pricing.products.plan1.description",
@@ -14,7 +14,7 @@ const plans: SubscriptionProductDto[] = [
     prices: [
       {
         serviceId: "",
-        id: undefined,
+        id: 1,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.MONTHLY,
         price: 0,
@@ -24,7 +24,7 @@ const plans: SubscriptionProductDto[] = [
       },
       {
         serviceId: "",
-        id: undefined,
+        id: 2,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.YEARLY,
         price: 0,
@@ -35,42 +35,42 @@ const plans: SubscriptionProductDto[] = [
     ],
     features: [
       {
-        id: undefined,
+        id: 1,
         order: 1,
         key: "pricing.features.oneLink",
         value: "1",
         included: true,
       },
       {
-        id: undefined,
+        id: 2,
         order: 2,
         key: "pricing.features.oneContract",
         value: "1",
         included: true,
       },
       {
-        id: undefined,
+        id: 3,
         order: 3,
         key: "pricing.features.maxUsers",
         value: "2",
         included: true,
       },
       {
-        id: undefined,
+        id: 5,
         order: 4,
         key: "pricing.features.oneWorkspace",
         value: "1",
         included: true,
       },
       {
-        id: undefined,
+        id: 4,
         order: 5,
         key: "pricing.features.maxStorage",
         value: "1 GB",
         included: true,
       },
       {
-        id: undefined,
+        id: 5,
         order: 6,
         key: "pricing.features.prioritySupport",
         value: "",
@@ -87,7 +87,7 @@ const plans: SubscriptionProductDto[] = [
   },
   {
     serviceId: "",
-    id: undefined,
+    id: "sds",
     tier: 2,
     title: "pricing.products.plan2.title",
     description: "pricing.products.plan2.description",
@@ -95,7 +95,7 @@ const plans: SubscriptionProductDto[] = [
     prices: [
       {
         serviceId: "",
-        id: undefined,
+        id: 1,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.MONTHLY,
         price: 199,
@@ -105,7 +105,7 @@ const plans: SubscriptionProductDto[] = [
       },
       {
         serviceId: "",
-        id: undefined,
+        id: 2,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.YEARLY,
         price: 1999,
@@ -116,42 +116,42 @@ const plans: SubscriptionProductDto[] = [
     ],
     features: [
       {
-        id: undefined,
+        id: 7,
         order: 1,
         key: "pricing.features.maxLinks",
         value: "45",
         included: true,
       },
       {
-        id: undefined,
+        id: 2,
         order: 2,
         key: "pricing.features.maxContracts",
         value: "45",
         included: true,
       },
       {
-        id: undefined,
+        id: 3,
         order: 3,
         key: "pricing.features.maxUsers",
         value: "5",
         included: true,
       },
       {
-        id: undefined,
+        id: 4,
         order: 4,
         key: "pricing.features.maxWorkspaces",
         value: "2",
         included: true,
       },
       {
-        id: undefined,
+        id: 5,
         order: 5,
         key: "pricing.features.maxStorage",
         value: "100 GB",
         included: true,
       },
       {
-        id: undefined,
+        id: 6,
         order: 6,
         key: "pricing.features.prioritySupport",
         value: "",
@@ -168,7 +168,7 @@ const plans: SubscriptionProductDto[] = [
   },
   {
     serviceId: "",
-    id: undefined,
+    id: "hts",
     tier: 3,
     title: "pricing.products.plan3.title",
     description: "pricing.products.plan3.description",
@@ -176,7 +176,7 @@ const plans: SubscriptionProductDto[] = [
     prices: [
       {
         serviceId: "",
-        id: undefined,
+        id: 1,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.MONTHLY,
         price: 399,
@@ -186,7 +186,7 @@ const plans: SubscriptionProductDto[] = [
       },
       {
         serviceId: "",
-        id: undefined,
+        id: 2,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.YEARLY,
         price: 3999,
@@ -197,42 +197,42 @@ const plans: SubscriptionProductDto[] = [
     ],
     features: [
       {
-        id: undefined,
+        id: 1,
         order: 1,
         key: "pricing.features.maxLinks",
         value: "100",
         included: true,
       },
       {
-        id: undefined,
+        id: 2,
         order: 2,
         key: "pricing.features.maxContracts",
         value: "90",
         included: true,
       },
       {
-        id: undefined,
+        id: 3,
         order: 3,
         key: "pricing.features.maxUsers",
         value: "12",
         included: true,
       },
       {
-        id: undefined,
+        id: 4,
         order: 4,
         key: "pricing.features.maxWorkspaces",
         value: "5",
         included: true,
       },
       {
-        id: undefined,
+        id: 5,
         order: 5,
         key: "pricing.features.maxStorage",
         value: "500 GB",
         included: true,
       },
       {
-        id: undefined,
+        id: 6,
         order: 6,
         key: "pricing.features.prioritySupport",
         value: "",
@@ -249,7 +249,7 @@ const plans: SubscriptionProductDto[] = [
   },
   {
     serviceId: "",
-    id: undefined,
+    id: "vxdsfw",
     tier: 4,
     title: "pricing.products.plan4.title",
     description: "pricing.products.plan4.description",
@@ -257,7 +257,7 @@ const plans: SubscriptionProductDto[] = [
     prices: [
       {
         serviceId: "",
-        id: undefined,
+        id: 1,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.MONTHLY,
         price: 0,
@@ -267,7 +267,7 @@ const plans: SubscriptionProductDto[] = [
       },
       {
         serviceId: "",
-        id: undefined,
+        id: 2,
         type: SubscriptionPriceType.RECURRING,
         billingPeriod: SubscriptionBillingPeriod.YEARLY,
         price: 0,
@@ -278,42 +278,42 @@ const plans: SubscriptionProductDto[] = [
     ],
     features: [
       {
-        id: undefined,
+        id: 3,
         order: 1,
         key: "pricing.features.maxLinks",
         value: "100+",
         included: true,
       },
       {
-        id: undefined,
+        id: 4,
         order: 2,
         key: "pricing.features.maxContracts",
         value: "90+",
         included: true,
       },
       {
-        id: undefined,
+        id: 5,
         order: 3,
         key: "pricing.features.maxUsers",
         value: "12+",
         included: true,
       },
       {
-        id: undefined,
+        id: 6,
         order: 4,
         key: "pricing.features.maxWorkspaces",
         value: "5+",
         included: true,
       },
       {
-        id: undefined,
+        id: 7,
         order: 5,
         key: "pricing.features.maxStorage",
         value: "500+ GB",
         included: true,
       },
       {
-        id: undefined,
+        id: 8,
         order: 6,
         key: "pricing.features.prioritySupport",
         value: "",
