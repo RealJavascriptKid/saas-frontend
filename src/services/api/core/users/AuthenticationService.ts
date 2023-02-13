@@ -13,18 +13,12 @@ export class AuthenticationService
   constructor() {
     super("Authentication");
   }
-  login(payload: UserLoginRequest): Promise<UserLoggedResponse> {
-    return new Promise((resolve, reject) => {
-      super
-        .post(payload, "Login")
-        .then((response: UserLoggedResponse) => {
-          authStore.login(response);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  async login(payload: UserLoginRequest): Promise<UserLoggedResponse> {
+
+      let response = await super.post(payload, "Login")
+      authStore.login(response);
+      return response;
+         
   }
   impersonate(userId: string): Promise<UserLoggedResponse> {
     return new Promise((resolve, reject) => {
@@ -40,6 +34,7 @@ export class AuthenticationService
         });
     });
   }
+  
   register(payload: UserRegisterRequest): Promise<UserLoggedResponse> {
     return new Promise((resolve, reject) => {
       super

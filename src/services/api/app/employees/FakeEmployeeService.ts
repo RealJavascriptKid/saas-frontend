@@ -3,6 +3,7 @@ import type { CreateEmployeesRequest } from "@/application/contracts/app/employe
 import type { UpdateEmployeeRequest } from "@/application/contracts/app/employees/UpdateEmployeeRequest";
 import type { EmployeeDto } from "@/application/dtos/app/employees/EmployeeDto";
 import { FakeUserService } from "../../core/users/FakeUserService";
+import { FakeApiService } from "../../FakeApiService";
 
 import type { IEmployeeService } from "./IEmployeeService";
 
@@ -66,58 +67,45 @@ for (let index = 1; index <= 10; index++) {
   employees.push(employee);
 }
 
-export class FakeEmployeeService implements IEmployeeService {
+export class FakeEmployeeService extends FakeApiService implements IEmployeeService {
   employees: EmployeeDto[] = employees;
+  constructor() {
+    super("Employee");
+  }
   getAll(): Promise<EmployeeDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log('FakeEmployeeService.getAll',employees)
-        return resolve(employees);
-      }, 500);
-    });
+    super.setResponse('FakeEmployeeService.getAll',employees)
+    return super.getAll("GetAll");
   }
   get(id: string): Promise<EmployeeDto> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const employee = this.employees.find((f) => f.id === id);
-        if (employee) {
-          console.log('FakeEmployeeService.get',employee)
-          resolve(employee);
-        } else {
-          reject();
-        }
-      }, 500);
-    });
+    const employee = this.employees.find((f) => f.id === id);
+    if (employee) {
+      super.setResponse('FakeEmployeeService.get',employee)
+      return super.get("Get", id);
+    } else {
+      Promise.reject();
+    }
   }
   createMultiple(data: CreateEmployeesRequest): Promise<EmployeeDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        data.employees.forEach((element) => {
-          element.id = (this.employees.length + 1).toString();
-          this.employees.push(element);
-        });
-        console.log('FakeEmployeeService.createMultiple',data.employees)
-        resolve(data.employees);
-      }, 500);
+    data.employees.forEach((element) => {
+      element.id = (this.employees.length + 1).toString();
+      this.employees.push(element);
     });
+    super.setResponse('FakeEmployeeService.createMultiple',data.employees)
+    return super.post(data, "CreateMultiple");
   }
   update(id: string, data: UpdateEmployeeRequest): Promise<EmployeeDto> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const item = this.employees.find((f) => f.id?.toString() === id);
-        if (item) {
-          item.firstName = data.firstName;
-          item.lastName = data.lastName;
-          item.email = data.email;
-          console.log('FakeEmployeeService.update',item)
-          resolve(item);
-        } else {
-          reject();
-        }
-      }, 500);
-    });
+    const item = this.employees.find((f) => f.id?.toString() === id);
+    if (item) {
+      item.firstName = data.firstName;
+      item.lastName = data.lastName;
+      item.email = data.email;
+      super.setResponse('FakeEmployeeService.update',item)
+      return super.put(id, data, "Update")
+    } else {
+      Promise.reject();
+    }
   }
   delete(_id: string): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    return super.delete(_id);
   }
 }

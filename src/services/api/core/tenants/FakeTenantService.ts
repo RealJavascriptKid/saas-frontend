@@ -17,8 +17,9 @@ import { FakeSubscriptionManagerService } from "../subscriptions/FakeSubscriptio
 import type { TenantProductDto } from "@/application/dtos/core/tenants/TenantProductDto";
 import type { AppUsageSummaryDto } from "@/application/dtos/app/usage/AppUsageSummaryDto";
 import type { AppUsageType } from "@/application/enums/app/usages/AppUsageType";
-import { tenantState } from "@/store/modules/tenantStore";
+import { tenantState, tenantStore } from "@/store/modules/tenantStore";
 import { appStore } from "@/store/modules/appStore";
+import { FakeApiService } from "../../FakeApiService"; 
 import { get } from "svelte/store";
 
 const fakeSubscriptionManagerService = new FakeSubscriptionManagerService();
@@ -104,25 +105,30 @@ tenants.forEach((element) => {
   });
 });
 
-export class FakeTenantService implements ITenantService {
+export class FakeTenantService extends FakeApiService implements ITenantService {
   tenants: TenantDto[] = tenants;
+  constructor() {
+    super("Tenant");
+  }
   adminGetAll(): Promise<TenantDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        return resolve(tenants);
-      }, 500);
-    });
+    super.setResponse('FakeTenantService.adminGetAll',tenants);
+    return super.getAll("Admin/GetAll");
   }
   adminGetProducts(_id: string): Promise<TenantProductDto[]> {
-    return Promise.resolve(tenants[0].products);
+    super.setResponse('FakeTenantService.adminGetProducts',tenants[0].products);
+    return super.get("GetProducts", _id);
   }
-  getAll(): Promise<TenantDto[]> {
-    return Promise.resolve(this.tenants);
+  async getAll():Promise<TenantDto[]> {
+    super.setResponse('FakeTenantService.getAll',this.tenants);
+    let response = await super.getAll()
+    tenantStore.setMyTenants(response);
+    return response;
   }
   get(id: string): Promise<TenantDto> {
     const tenant = this.tenants.find((f) => f.id === id);
     if (tenant) {
-      return Promise.resolve(tenant);
+      super.setResponse('FakeTenantService.get',tenant);
+      return super.get("Get", id);
     } else {
       return Promise.reject();
     }
@@ -143,11 +149,11 @@ export class FakeTenantService implements ITenantService {
       monthlyContracts: currentSubcription?.monthlyContracts ?? 0,
     };
     appStore.setFeatures(features);
-    console.log("FakeTenantService.getFeatures:",features)
-    return Promise.resolve(features);
+    super.setResponse("FakeTenantService.getFeatures:",features)
+    return  super.get("GetFeatures")
   }
-  getCurrentUsage(_type: AppUsageType): Promise<AppUsageSummaryDto> {
-    return new Promise((resolve) => {
+  getCurrentUsage(type: AppUsageType): Promise<AppUsageSummaryDto> {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         const summary: AppUsageSummaryDto = {
           type: 0,
@@ -159,25 +165,42 @@ export class FakeTenantService implements ITenantService {
           storage: 0.1,
           pendingInvitations: 1,
         };
-        appStore.setUsage(summary);
-        console.log("FakeTenantService.getCurrentUsage:",summary)
-        resolve(summary);
+
+        super.setResponse("FakeTenantService.getCurrentUsage:",summary)
+        super
+        .get("GetCurrentUsage/" + type)
+        .then((response) => {
+          appStore.setUsage(response);
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
       }, 2000);
     });
   }
-  create(_payload: TenantCreateRequest): Promise<UserLoggedResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  async create(payload: TenantCreateRequest): Promise<UserLoggedResponse> {
+    super.setResponse("FakeTenantService.create","[SANDBOX] Method not implemented.");
+    return super.post(payload)
   }
-  update(_payload: TenantDto): Promise<TenantDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  async update(payload: TenantDto): Promise<TenantDto> {
+    super.setResponse("FakeTenantService.update","[SANDBOX] Method not implemented.");
+    let tenantId = get(tenantState).current?.id ?? "";
+    let response = await  super.put(tenantId, payload);
+    return response;
   }
-  updateImage(_payload: TenantUpdateImageRequest): Promise<TenantDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  async updateImage(payload: TenantUpdateImageRequest): Promise<TenantDto> {
+    super.setResponse("FakeTenantService.updateImage","[SANDBOX] Method not implemented.");
+    let tenantId = get(tenantState).current?.id ?? "";
+    return super.put(tenantId, payload, "UpdateImage");
   }
-  delete(): Promise<void> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  async delete(): Promise<void> {
+    super.setResponse("FakeTenantService.delete","[SANDBOX] Method not implemented.");
+    let tenantId = get(tenantState).current?.id ?? "";
+    return super.delete(tenantId);
   }
-  adminDelete(id: string): Promise<void> {
-    return Promise.reject("[SANDBOX] Method not implemented." + id);
+  async adminDelete(id: string): Promise<void> {
+    super.setResponse("FakeTenantService.adminDelete","[SANDBOX] Method not implemented." + id);
+    return super.delete(id, "Admin/Delete");
   }
 }

@@ -14,6 +14,7 @@ import { FakeUserService } from "../users/FakeUserService";
 import fakeCompanies from "./FakeCompanies";
 import fakeNamesAndEmails from "../tenants/FakeNamesAndEmails";
 import { Role } from "@/application/enums/shared/Role";
+import { FakeApiService } from "../../FakeApiService";
 
 const fakeContractService = new FakeContractService();
 const fakeUserService = new FakeUserService();
@@ -143,39 +144,34 @@ const invitations: LinkInvitationDto[] = [
   } as LinkInvitationDto,
 ];
 
-export class FakeLinkService implements ILinkService {
+export class FakeLinkService extends FakeApiService implements ILinkService {
   links: LinkDto[] = links;
   providers: LinkDto[] = providers;
   clients: LinkDto[] = clients;
   invitations: LinkInvitationDto[] = invitations;
-  getAllLinked(): Promise<LinkDto[]> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        resolve(this.links.filter((f) => f.status === LinkStatus.LINKED));
-      }, 500);
-    });
+  constructor() {
+    super("Link");
+  }
+  getAllLinked(): Promise<LinkDto[]> {    
+    super.setResponse('FakeLinkService.getAllLinked',this.links.filter((f) => f.status === LinkStatus.LINKED))
+    return super.getAll("GetAllLinked");
   }
   getAllPending(): Promise<LinkDto[]> {
     return new Promise((resolve, _reject) => {
       const links = this.links.filter((f) => f.status === 0);
-      setTimeout(() => {
-        resolve(links);
-      }, 500);
+      super.setResponse('FakeLinkService.getAllPending',links)
+      return super.getAll("GetAllPending");
     });
   }
   getAllProviders(): Promise<LinkDto[]> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        resolve(this.providers.filter((f) => f.status === LinkStatus.LINKED));
-      }, 500);
-    });
+    
+    const links = this.providers.filter((f) => f.status === LinkStatus.LINKED)
+    super.setResponse('FakeLinkService.getAllProviders',links)
+    return super.getAll("GetAllProviders");
   }
   getAllClients(): Promise<LinkDto[]> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        resolve(this.clients);
-      }, 500);
-    });
+    super.setResponse('FakeLinkService.getAllClients',this.clients)
+    return super.getAll("GetAllClients");
   }
   getLinkUsers(_linkId: string): Promise<WorkspaceUserDto[]> {
     const users: any[] = [];
@@ -187,32 +183,24 @@ export class FakeLinkService implements ILinkService {
         role: Role.MEMBER,
       });
     });
-    console.log("FakeLinkService.getLinkUsers:",users)
-    return Promise.resolve(users);
+    super.setResponse("FakeLinkService.getLinkUsers:",users)
+    return super.getAll("GetLinkUsers/" + _linkId);
   }
   getInvitation(id: string): Promise<LinkInvitationDto> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const invitation = this.invitations.find((f) => f.id === id);
-        if (invitation) {
-          console.log("FakeLinkService.getInvitation:",invitation)
-          resolve(invitation);
-        }
-        reject();
-      }, 500);
-    });
+    const invitation = this.invitations.find((f) => f.id === id);
+    if (invitation) {
+      super.setResponse("FakeLinkService.getInvitation:",invitation)
+      return super.get("GetInvitation", id);
+    }
+    return Promise.reject();
   }
   createInvitation(payload: LinkInvitationDto): Promise<LinkInvitationDto> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        this.invitations.push(payload);
-        console.log("FakeLinkService.createInvitation:",payload)
-        resolve(payload);
-      }, 500);
-    });
+    this.invitations.push(payload);
+    super.setResponse("FakeLinkService.createInvitation:",payload)
+    return super.post(payload, "CreateInvitation");
   }
   rejectInvitation(_id: string): Promise<void> {
-    return Promise.resolve();
+    return super.post(undefined, "RejectInvitation/" + _id);
   }
   searchUser(email: string): Promise<UserDto> {
     const fakeUsers: any[] = [];
@@ -225,8 +213,8 @@ export class FakeLinkService implements ILinkService {
     });
     const user = fakeUsers.find((f) => f.email === email);
     if (user) {
-      console.log("FakeLinkService.searchUser:",user)
-      return Promise.resolve(user);
+      super.setResponse("FakeLinkService.searchUser:",user)
+      return super.get(`SearchUser/${email}`);
     }
     return Promise.reject();
   }
@@ -244,35 +232,33 @@ export class FakeLinkService implements ILinkService {
     });
     const user = fakeUsers.find((f) => f.email === email);
     if (user) {
-      console.log("FakeLinkService.searchMember:",user)
-      return Promise.resolve(user);
+      super.setResponse("FakeLinkService.searchMember:",user)
+      return super.get(`SearchMember/${email}/${_workspaceName}`);
     }
     return Promise.reject();
   }
   get(id: string): Promise<LinkDto> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const link = this.links.find((f) => f.id === id);
-        if (link) {
-          console.log("FakeLinkService.get:",link)
-          resolve(link);
-        } else {
-          reject();
-        }
-      }, 500);
-    });
+   
+    const link = this.links.find((f) => f.id === id);
+    if (link) {
+      super.setResponse("FakeLinkService.get:",link)
+      return super.get("Get", id);
+    } else {
+      return Promise.reject();
+    }
+     
   }
   create(_data: CreateLinkRequest): Promise<LinkDto> {
-    console.log("FakeLinkService.create:",this.links[0])
-    return Promise.resolve(this.links[0]);
+    super.setResponse("FakeLinkService.create:",this.links[0])
+    return super.post(_data, "Create");
   }
   acceptOrReject(id: string, data: UpdateLinkRequest): Promise<LinkDto> {
     const link = this.links.find((f) => f.id === id);
     if (link) {
       link.status = data.accepted ? LinkStatus.LINKED : LinkStatus.REJECTED;
 
-      console.log("FakeLinkService.acceptOrReject:",link)
-      return Promise.resolve(link);
+      super.setResponse("FakeLinkService.acceptOrReject:",link)
+      return super.put(id, data, "AcceptOrReject");
     }
     return Promise.reject();
   }
@@ -280,7 +266,8 @@ export class FakeLinkService implements ILinkService {
     const link = this.links.find((f) => f.id === id);
     if (link) {
       this.links = this.links.filter((f) => f.id !== id);
-      return Promise.resolve();
+      super.setResponse("FakeLinkService.delete:",true)
+      return super.delete(id, "Delete");
     } else {
       return Promise.reject();
     }

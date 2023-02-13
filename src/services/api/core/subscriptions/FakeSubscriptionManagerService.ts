@@ -12,6 +12,8 @@ import plans from "@/application/pricing/plans";
 import type { SubscriptionPaymentMethodDto } from "@/application/dtos/core/subscriptions/SubscriptionPaymentMethodDto";
 import { tenantStore } from "@/store/modules/tenantStore";
 import { pricingStore } from "@/store/modules/pricingStore";
+import { SubscriptionBillingPeriod } from "@/application/enums/core/subscriptions/SubscriptionBillingPeriod";
+import { FakeApiService } from "../../FakeApiService";
 
 const subscriptions: SubscriptionGetCurrentResponse[] = [];
 for (const product of plans) {
@@ -84,46 +86,95 @@ for (const product of plans) {
   subscriptions.push(subscription);
 }
 export class FakeSubscriptionManagerService
-  implements ISubscriptionManagerService
+  extends FakeApiService implements ISubscriptionManagerService
 {
   subscriptions = subscriptions;
   currentSubscription = subscriptions[1];
+  constructor() {
+    super("SubscriptionManager");
+  }
   getCurrentSubscription(): Promise<SubscriptionGetCurrentResponse> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        tenantStore.setSubscription(this.currentSubscription);
-        if (this.currentSubscription.myProducts?.length > 0) {
-          pricingStore.setProduct(
-            this.currentSubscription.myProducts[0].subscriptionProduct
-          );
-          pricingStore.setBillingPeriod(
-            this.currentSubscription.myProducts[0].subscriptionPrice
-              .billingPeriod
-          );
-        }
-        console.log("FakeSubscriptionManagerService.getCurrentSubscription:",this.currentSubscription)
-        resolve(this.currentSubscription);
-      }, 500);
+    super.setResponse("FakeSubscriptionManagerService.getCurrentSubscription:",this.currentSubscription)
+
+    return new Promise((resolve, reject) => {
+      super
+        .get("GetCurrentSubscription")
+        .then((subscription: SubscriptionGetCurrentResponse) => {
+          tenantStore.setSubscription(subscription);
+          if (subscription.myProducts?.length > 0) {
+            pricingStore.setProduct(
+              subscription.myProducts[0].subscriptionProduct
+            );
+            pricingStore.setBillingPeriod(
+              subscription.myProducts[0].subscriptionPrice.billingPeriod
+            );
+          }
+          resolve(subscription);
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
   getCoupon(
     _couponId: string,
     _currency: string
   ): Promise<SubscriptionCouponDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse('FakeSubscriptionManagerService.getCoupon',"[SANDBOX] Method not implemented.")
+    return super.get(`GetCoupon/${_couponId}/${_currency}`);
   }
   updateSubscription(
     _subscription: SelectedSubscriptionRequest
   ): Promise<SubscriptionGetCurrentResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse('FakeSubscriptionManagerService.updateSubscription',"[SANDBOX] Method not implemented.")
+    return new Promise((resolve, reject) => {
+      super
+        .post(_subscription, `UpdateSubscription`)
+        .then((response) => {
+          tenantStore.setSubscription(response);
+          if (response.myProducts?.length > 0) {
+            pricingStore.setProduct(response.myProducts[0].subscriptionProduct);
+            pricingStore.setBillingPeriod(
+              response.myProducts[0].subscriptionPrice.billingPeriod
+            );
+          }
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
   cancelSubscription(): Promise<SubscriptionGetCurrentResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse('FakeSubscriptionManagerService.cancelSubscription',"[SANDBOX] Method not implemented.")
+    return new Promise((resolve, reject) => {
+      super
+        .post(null, "CancelSubscription")
+        .then((response) => {
+          tenantStore.setSubscription(response);
+          if (response.myProducts?.length > 0) {
+            pricingStore.setProduct(response.myProducts[0].subscriptionProduct);
+            pricingStore.setBillingPeriod(
+              response.myProducts[0].subscriptionPrice.billingPeriod
+            );
+          }
+          pricingStore.setSelected({
+            product: null,
+            billingPeriod: SubscriptionBillingPeriod.MONTHLY,
+          });
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
   updateCardToken(_cardToken: string): Promise<SubscriptionGetCurrentResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse('FakeSubscriptionManagerService.updateCardToken',"[SANDBOX] Method not implemented.")
+    return super.post(_cardToken, `UpdateCardToken/${_cardToken}`);
   }
   createCustomerPortalSession(): Promise<SubscriptionGetCurrentResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse('FakeSubscriptionManagerService.createCustomerPortalSession',"[SANDBOX] Method not implemented.")
+    return super.post(null, `CreateCustomerPortalSession`);
   }
 }

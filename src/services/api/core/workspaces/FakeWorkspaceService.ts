@@ -10,6 +10,7 @@ import fakeCompanies from "../links/FakeCompanies";
 import type { IWorkspaceService } from "./IWorkspaceService";
 import fakeNamesAndEmails from "../tenants/FakeNamesAndEmails";
 import { tenantStore } from "@/store/modules/tenantStore";
+import { FakeApiService } from "../../FakeApiService";
 
 const workspaces: WorkspaceDto[] = [];
 
@@ -37,37 +38,62 @@ for (let index = 0; index < fakeCompanies.length; index++) {
   });
 }
 
-export class FakeWorkspaceService implements IWorkspaceService {
+export class FakeWorkspaceService extends FakeApiService implements IWorkspaceService {
   workspaces = workspaces;
+  constructor() {
+    super("Workspace");
+  }
   getAllWorkspaces(saveInStore: boolean): Promise<WorkspaceDto[]> {
-    return new Promise((resolve, _reject) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         const workspaces = this.workspaces
           .filter((f) => f.type === WorkspaceType.PUBLIC)
           .slice(0, 2);
-        if (saveInStore) {
-          tenantStore.setWorkspaces(workspaces);
-        }
-        console.log("FakeUserService.getAllWorkspaces:",workspaces)
-        resolve(workspaces);
+      
+        super.setResponse("FakeWorkspaceService.getAllWorkspaces:",workspaces)
+        super
+        .getAll("GetAll")
+        .then((response: WorkspaceDto[]) => {
+          resolve(JSON.parse(JSON.stringify(response)));
+          if (saveInStore) {
+            tenantStore.setWorkspaces(response);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+
       }, 500);
     });
   }
   get(id: string): Promise<WorkspaceDto> {
     const workspace = this.workspaces.find((f) => f.id === id);
     if (workspace) {
-      return Promise.resolve(workspace);
+      super.setResponse('FakeWorkspaceService.get',workspace);
+      return super.get("Get", id);
     } else {
       return Promise.reject();
     }
   }
-  create(_data: CreateWorkspaceRequest): Promise<WorkspaceDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  create(data: CreateWorkspaceRequest): Promise<WorkspaceDto> {
+    super.setResponse("FakeWorkspaceService.create","[SANDBOX] Method not implemented.");
+    return super.post(data);
   }
-  update(_id: string, _data: UpdateWorkspaceRequest): Promise<WorkspaceDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  update(id: string, data: UpdateWorkspaceRequest): Promise<WorkspaceDto> {
+    super.setResponse("FakeWorkspaceService.update","[SANDBOX] Method not implemented.");
+    return super.put(id, data)
   }
-  delete(_id: string): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  delete(id: string): Promise<any> {
+     return new Promise((resolve, reject) => {
+      super.setResponse("FakeWorkspaceService.delete","[SANDBOX] Method not implemented.");
+      super
+        .delete(id)
+        .then(() => {
+          resolve(this.getAllWorkspaces(true));
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 }

@@ -3,37 +3,49 @@ import type { SubscriptionProductDto } from "@/application/dtos/core/subscriptio
 import plans from "@/application/pricing/plans";
 import { pricingState, pricingStore } from "@/store/modules/pricingStore";
 import type { ISubscriptionProductService } from "./ISubscriptionProductService";
+import { FakeApiService } from "../../FakeApiService"; 
 import { get } from "svelte/store";
-
+import { _ } from "svelte-i18n";
+const $t = get(_);
 export class FakeSubscriptionProductService
-  implements ISubscriptionProductService
+  extends FakeApiService implements ISubscriptionProductService
 {
+  constructor() {
+    super("SubscriptionProduct");
+  }
   getProducts(): Promise<SubscriptionProductDto[]> {
-    return new Promise((resolve, _reject) => {
-      pricingStore.setProducts(plans);
-      setTimeout(() => {
-        const currencies: string[] = [];
-        plans.forEach((product) => {
-          product.prices.forEach((price) => {
-            if (!currencies.includes(price.currency)) {
-              currencies.push(price.currency);
-            }
+    super.setResponse("FakeSubscriptionProductService.setProducts:",plans)
+    return new Promise((resolve, reject) => {
+      super
+        .getAll()
+        .then((response: SubscriptionProductDto[]) => {
+          const currencies: string[] = [];
+          response.forEach((product) => {
+            product.prices.forEach((price) => {
+              if (!currencies.includes(price.currency)) {
+                currencies.push(price.currency);
+              }
+            });
           });
+          let currency = get(pricingState).currency;
+          if (currencies.length > 0 && !currencies.includes(currency)) {
+            pricingStore.setCurrency(currencies[0]);
+          }
+          pricingStore.setProducts(response);
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
         });
-        let currency = get(pricingState).currency;
-        if (currencies.length > 0 && !currencies.includes(currency)) {
-          pricingStore.setCurrency(currencies[0]);
-        }
-        pricingStore.setProducts(plans);
-
-        console.log("FakeSubscriptionProductService.setProducts:",plans)
-        resolve(plans);
-      }, 500);
     });
   }
   createProduct(
-    _product: SubscriptionProductDto
+    product: SubscriptionProductDto
   ): Promise<SubscriptionProductDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse("FakeSubscriptionProductService.createProduct","[SANDBOX] Method not implemented.");
+
+    product.title = $t(product.title).toString();
+    product.description = $t(product.description).toString();
+    return super.post(product, `CreateProduct`);
   }
 }

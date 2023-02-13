@@ -1,24 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { EntityDto } from "@/application/dtos/EntityDto";
 import type { ITemplateService } from "./ITemplateService";
+import { FakeApiService } from "../../FakeApiService";
 
-export class FakeTemplateService implements ITemplateService {
+export class FakeTemplateService extends FakeApiService implements ITemplateService {
+  constructor() {
+    super("Template");
+  }
   getAll(): Promise<EntityDto[]> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    return super.getAll("GetAll");
   }
-  get(_id: string): Promise<EntityDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  get(id: string): Promise<EntityDto> {
+    return super.get("Get", id);
   }
-  create(_data: EntityDto): Promise<EntityDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  create(data: EntityDto): Promise<EntityDto> {
+    return super.post(data, "Create");
   }
-  download(_id: string): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  download(id: string): Promise<any> {
+    return super.download(undefined, "Download/" + id);
   }
-  update(_id: string, _data: EntityDto): Promise<EntityDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  update(id: string, data: EntityDto): Promise<EntityDto> {
+    return super.put(id, data, "Update");
   }
-  delete(_id: string): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  delete(id: string): Promise<any> {
+    return super.delete(id);
   }
 }

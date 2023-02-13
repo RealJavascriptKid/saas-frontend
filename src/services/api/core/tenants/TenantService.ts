@@ -22,18 +22,10 @@ export class TenantService extends ApiService implements ITenantService {
   adminGetProducts(id: string): Promise<TenantProductDto[]> {
     return super.get("GetProducts", id);
   }
-  getAll(): Promise<TenantDto[]> {
-    return new Promise((resolve, reject) => {
-      super
-        .getAll()
-        .then((response: TenantDto[]) => {
-          tenantStore.setMyTenants(response);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  async getAll():Promise<TenantDto[]> {
+    let response = await super.getAll()
+    tenantStore.setMyTenants(response);
+    return response;
   }
   get(id: string): Promise<TenantDto> {
     return super.get("Get", id);
@@ -67,31 +59,13 @@ export class TenantService extends ApiService implements ITenantService {
       }, 2000);
     });
   }
-  create(payload: TenantCreateRequest): Promise<UserLoggedResponse> {
-    return new Promise((resolve, reject) => {
-      super
-        .post(payload)
-        .then((response: UserLoggedResponse) => {
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  async create(payload: TenantCreateRequest): Promise<UserLoggedResponse> {
+    return super.post(payload)
   }
-  update(payload: TenantDto): Promise<TenantDto> {
+  async update(payload: TenantDto): Promise<TenantDto> {
     let tenantId = get(tenantState).current?.id ?? "";
-    return new Promise((resolve, reject) => {
-      super
-        .put(tenantId, payload)
-        .then((response: TenantDto) => {
-          tenantStore.setSettings(payload);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    let response = await  super.put(tenantId, payload);
+    return response;
   }
   updateImage(payload: TenantUpdateImageRequest): Promise<TenantDto> {
     let tenantId = get(tenantState).current?.id ?? "";

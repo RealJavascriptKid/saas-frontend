@@ -20,18 +20,10 @@ export class UserService extends ApiService implements IUserService {
   get(id: string): Promise<UserDto> {
     return super.get("Get", id);
   }
-  updateAvatar(avatar: UserUpdateAvatarRequest): Promise<UserDto> {
-    return new Promise((resolve, reject) => {
-      super
-        .post(avatar, "UpdateAvatar")
-        .then((response: UserDto) => {
-          accountStore.setLogged(response);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  async updateAvatar(avatar: UserUpdateAvatarRequest): Promise<UserDto> {
+     let response = await super.post(avatar, "UpdateAvatar")        
+     accountStore.setLogged(response);
+     return response;
   }
   updateLocale(payload: UserUpdateLocaleRequest): Promise<any> {
     return super.post(payload, `UpdateLocale`);
@@ -64,20 +56,11 @@ export class UserService extends ApiService implements IUserService {
         });
     });
   }
-  updateDefaultTenant(tenantId?: string): Promise<UserLoggedResponse> {
+  async updateDefaultTenant(tenantId?: string): Promise<UserLoggedResponse> {
     let userId = get(accountState).user.id;
-
-    return new Promise((resolve, reject) => {
-      super
-        .post(null, `UpdateDefaultTenant/${userId}/${tenantId}`)
-        .then((response: UserLoggedResponse) => {
-          authStore.login(response);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    let response = await super.post(null, `UpdateDefaultTenant/${userId}/${tenantId}`)
+    authStore.login(response);
+    return response;
   }
   deleteMe(): Promise<void> {
     return new Promise((resolve, reject) => {

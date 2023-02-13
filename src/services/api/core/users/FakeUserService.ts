@@ -9,11 +9,13 @@ import { UserLoginType } from "@/application/enums/core/users/UserLoginType";
 import { UserType } from "@/application/enums/core/users/UserType";
 import { accountState, accountStore } from "@/store/modules/accountStore";
 import { authStore } from "@/store/modules/authStore";
+import { FakeApiService } from "../../FakeApiService"; 
 import { get } from "svelte/store";
 
 import fakeNamesAndEmails from "../tenants/FakeNamesAndEmails";
 import { FakeTenantService } from "../tenants/FakeTenantService";
 import type { IUserService } from "./IUserService";
+
 
 const users: UserDto[] = [];
 const fakeTenantService = new FakeTenantService();
@@ -39,55 +41,69 @@ for (let index = 0; index < 20; index++) {
   users.push(user);
 }
 
-export class FakeUserService implements IUserService {
+export class FakeUserService extends FakeApiService implements IUserService {
   users = users;
+  constructor() {
+    super("User");
+  }
   adminGetAll(): Promise<UserDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log("FakeUserService.users:",users)
-        return resolve(users);
-      }, 500);
-    });
+    super.setResponse("FakeUserService.adminGetAll:",users)
+    return super.getAll("Admin/GetAll")
   }
   get(id: string): Promise<UserDto> {
     const user = this.users.find((f) => f.id === id);
     if (user) {
-      console.log("FakeUserService.get:",user)
-      return Promise.resolve(user);
+      super.setResponse("FakeUserService.get:",user)
+      return super.get("Get", id);
     } else {
       return Promise.reject();
     }
   }
-  updateAvatar(payload: UserUpdateAvatarRequest): Promise<UserDto> {
-    let user = get(accountState).user;
-    return new Promise((resolve) => {
-      accountStore.setAvatar(payload.avatar);
-      if (user != null) {
-        console.log("FakeUserService.updateAvatar:",user)
-        return resolve(user);
-      }
-    });
+  async updateAvatar(payload: UserUpdateAvatarRequest): Promise<UserDto> {
+    let user = get(accountState).user;    
+    super.setResponse("FakeUserService.updateAvatar:",user)
+    let response = await super.post(payload, "UpdateAvatar")        
+    accountStore.setAvatar(payload.avatar);
+     return response;
   }
   updateLocale(payload: UserUpdateLocaleRequest): Promise<any> {
-    return Promise.resolve(payload);
+    super.setResponse("FakeUserService.updateLocale","[SANDBOX] Method not implemented.");
+    return super.post(payload, `UpdateLocale`);
   }
-  update(_id: string, _payload: UserUpdateRequest): Promise<UserDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  update(id: string, payload: UserUpdateRequest): Promise<UserDto> {
+    super.setResponse("FakeUserService.update","[SANDBOX] Method not implemented.");
+    return super.post(payload, `update`);
   }
-  updatePassword(_payload: UserUpdatePasswordRequest): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  updatePassword(payload: UserUpdatePasswordRequest): Promise<any> {
+    super.setResponse("FakeUserService.updatePassword","[SANDBOX] Method not implemented.");
+    return super.post(payload, "UpdatePassword");
   }
-  adminUpdatePassword(_userId: string, _password: string): Promise<any> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  adminUpdatePassword(userId: string, password: string): Promise<any> {
+    super.setResponse("FakeUserService.test","[SANDBOX] Method not implemented.");
+    return super
+    .post(null, `Admin/UpdatePassword/${userId}/${password}`)
   }
-  updateDefaultTenant(_tenantId?: string): Promise<UserLoggedResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  async updateDefaultTenant(tenantId?: string): Promise<UserLoggedResponse> {
+    let userId = get(accountState).user.id;
+    super.setResponse("FakeUserService.test","[SANDBOX] Method not implemented.");
+    let response = await super.post(null, `UpdateDefaultTenant/${userId}/${tenantId}`)
+    authStore.login(response);
+    return response;
   }
   deleteMe(): Promise<void> {
-    authStore.logout();
-    return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      super
+        .delete("", "DeleteMe")
+        .then((response) => {
+          authStore.logout();
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
-  adminDelete(_id: string): Promise<void> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  adminDelete(id: string): Promise<void> {
+    return super.delete(id, "Admin/Delete");
   }
 }

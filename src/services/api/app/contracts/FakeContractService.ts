@@ -21,6 +21,7 @@ import { ContractStatusFilter } from "@/application/contracts/app/contracts/Cont
 import type { LinkDto } from "@/application/dtos/core/links/LinkDto";
 import { LinkStatus } from "@/application/enums/core/links/LinkStatus";
 import { accountState } from "@/store/modules/accountStore";
+import { FakeApiService } from "../../FakeApiService";
 import { get } from "svelte/store";
 import { _ } from "svelte-i18n";
 const $t = get(_);
@@ -152,43 +153,32 @@ for (let idxContract = 0; idxContract < contractStatus.length; idxContract++) {
   contracts.push(contract);
 }
 
-export class FakeContractService implements IContractService {
+export class FakeContractService  extends FakeApiService implements IContractService {
   contracts: ContractDto[] = contracts;
-  getAllByStatusFilter(status: ContractStatusFilter): Promise<ContractDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        let contracts = this.contracts;
-        if (status !== ContractStatusFilter.ALL) {
-          contracts = this.contracts.filter(
-            (f) => Number(f.status) === Number(status)
-          );
-        }
-        console.log('FakeContractService.getAllByStatusFilter:',contracts)
-        resolve(contracts);
-      }, 500);
-    });
+  
+  constructor() {
+    super("Contract");
+  }
+
+  getAllByStatusFilter(filter: ContractStatusFilter): Promise<ContractDto[]> {
+    let contracts = this.contracts;
+    if (filter !== ContractStatusFilter.ALL) {
+      contracts = this.contracts.filter(
+        (f) => Number(f.status) === Number(filter)
+      );
+    }
+    super.setResponse('FakeContractService.getAllByStatusFilter:',contracts)
+    return super.getAll("GetAllByStatusFilter/" + filter);
   }
   getAllByLink(linkId: string): Promise<ContractDto[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const contracts = this.contracts.filter((f) => f.linkId === linkId);
-        console.log('FakeContractService.getAllByLink:',contracts)
-        resolve(contracts);
-      }, 500);
-    });
+    const contracts = this.contracts.filter((f) => f.linkId === linkId);
+    super.setResponse('FakeContractService.getAllByLink:',contracts)
+    return super.getAll("GetAllByLink/" + linkId);
   }
-  getContract(id: string): Promise<ContractDto> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const contract = this.contracts.find((f) => f.id?.toString() === id);
-        if (contract) {
-          console.log('FakeContractService.getContract:',contract)
-          resolve(contract);
-        } else {
-          reject();
-        }
-      }, 500);
-    });
+  getContract(id: string): Promise<ContractDto> {   
+    const contract = this.contracts.find((f) => f.id?.toString() === id);
+    super.setResponse('FakeContractService.getContract:',contract)
+    return super.get(`Get/${id}`);
   }
   create(data: CreateContractRequest): Promise<ContractDto> {
     let user = get(accountState).user;
@@ -240,14 +230,14 @@ export class FakeContractService implements IContractService {
     });
 
     this.contracts.push(contract);
-    console.log('FakeContractService.create:',contract)
-    return Promise.resolve(contract);
+    super.setResponse('FakeContractService.create:',contract)
+    return super.post(data, "Create");
   }
   downloadFile(id: string): Promise<any> {
     const contract = this.contracts.find((f) => f.id?.toString() === id);
     if (contract) {
-      console.log('FakeContractService.downloadFile:',FakePdfBase64)
-      return Promise.resolve(FakePdfBase64);
+      super.setResponse('FakeContractService.downloadFile:',FakePdfBase64)
+      return super.post(undefined, `Download/${id}`);
     } else {
       return Promise.reject();
     }
@@ -256,8 +246,8 @@ export class FakeContractService implements IContractService {
     return Promise.reject("[SANDBOX] Method not implemented.");
   }
   send(_id: string, _request: SendContractRequest): Promise<any> {
-    console.log('FakeContractService.send:',true)
-    return Promise.resolve(true);
+    super.setResponse('FakeContractService.send:',true)
+    return super.post(_request, `Send/${_id}`);
   }
   update(id: string, data: UpdateContractRequest): Promise<ContractDto> {
     const contract = this.contracts.find((f) => f.id?.toString() === id);
@@ -271,15 +261,15 @@ export class FakeContractService implements IContractService {
       if (data.file) {
         contract.hasFile = true;
       }
-      console.log('FakeContractService.update:',contract)
-      return Promise.resolve(contract);
+      super.setResponse('FakeContractService.update:',contract)
+      return super.put(id, data, "Update");
     } else {
       return Promise.reject();
     }
   }
   delete(id: string): Promise<any> {
     this.contracts = this.contracts.filter((f) => f.id !== id);
-    console.log('FakeContractService.delete:',this.contracts)
-    return Promise.resolve(this.contracts);
+    super.setResponse('FakeContractService.delete:',this.contracts)
+    return super.delete(id);
   }
 }

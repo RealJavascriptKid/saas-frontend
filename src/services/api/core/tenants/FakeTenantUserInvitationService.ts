@@ -5,12 +5,17 @@ import type { UserInviteRequest } from "@/application/contracts/core/users/UserI
 import type { TenantJoinSettingsDto } from "@/application/dtos/core/tenants/TenantJoinSettingsDto";
 import type { TenantUserDto } from "@/application/dtos/core/tenants/TenantUserDto";
 import type { UserVerifyRequest } from "@/application/contracts/core/users/UserVerifyRequest";
+import { AuthenticationService } from "@/services/api/core/users/AuthenticationService";
 import type { UserLoggedResponse } from "@/application/contracts/core/users/UserLoggedResponse";
 // tslint:disable-next-line: max-line-length
 import type { TenantUpdateJoinSettingsRequest } from "@/application/contracts/core/tenants/TenantUpdateJoinSettingsRequest";
+import { TenantUserStatus } from "@/application/enums/core/tenants/TenantUserStatus";
 import type { ITenantUserInvitationService } from "./ITenantUserInvitationService";
 import { FakeTenantUsersService } from "./FakeTenantUsersService";
 import { FakeTenantService } from "./FakeTenantService";
+import { FakeApiService } from "../../FakeApiService";
+import { tenantState } from "@/store/modules/tenantStore";
+import { get } from "svelte/store";
 
 const fakeTenantUsersService = new FakeTenantUsersService();
 const fakeTenantService = new FakeTenantService();
@@ -21,25 +26,20 @@ const invitation: TenantInvitationResponse = {
 };
 
 export class FakeTenantUserInvitationService
-  implements ITenantUserInvitationService
+  extends FakeApiService implements ITenantUserInvitationService
 {
+  constructor() {
+    super("TenantUserInvitation");
+  }
   getInvitation(_tenantUserId: string): Promise<TenantInvitationResponse> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log("FakeTenantUserInvitationService.getInvitation:",invitation)
-        resolve(invitation);
-      }, 500);
-    });
+    super.setResponse("FakeTenantUserInvitationService.getInvitation:",invitation)
+    return super.get("GetInvitation", _tenantUserId);
   }
-  getInviteURL(_linkUuid: string): Promise<TenantDto> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        console.log("FakeTenantUserInvitationService.getInviteURL:",invitation.tenant)
-        resolve(invitation.tenant);
-      }, 500);
-    });
+  getInviteURL(linkUuid: string): Promise<TenantDto> {
+    super.setResponse("FakeTenantUserInvitationService.getInviteURL:",invitation.tenant)
+    return super.get("GetInviteURL", linkUuid);
   }
-  getInvitationSettings(_tenantId?: string): Promise<TenantJoinSettingsDto> {
+  getInvitationSettings(tenantId?: string): Promise<TenantJoinSettingsDto> {
     let settings = {
       id: "",
       tenantId: "",
@@ -49,34 +49,64 @@ export class FakeTenantUserInvitationService
       publicUrl: false,
       requireAcceptance: false,
     }
-    console.log("FakeTenantUserInvitationService.getInvitationSettings:",settings)
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        resolve(settings);
-      }, 500);
-    });
+    super.setResponse("FakeTenantUserInvitationService.getInvitationSettings:",settings)
+    if (!tenantId) {
+      tenantId = get(tenantState).current?.id ?? "";
+    }
+    return super.get("GetInvitationSettings", tenantId);
   }
-  inviteUser(_invitation: UserInviteRequest): Promise<TenantUserDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  inviteUser(invitation: UserInviteRequest): Promise<TenantUserDto> {
+    super.setResponse("FakeTenantUserInvitationService.test","[SANDBOX] Method not implemented.");
+    return super.post(invitation, `InviteUser`);
   }
   requestAccess(
-    _linkUuid: string,
-    _payload: UserVerifyRequest
+    linkUuid: string,
+    payload: UserVerifyRequest
   ): Promise<TenantUserDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse("FakeTenantUserInvitationService.test","[SANDBOX] Method not implemented.");
+    return new Promise((resolve, reject) => {
+      super
+        .post(payload, `RequestAccess/${linkUuid}`)
+        .then((response: TenantUserDto) => {
+          if (response.status === TenantUserStatus.ACTIVE) {
+            const auth = new AuthenticationService();
+            auth.login({
+              email: payload.email,
+              password: payload.password,
+              loginType: payload.userLoginType,
+            });
+          }
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
-  acceptUser(_payload: TenantUserDto): Promise<void> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+  acceptUser(payload: TenantUserDto): Promise<void> {
+    super.setResponse("FakeTenantUserInvitationService.test","[SANDBOX] Method not implemented.");
+    return super.post(payload, `AcceptUser/${payload.id}`);
   }
   acceptInvitation(
-    _tenantUserId: string,
-    _payload: UserVerifyRequest
+    tenantUserId: string,
+    payload: UserVerifyRequest
   ): Promise<UserLoggedResponse> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse("FakeTenantUserInvitationService.test","[SANDBOX] Method not implemented.");
+    return new Promise((resolve, reject) => {
+      super
+        .post(payload, `AcceptInvitation/${tenantUserId}`)
+        .then((response: UserLoggedResponse) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
   updateInvitationSettings(
-    _payload: TenantUpdateJoinSettingsRequest
+    payload: TenantUpdateJoinSettingsRequest
   ): Promise<TenantJoinSettingsDto> {
-    return Promise.reject("[SANDBOX] Method not implemented.");
+    super.setResponse("FakeTenantUserInvitationService.test","[SANDBOX] Method not implemented.");
+    return super.post(payload, `UpdateInvitationSettings`);
   }
 }
