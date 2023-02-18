@@ -27,6 +27,11 @@ export class FakeApiService {
   }
   protected async getAll(method = "GetAll", headers?: any): Promise<any> {
     let {response,callerName} = this.getResponse();
+    
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
 
     if(!this.apiCall){
 
@@ -36,7 +41,7 @@ export class FakeApiService {
 
     }
    
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {      
       server
         .get(this.controller + `${method}`, {
           headers,
@@ -56,6 +61,11 @@ export class FakeApiService {
   }
   protected async get(method: string, id = "", headers?: any): Promise<any> {
     let {response,callerName} = this.getResponse();
+
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
 
     if (id) {
       method += "/" + id;
@@ -88,6 +98,11 @@ export class FakeApiService {
   protected async post(data: any, method = "Create", headers?: any): Promise<any> {
     let {response,callerName} = this.getResponse();
 
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
+
     if(!this.apiCall){
 
       await this.wait(500);
@@ -118,6 +133,11 @@ export class FakeApiService {
 
     let {response,callerName} = this.getResponse();
 
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
+
     if(!this.apiCall){
 
       await this.wait(500);
@@ -144,10 +164,14 @@ export class FakeApiService {
   protected async upload(fileData: FormData, method = "Upload"): Promise<any> {
     let {response,callerName} = this.getResponse();
 
+    let headers = { "Content-Type": "multipart/form-data" };
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
+
     return new Promise((resolve, reject) => {
       server
         .post(this.controller + `${method}`, fileData, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers,
         })
         .then((response) => {
           resolve(response.data);
@@ -164,6 +188,11 @@ export class FakeApiService {
     headers?: any
   ): Promise<any> {
     let {response,callerName} = this.getResponse();
+
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
 
     if(!this.apiCall){
 
@@ -190,6 +219,11 @@ export class FakeApiService {
   }
   protected async delete(id: string, method = "Delete", headers?: any): Promise<any> {
     let {response,callerName} = this.getResponse();
+
+    if(!headers)
+      headers = {};
+
+    headers = {...headers,expectedResponse:JSON.stringify(response),callerName}
 
     if (id) {
       method += "/" + id;

@@ -19,7 +19,7 @@ defaultWorkspace.tenant = fakeTenantService.tenants[0];
 
 const userLoggedResponse: UserLoggedResponse = {
   user: fakeUserService.users[0],
-  token: "",
+  token: "fakeToken",
   defaultWorkspace,
 };
 
@@ -37,6 +37,7 @@ export class FakeAuthenticationService extends FakeApiService implements IAuthen
        
   }
   impersonate(userId: string): Promise<UserLoggedResponse> {
+    super.setResponse("FakeAuthenticationService.impersonate:",userLoggedResponse)
     return new Promise((resolve, reject) => {
       super
         .post(null, `Admin/Impersonate/${userId}`)
@@ -52,6 +53,8 @@ export class FakeAuthenticationService extends FakeApiService implements IAuthen
   }
   
   register(payload: UserRegisterRequest): Promise<UserLoggedResponse> {
+
+    super.setResponse("FakeAuthenticationService.register:",userLoggedResponse)
     return new Promise((resolve, reject) => {
       super
         .post(payload, "Register")
@@ -67,6 +70,7 @@ export class FakeAuthenticationService extends FakeApiService implements IAuthen
     });
   }
   verify(payload: UserVerifyRequest): Promise<UserLoggedResponse> {
+    super.setResponse("FakeAuthenticationService.verify:",userLoggedResponse)
     return new Promise((resolve, reject) => {
       super
         .post(payload, "Verify")
